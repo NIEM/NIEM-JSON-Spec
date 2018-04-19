@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+. "$HOME"/share/wrtools-core/opt_help.bash
+. "$HOME"/share/wrtools-core/fail.bash
+. "$HOME"/share/wrtools-core/opt_verbose.bash
+
+#HELP:COMMAND_NAME: Run some convenient stuff
+#HELP:Usage: COMMAND_NAME $global-options* $command ...
+#HELP:global-options:
+#HELP:  --help | -h: Print this help
+#HELP:  --verbose, -v: Print additional diagnostics
+
+OPTIND=1
+while getopts :hv-: option
+do
+    case "$option" in
+        v ) opt_verbose;;
+        h ) opt_help;;
+        - )
+            case "$OPTARG" in
+                help ) opt_help;;
+                help=* ) fail "Long option \"${OPTARG%%=*}\" has an unexpected argument";;
+                verbose ) opt_verbose;;
+                verbose=* ) fail "Long option \"${OPTARG%%=*}\" has unexpected argument";;
+                * ) fail "Unknown long option \"${OPTARG%%=*}\"";;
+            esac
+            ;;  
+        '?' ) fail "unknown option \"$OPTARG\"";;
+        : ) fail "option \"$OPTARG\" missing argument";;
+        * ) assert false;;
+    esac
+done
+shift $((OPTIND - 1))
+
+#HELP:Commands:
+
+(( $# >= 1 )) || fail "Need a command. Use \"help\" for more info."
+
+case $1 in
+    #HELP:  help: print this help
+    help ) opt_help;;
+    #HELP:  build: Build stuff.
+    #HELP:  rebuild: Clean and then rebuild stuff starting from nothing.
+    #HELP:      Default is to build & install everything. Provide targets if you want to
+    #HELP:      build something specific.
+    build | rebuild )
+        if [[ $1 == "rebuild" ]]
+        then vrun make distclean depend=no
+        fi
+        if [[ -x ./config.status ]]
+        then ./config.status
+        else @srcdir@/configure
+        fi
+        vrun make depend depend=build
+        if (( $# == 0 ))
+        then vrun make -j 8
+             vrun make -j 8 install
+        else vrun make -j 8 "${@:2}"
+        fi
+        ;;
+    * )
+        fail "Unknown command \"$command\"";;
+esac
+         
+

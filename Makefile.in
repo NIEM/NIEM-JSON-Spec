@@ -1,0 +1,158 @@
+#############################################################################
+# Don't touch these...
+#############################################################################
+
+this_makefile := ${lastword ${MAKEFILE_LIST}}
+SHELL = @bash@ -o pipefail -o errexit -o nounset
+.SECONDARY:
+.DELETE_ON_ERROR:
+
+#############################################################################
+# things to set / override
+#############################################################################
+
+#HELP:Build file for @PACKAGE_NAME@ (@PACKAGE_TARNAME@)
+
+#############################################################################
+# dirs
+
+abs_srcdir = @abs_srcdir@
+src_dir = ${abs_srcdir}/src
+abs_builddir = @abs_builddir@
+build_dir = ${abs_builddir}/build
+prefix = @prefix@
+
+#############################################################################
+# COMMANDS
+
+# Autoconf stuff
+MKDIR_P = @MKDIR_P@
+INSTALL = @INSTALL@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+SED = @SED@
+# Unix commands
+aspell = @aspell@
+cat = @cat@
+fgrep = @fgrep@
+m4 = @m4@
+sort = @sort@
+# webb commands
+process_doc = @process_doc@
+
+#############################################################################
+# files
+
+dependencies_mk := ${build_dir}/dependencies.mk
+config_files = @config_files@
+
+m4_required_files = ${src_dir}/macros.m4
+m4_flags = --prefix-builtins --include=${build_dir} ${m4_required_files}
+
+doc-name = niem-json-spec
+all_files_relative = ${doc-name}.html ${doc-name}.txt
+all_files = ${all_files_relative:%=${build_dir}/%}
+install_files = ${all_files_relative:%=${prefix}/%}
+
+#############################################################################
+# depend
+
+#HELP:Variable 'depend':
+#HELP:   'build': Build new dependencies file
+#HELP:   anything else: Include dependencies if they exist (the default)
+depend = include-if-present
+
+#HELP:Default target is "all". Targets include:
+.DEFAULT_GOAL = all
+
+ifeq (${depend},build)
+.DEFAULT_GOAL = depend
+
+.PHONY: depend #   Build dependencies file
+depend: ${dependencies_mk}
+
+${dependencies_mk}: ${build_dir}/niem-json-spec.xml
+	@ ${MKDIR_P} ${dir $@}
+	${process_doc} --in=$< --out=$@ --format=makedepend
+
+else
+# don't include if it doesn't exist, so that 'make clean' works w/o rebuilding dependencies
+ifeq (${wildcard ${dependencies_mk}},${dependencies_mk})
+include ${dependencies_mk}
+endif
+endif
+
+-include ${dependencies_mk}
+
+
+#############################################################################
+# real targets
+
+.PHONY: all #   Build everything
+all: ${all_files}
+
+.PHONY: clean #   Remove built files
+clean:
+	${RM} ${all_files}
+
+.PHONY: install #   Install everything to $prefix (default @prefix@)
+install: ${install_files}
+
+.PHONY: uninstall #   Remove installed files
+uninstall:
+	${RM} ${install_files}
+
+#############################################################################
+# build
+
+${build_dir}/${doc-name}.html: ${build_dir}/${doc-name}.xml ${doc_html_required_files}
+	${process_doc} --format=html --in=$< --out=$@
+
+${build_dir}/${doc-name}.txt: ${build_dir}/${doc-name}.xml ${doc_text_required_files}
+	${process_doc} --format=text --in=$< --out=$@
+
+${build_dir}/%: ${build_dir}/%.m4 ${m4_required_files}
+	${MKDIR_P} ${dir $@}
+	${m4} ${m4_flags} $< > $@
+	@ if ${fgrep} MACRO_ $@; then echo found unexpanded macro in $@; false; fi
+
+#############################################################################
+# import from source
+
+# import from src
+${build_dir}/%: ${src_dir}/%
+	${MKDIR_P} ${dir $@}
+	${INSTALL_DATA} $< $@
+
+#############################################################################
+# install
+
+${prefix}/%: ${build_dir}/%
+	${MKDIR_P} ${dir $@}
+	${INSTALL_DATA} $< $@
+
+#############################################################################
+# check spelling
+
+.PHONY: spell #   Check spelling of text doc
+spell: ${build_dir}/${doc-name}.txt
+	${cat} $< \
+	  | ${aspell} --home-dir=${src_dir} -p aspell-exceptions.txt list \
+	  | ${sort} -uf \
+	  | (! fgrep -v 'This will fail the spellcheck if it does not come up empty.' )
+
+#############################################################################
+# convenience targets
+
+.PHONY: distclean #   Clean all build and configure products
+distclean: clean
+	${RM} ${dependencies_mk} ${config_files} config.log config.status
+
+#############################################################################
+# make help: this must be the last target
+
+.PHONY: help #   Print this help
+help:
+	@ ${SED} -e '/^\.PHONY:/s/^\.PHONY: *\([^ #]*\) *\#\( *\)\([^ ].*\)/\2\1: \3/p;/^[^#]*#HELP:/s/[^#]*#HELP:\(.*\)/\1/p;d' ${this_makefile}
+
+# don't put anything after this

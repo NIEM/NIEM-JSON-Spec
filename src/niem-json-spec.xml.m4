@@ -10,7 +10,30 @@
 
     m4_define([[[MACRO_ABSTRACT_TEXT]]],[[[
 
-    <p>This document establishes methods and rules for using NIEM with JSON.</p>
+    <p>The NIEM JSON Specification establishes methods, rules, and conformance targets for using
+      NIEM with JSON.</p>
+
+    <p>The definition of conformance for NIEM JSON data primarily focuses on the relationship
+      between the data in the JSON file and the definitions established by a NIEM-conformant schema,
+      like the schema defined by a NIEM IEPD. There a two forms of conformance of a NIEM JSON
+      document to a NIEM-conformant schema:</p>
+
+    <ul>
+      <li><p><strong>Strict conformance</strong> establishes that the JSON instance follows all
+          rules of the schema or IEPD. An instance that strictly conforms to an IEPD will contain
+          all content that is required by the IEPD, will contain only content allowed by the IEPD,
+          and reflect the parent-child structure and cardinality constraints defined by the
+          IEPD. This is intended to enable NIEM JSON to satisfy exchange requirements similar to
+          traditional NIEM XML use cases.</p></li>
+      <li><p><strong>Lax conformance</strong> is intended to enable the use of vocabularies that are
+          defined by NIEM schemas or IEPDs via <em>linked data</em> and <em>linked open data</em>
+          methods. It is intended to establish that exchanges that use NIEM-conformant vocabularies
+          use those vocabularies properly, while allowing for more flexibilty, and for combining
+          terms from NIEM-conformant vocabularies with terms from other vocabularies.</p></li>
+    </ul>
+    
+
+    
 
     ]]])
 

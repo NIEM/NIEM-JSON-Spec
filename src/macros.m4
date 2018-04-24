@@ -1,6 +1,6 @@
 m4_changequote([[[,]]])m4_dnl
 m4_changecom(,)m4_dnl
-m4_define([[[MACRO_DOCUMENT_VERSION]]],[[[4.0alpha1pre1]]])m4_dnl
+m4_define([[[MACRO_DOCUMENT_VERSION]]],[[[4.0alpha1pre2]]])m4_dnl
 m4_define([[[MACRO_DOCUMENT_DATE]]],[[[2018-04-19]]])m4_dnl
 m4_define([[[MACRO_SHORT_NAME]]],[[[niem-json-spec]]])m4_dnl
 m4_define([[[MACRO_DOCUMENT_URI]]],[[[http://reference.niem.gov/niem/specification/MACRO_SHORT_NAME/MACRO_DOCUMENT_VERSION/]]])m4_dnl

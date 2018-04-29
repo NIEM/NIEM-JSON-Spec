@@ -4,10 +4,14 @@ m4_define([[[MACRO_DOCUMENT_VERSION]]],[[[4.0alpha1pre2]]])m4_dnl
 m4_define([[[MACRO_DOCUMENT_DATE]]],[[[2018-04-19]]])m4_dnl
 m4_define([[[MACRO_SHORT_NAME]]],[[[niem-json-spec]]])m4_dnl
 m4_define([[[MACRO_DOCUMENT_URI]]],[[[http://reference.niem.gov/niem/specification/MACRO_SHORT_NAME/MACRO_DOCUMENT_VERSION/]]])m4_dnl
+m4_dnl conformance targets
+m4_define([[[MACRO_CT_URI_LAX]]],[[[MACRO_DOCUMENT_URI[[[]]]#Lax]]])m4_dnl
+m4_define([[[MACRO_CT_URI_STRICT]]],[[[MACRO_DOCUMENT_URI[[[]]]#Strict]]])m4_dnl
 m4_dnl
 m4_define([[[MACRO_HREF_NDR]]],[[[http://reference.niem.gov/niem/specification/naming-and-design-rules/4.0/niem-ndr-4.0.html]]])m4_dnl
 m4_define([[[MACRO_HREF_CTAS]]],[[[http://reference.niem.gov/niem/specification/conformance-targets-attribute/3.0/NIEM-CTAS-3.0-2014-07-31.html]]])m4_dnl
 m4_define([[[MACRO_HREF_JSONLD]]],[[[https://www.w3.org/TR/2014/REC-json-ld-20140116/]]])m4_dnl
+m4_define([[[MACRO_HREF_RFC8259]]],[[[https://tools.ietf.org/html/rfc8259]]])m4_dnl
 m4_dnl
 m4_dnl  MACRO_ASSERT( $test, $message )
 m4_dnl

@@ -70,22 +70,20 @@
   </section>
 
   <section>
-    <title>Terminology</title>
+    <title>External Terminology</title>
     
-    <p>This document uses terminology from other specifications. This section enumerates this
-      externally-defined terminology.</p>
+    <p>This document uses terminology from other documents. This section
+      enumerates this externally-defined terminology.</p>
 
-    <!-- taken from ndr -->
     <section id="section-terminology-bcp-14">
       <title>IETF Best Current Practice 14 terminology</title>
       <p>The key words <q>MUST</q>, <q>MUST NOT</q>, <q>REQUIRED</q>, <q>SHALL</q>,
-        <q>SHALL NOT</q>, <q>SHOULD</q>, <q>SHOULD NOT</q>, <q>RECOMMENDED</q>, <q>NOT RECOMMENDED</q>,
-        <q>MAY</q>, and <q>OPTIONAL</q> in this document are to be interpreted as described in
-        <ref idref="BCP14"/> <ref idref="RFC2119"/> <ref idref="RFC8174"/> when, and only when, they appear in
-        all capitals, as shown here.</p>
+        <q>SHALL NOT</q>, <q>SHOULD</q>, <q>SHOULD NOT</q>, <q>RECOMMENDED</q>, <q>NOT
+        RECOMMENDED</q>, <q>MAY</q>, and <q>OPTIONAL</q> in this document are to be interpreted as
+        described in <ref idref="BCP14"/> <ref idref="RFC2119"/> <ref idref="RFC8174"/> when, and
+        only when, they appear in all capitals, as shown here.</p>
     </section>
 
-    <!-- taken from code lists spec -->
     <section>
       <title>Conformance Targets Attribute Specification</title>
       <p><ref idref="CTAS"/> defines several terms used normatively within this specification.</p>
@@ -103,8 +101,8 @@
       </blockquote>
       
       <p>The term <termDef>conformance target identifier</termDef> is defined by
-        MACRO_REF_EXTERNAL(CTAS,MACRO_HREF_CTAS#definition_conformance_target_identifier,3.1,Conformance
-        Target Defined), which states:</p>
+      MACRO_REF_EXTERNAL(CTAS,MACRO_HREF_CTAS#definition_conformance_target_identifier,3.1,Conformance
+      Target Defined), which states:</p>
 
       <blockquote>
         <p>A <em>conformance target identifier</em> is an internationalized resource identifier that
@@ -121,39 +119,127 @@
           document<char name="rsquo"/>s effective conformance targets attribute.</p>
       </blockquote>
     </section>
+
     <section>
-      <title>JSON</title>
+      <title>NIEM Naming and Design Rules</title>
+
+      <p>The term <termDef>conformant schema document set</termDef> is defined by the
+      MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#definition_conformant_schema_document_set,4.1.3,Schema
+      document set), which states: </p>
+
+      <blockquote>
+        <p>A <strong>conformant schema document set</strong> is a collection of schema documents
+          that together are capable of validating a conformant instance XML document.</p>
+      </blockquote>
+
+      <p>Note the principle component of a NIEM exchange definition (an information exchange package
+        description, or IEPD) is a conformant schema document set.</p>
+
+      <p>The term <termDef>conformant instance XML document</termDef> is defined by the
+        MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#definition_conformant_instance_XML_document,4.1.4,Instance
+        documents and elements), which states: </p>
+
+      <blockquote>
+        <p>A <strong>conformant instance XML document</strong> is an XML document that is [an]
+          instance document valid to a conformant schema document set.</p>
+      </blockquote>
+      
     </section>
+    
     <section>
       <title>JSON-LD</title>
-      <p><ref idref="JSON-LD"/> defines the term <termDef>JSON-LD document</termDef> at
-        MACRO_REF_EXTERNAL(JSON-LD,MACRO_HREF_JSONLD#dfn-json-ld-document,7,Data Model).</p>
+      <p><ref idref="JSON-LD"/> defines the term <termDef>JSON-LD document</termDef>.
+        MACRO_REF_EXTERNAL(JSON-LD,MACRO_HREF_JSONLD#dfn-json-ld-document,7,Data Model) provides a
+        summary of what constitutes a JSON-LD document.
+        MACRO_REF_EXTERNAL(JSON-LD,MACRO_HREF_JSONLD#json-ld-grammar,8,JSON-LD Grammar) states:</p>
+
+      <blockquote>
+        <p>A JSON-LD document MUST be a valid JSON document as described in
+        <ref idref="RFC4627"/>.</p>
+      </blockquote>
+
+      <p><ref idref="JSON-LD"/> leverages <ref idref="RFC4627"/> as a normative definition of
+        JSON. That specification has been superseded by <ref idref="RFC8259"/>. Consequently, this
+        specification uses <ref idref="RFC8259"/> as its normative definition of JSON.</p>
+
+      <p><ref idref="JSON-LD"/> normatively references the term <em>JSON document</em> in
+        <ref idref="RFC4627"/>, which does not define that term. We interpret this to be a reference
+        to <em>JSON text</em> as defined by <ref idref="RFC8259"/>.</p>
+
     </section>
+
+    <section>
+      <title>JSON</title>
+
+      <p>The term <termDef>JSON text</termDef> is defined by
+        MACRO_REF_EXTERNAL(RFC8259,MACRO_HREF_RFC8259#section-2,2,JSON Grammar), which defines it as
+        a single serialized JSON value.</p>
+
+      <p>The term <termDef>JSON document</termDef>, when used within this document, is synonymous
+        with <termRef>JSON text</termRef>.</p>
+      
+    </section>
+
   </section>
 
   <section>
     <title>Conformance Targets</title>
 
-    <section>
-      <title>JSON document</title>
-      <p>The conformance target <termDef>JSON document</termDef> uses code
-        <conformance-target id="JSON">JSON</conformance-target>.</p>
-    </section>
-  </section>
+  <p>This document defines multiple <termRef term="conformance target">conformance
+      targets</termRef>. Each conformance target is defined normatively by this
+    specification. Each conformance target has an associated abbreviation, which is used to
+    identify to which conformance targets a rule applies.</p>
 
-  <section>
-    <title>Conformance of a JSON document to a NIEM IEPD</title>
-    <p>A JSON document MAY be conformant to any number of NIEM IEPDs.</p>
+    <table id="table-ct-list">
+      <title>Codes representing conformance targets</title>
+      <theadr>
+        <th>Code</th>
+        <th>Conformance target</th>
+      </theadr>
+      <tr>
+        <td><conformance-target id="LAX">LAX</conformance-target></td>
+        <td><termRef>NIEM-JSON document laxly conformant to a schema</termRef></td>
+      </tr>
+      <tr>
+        <td><conformance-target id="STRICT">STRICT</conformance-target></td>
+        <td><termRef>NIEM-JSON document strictly conformant to a schema</termRef></td>
+      </tr>
+    </table>
+
     <section>
-      <title>Strict conformance to an IEPD</title>
-      <p>A JSON document is strictly conformant to an IEPD if and only if it contains only the
-        content as described by an NIEM-conformant XML Schema set.</p>
+      <title>NIEM-JSON document laxly conformant to a schema</title>
+      <definition term="NIEM-JSON document laxly conformant to a schema">
+        <p>A <strong>NIEM-JSON document laxly conformant to a schema</strong> is a <termRef>JSON-LD
+            document</termRef> that may be interpreted using the RDF vocabulary defined by a
+          <termRef>conformant schema document set</termRef>.
+It is a <termRef>conformance target</termRef> of this specification. A NIEM-JSON
+          document laxly conformant to a schema MUST conform to all rules of this specification that
+          apply to this conformance target.  The <termRef>conformance target identifier</termRef>
+          for this conformance target is <code>MACRO_CT_URI_LAX</code>.</p>
+      </definition>
     </section>
+
     <section>
-      <title>Lax conformance to an IEPD</title>
-      <p>A JSON document is laxly conformant to an IEPD if and only if it contains the content
-        required by an NIEM-conformant XML Schema set, and MAY include other content not specified
-        by the NIEM-conformant XML Schema set.</p>
+      <title>NIEM-JSON document strictly conformant to a schema</title>
+      <definition term="NIEM-JSON document strictly conformant to a schema">
+        <p>A <strong>NIEM-JSON document strictly conformant to a schema</strong> is
+          a <termRef>JSON-LD document</termRef> that may be assigned a one-to-one correspondence to
+          a <termRef>conformant instance XML document</termRef> valid against a NIEM schema.  It is
+          a <termRef>conformance target</termRef> of this specification. A NIEM-JSON document
+          strictly conformant to a schema MUST conform to all rules of this specification that apply
+          to this conformance target.  The <termRef>conformance target identifier</termRef> for this
+          conformance target is <code>MACRO_CT_URI_STRICT</code>.</p>
+      </definition>
+    </section>
+
+    <section>
+      <title>Background and Introduction</title>
+
+      <p>This document defines conformance of a JSON document against a <termRef>conformant schema
+          document set</termRef>.</p>
+
+    <p>A JSON document MAY be conformant to any number of NIEM IEPDs.</p>
+
     </section>
   </section>
 
@@ -162,7 +248,7 @@
     
     <ruleSection>
       <title>File must be a JSON-LD file</title>
-      <rule applicability="JSON" id="is-json-ld" class="Constraint">
+      <rule applicability="STRICT LAX" id="is-json-ld" class="Constraint">
         <p>The file MUST be a JSON-LD file.</p>
       </rule>
     </ruleSection>
@@ -177,23 +263,6 @@
 
   <section isAppendix="true">
     <title>References</title>
-
-    <reference id="CTAS">
-      <p>Roberts, Webb. <q>NIEM Conformance Targets Attribute Specification, Version 3.0.</q> NIEM
-      Technical Architecture Committee, July 31, 2014. <link>MACRO_HREF_CTAS</link>.</p>
-    </reference>
-
-    <reference id="RFC8259">
-      <p>Bray, T., Ed., <q>The JavaScript Object Notation (JSON) Data Interchange Format</q>, STD
-        90, RFC 8259, DOI 10.17487/RFC8259, December
-        2017, <link>https://www.rfc-editor.org/info/rfc8259</link>.</p>
-    </reference>
-
-    <reference id="NDR" label="NIEM NDR">
-      <p>Roberts, Webb. <q>National Information Exchange Model Naming and Design Rules, Version
-          4.0.</q> NIEM Technical Architecture Committee, November 7,
-          2017. <link>MACRO_HREF_NDR</link>.</p>
-    </reference>
     <reference id="BCP14" label="BCP 14">
       <p>Internet Engineering Task Force Best Current Practice 14. Available
         from <link>https://www.ietf.org/rfc/bcp/bcp14.txt</link>. BCP 14 is composed of:</p>
@@ -210,13 +279,30 @@
         </reference>
       </sub>
     </reference>
+    <reference id="CTAS">
+      <p>Roberts, Webb. <q>NIEM Conformance Targets Attribute Specification, Version 3.0.</q> NIEM
+      Technical Architecture Committee, July 31, 2014. <link>MACRO_HREF_CTAS</link>.</p>
+    </reference>
     <reference id="JSON-LD">
       <p>Manu Sporny, Dave Longley, Gregg Kellogg, Markus Lanthaler, and Niklas
           Lindstr<char name="ouml"/>m. <q>JSON-LD 1.0, A JSON-Based Serialization for Linked Data,
           W3C Recommendation.</q> Edited by Manu Sporny, Gregg Kellogg, and Markus Lanthaler. W3C,
           January 16, 2014. <link>MACRO_HREF_JSONLD</link>.</p>
     </reference>
-
+    <reference id="NDR" label="NIEM NDR">
+      <p>Roberts, Webb. <q>National Information Exchange Model Naming and Design Rules, Version
+          4.0.</q> NIEM Technical Architecture Committee, November 7,
+          2017. <link>MACRO_HREF_NDR</link>.</p>
+    </reference>
+    <reference id="RFC4627">
+      <p>D. Crockford. The application/json Media Type for JavaScript Object Notation (JSON)
+        (RFC 4627). July 2006. RFC. <link>http://www.ietf.org/rfc/rfc4627.txt</link></p>
+    </reference>
+    <reference id="RFC8259">
+      <p>Bray, T., Ed., <q>The JavaScript Object Notation (JSON) Data Interchange Format</q>, STD
+        90, RFC 8259, DOI 10.17487/RFC8259, December
+        2017, <link>https://www.ietf.org/rfc/rfc8259.txt</link>.</p>
+    </reference>
     <reference id="SHACL">
       <p>Holger Knublauch, and Dimitris Kontokostas. <q>Shapes Constraint Language (SHACL).</q> W3C,
       July 20, 2017. <link>https://www.w3.org/TR/2017/REC-shacl-20170720/</link>.</p>

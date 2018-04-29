@@ -49,8 +49,8 @@ config_files = @config_files@
 m4_required_files = ${src_dir}/macros.m4
 m4_flags = --prefix-builtins --include=${build_dir} ${m4_required_files}
 
-doc-name = niem-json-spec
-all_files_relative = ${doc-name}.html ${doc-name}.txt
+doc_name = niem-json-spec
+all_files_relative = ${doc_name}.html ${doc_name}.txt
 all_files = ${all_files_relative:%=${build_dir}/%}
 install_files = ${all_files_relative:%=${prefix}/%}
 
@@ -91,9 +91,14 @@ endif
 .PHONY: all #   Build everything
 all: ${all_files}
 
+.PHONY: html #   Build HTML output
+html: ${build_dir}/${doc_name}.html
+
 .PHONY: clean #   Remove built files
 clean:
 	${RM} ${all_files}
+
+
 
 .PHONY: install #   Install everything to $prefix (default @prefix@)
 install: ${install_files}
@@ -105,10 +110,10 @@ uninstall:
 #############################################################################
 # build
 
-${build_dir}/${doc-name}.html: ${build_dir}/${doc-name}.xml ${doc_html_required_files}
+${build_dir}/${doc_name}.html: ${build_dir}/${doc_name}.xml ${doc_html_required_files}
 	${process_doc} --format=html --in=$< --out=$@
 
-${build_dir}/${doc-name}.txt: ${build_dir}/${doc-name}.xml ${doc_text_required_files}
+${build_dir}/${doc_name}.txt: ${build_dir}/${doc_name}.xml ${doc_text_required_files}
 	${process_doc} --format=text --in=$< --out=$@
 
 ${build_dir}/%: ${build_dir}/%.m4 ${m4_required_files}
@@ -135,7 +140,7 @@ ${prefix}/%: ${build_dir}/%
 # check spelling
 
 .PHONY: spell #   Check spelling of text doc
-spell: ${build_dir}/${doc-name}.txt
+spell: ${build_dir}/${doc_name}.txt
 	${cat} $< \
 	  | ${aspell} --home-dir=${src_dir} -p aspell-exceptions.txt list \
 	  | ${sort} -uf \

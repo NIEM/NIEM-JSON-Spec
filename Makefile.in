@@ -144,7 +144,8 @@ spell: ${build_dir}/${doc_name}.txt
 	${cat} $< \
 	  | ${aspell} --home-dir=${src_dir} -p aspell-exceptions.txt list \
 	  | ${sort} -uf \
-	  | (! fgrep -v 'This will fail the spellcheck if it does not come up empty.' )
+	  > ${build_dir}/aspell-results.txt
+	! test -s ${build_dir}/aspell-results.txt
 
 #############################################################################
 # convenience targets

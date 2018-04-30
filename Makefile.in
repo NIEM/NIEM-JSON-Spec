@@ -145,7 +145,7 @@ spell: ${build_dir}/${doc_name}.txt
 	  | ${aspell} --home-dir=${src_dir} -p aspell-exceptions.txt list \
 	  | ${sort} -uf \
 	  > ${build_dir}/aspell-results.txt
-	! test -s ${build_dir}/aspell-results.txt
+	if test -s ${build_dir}/aspell-results.txt; then cat ${build_dir}/aspell-results.txt; exit 1; fi
 
 #############################################################################
 # convenience targets

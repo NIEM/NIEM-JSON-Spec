@@ -12,25 +12,26 @@
 
     m4_define([[[MACRO_ABSTRACT_TEXT]]],[[[
 
-    <p>The NIEM JSON Specification establishes methods, rules, and conformance targets for using
-      NIEM with JSON.</p>
+    <p>The NIEM JSON Specification establishes the technical basis for using JavaScript Object
+      Notation (JSON) as a data format for exchange of information consistent with NIEM-conformant
+      schemas and Information Exchange Package Descriptions (IEPDs).</p>
 
     <p>The definition of conformance for NIEM JSON data primarily focuses on the relationship
       between the data in the JSON file and the definitions established by a NIEM-conformant schema,
-      like the schema defined by a NIEM IEPD. There a two forms of conformance of a NIEM JSON
+      (e.g., the schema defined by a NIEM IEPD). There are two forms of conformance of a NIEM JSON
       document to a NIEM-conformant schema:</p>
 
     <ul>
       <li><p><strong>Strict conformance</strong> establishes that the JSON instance follows all
           rules of the schema or IEPD. An instance that strictly conforms to an IEPD will contain
           all content that is required by the IEPD, will contain only content allowed by the IEPD,
-          and reflect the parent-child structure and cardinality constraints defined by the
-          IEPD. This is intended to enable NIEM JSON to satisfy exchange requirements similar to
+          and will reflect the parent-child structure and cardinality constraints defined by the
+          IEPD. This enables NIEM JSON to satisfy exchange requirements similar to
           traditional NIEM XML use cases.</p></li>
-      <li><p><strong>Lax conformance</strong> is intended to enable the use of vocabularies that are
+      <li><p><strong>Lax conformance</strong> enables the use of vocabularies that are
           defined by NIEM schemas or IEPDs via <em>linked data</em> and <em>linked open data</em>
-          methods. It is intended to establish that exchanges that use NIEM-conformant vocabularies
-          use those vocabularies properly, while allowing for more flexibility, and for combining
+          methods. It establishes that exchanges with NIEM-conformant vocabularies
+          use those vocabularies properly; this allows data to be more flexible, and to combine
           terms from NIEM-conformant vocabularies with terms from other vocabularies.</p></li>
     </ul>
 
@@ -44,11 +45,11 @@
     <title>Authors</title>
     <p>Webb Roberts, Georgia Tech Research Institute
       (<link href="mailto:webb.roberts@gtri.gatech.edu">&lt;webb.roberts@gtri.gatech.edu&gt;</link>),
-      Lead Author</p>
+      Lead author</p>
   </subsection>
 
   <subsection>
-    <title>Document Status</title>
+    <title>Document status</title>
     <p>This document is a draft of a specification product of the NIEM Technical Architecture
       Committee (NTAC).</p>
 
@@ -59,7 +60,7 @@
   </subsection>
 
   <subsection id="toc">
-    <title>Table of Contents</title>
+    <title>Table of contents</title>
     <tableOfContents/>
   </subsection>
   <section>
@@ -69,10 +70,10 @@
   </section>
 
   <section>
-    <title>External Terminology</title>
+    <title>External terminology</title>
     
     <p>This document uses terminology from other documents. This section
-      enumerates this externally-defined terminology.</p>
+      identifies sources and definitions of externally-defined terminology.</p>
 
     <section id="section-terminology-bcp-14">
       <title>IETF Best Current Practice 14 terminology</title>
@@ -152,7 +153,7 @@
         MACRO_REF_EXTERNAL(MPD,MACRO_HREF_MPD#definition_IEP_conformance_target,5.6,Defining
         Information Exchange Packages). An IEP conformance target defines a set of conformance
         criteria for a class of <termRef term="information exchange package">information exchange
-          packages (IEPs)</termRef>.</p>
+          package (IEP)</termRef>.</p>
 
       <p>The term <termDef>information exchange package</termDef> is defined by
         MACRO_REF_EXTERNAL(MPD,MACRO_HREF_MPD#definition_information_exchange_package,3.2.3,IEP
@@ -194,12 +195,17 @@
         <ref idref="RFC4627"/>, which does not define that term. We interpret this to be a reference
         to <em>JSON text</em> as defined by <ref idref="RFC8259"/>.</p>
 
-      <p>The evaluation of a JSON-LD document as RDF is specified by <ref idref="JSON-LD-API"/>.</p>
+      <p>The evaluation of a JSON-LD document as Resource Description Framework (RDF) is specified
+      by <ref idref="JSON-LD-API"/>.</p>
 
     </section>
 
     <section>
       <title>RDF Schema</title>
+
+      <p><ref idref="RDFS"/> describes RDF Schema (RDFS), which provides a data-modeling vocabulary
+        for RDF data. <ref idref="NDR"/> defines components of NIEM-conformant schema document sets
+        in terms of RDF Schema.</p>
 
       <p>Property <qName>rdf:value</qName> is defined by
         MACRO_REF_EXTERNAL(RDFS,MACRO_HREF_RDFS#ch_value,5.4.3,rdf:value). This property is used
@@ -208,11 +214,12 @@
   </section>
 
   <section>
-    <title>Conformance Targets</title>
+    <title>Conformance targets</title>
 
     <p>This document defines multiple <termRef term="conformance target">conformance
         targets</termRef>. Each conformance target is defined normatively by this
-      specification. Each conformance target has an associated abbreviation, which is used to
+        specification. Each conformance target has an associated abbreviation, which appears in
+        rules to
       identify to which conformance targets a rule applies.</p>
 
     <table id="table-ct-list">
@@ -277,7 +284,7 @@
       <title>Strictly conformant JSON corresponds to valid XML</title>
 
       <rule applicability="STRICT" class="Constraint">
-        <p>The RDF entailed by <termRef>NIEM-JSON document strictly conformant to a schema</termRef>
+        <p>The RDF entailed by a <termRef>NIEM-JSON document strictly conformant to a schema</termRef>
           MUST be equal to the RDF entailed by a corresponding <termRef>conformant instance XML
           document</termRef> instance of the schema, accounting for
           <termRef>literal-to-object conversion</termRef> and the omission of external content.</p>
@@ -358,10 +365,10 @@
         external content with an RDF mapping. As such, external content is outside the scope of
         evaluation as conformance JSON documents. In addition,
         MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#section_5.6.3.3,5.6.3.3,Element as a property with
-        unknown context) provides RDF identifying NIEM content carried by an external context.</p>
+        unknown context), provides RDF identifying NIEM content carried by an external context.</p>
 
-      <p>External content and unknown contexts are omitted from evaluation of conformance, and is
-        presumed to be conformant, as evaluating its conformance is outside the scope of this
+      <p>External content and unknown contexts are omitted from evaluation of conformance, and are
+        presumed to be conformant, as evaluating their conformance is outside the scope of this
         specification.</p>
 
     </section>

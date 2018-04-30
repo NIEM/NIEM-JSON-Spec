@@ -18,7 +18,7 @@
 
     <p>The definition of conformance for NIEM JSON data primarily focuses on the relationship
       between the data in the JSON file and the definitions established by a NIEM-conformant schema,
-      (e.g., the schema defined by a NIEM IEPD). There are two forms of conformance of a NIEM JSON
+      e.g., the schema defined by a NIEM IEPD. There are two forms of conformance of a NIEM JSON
       document to a NIEM-conformant schema:</p>
 
     <ul>

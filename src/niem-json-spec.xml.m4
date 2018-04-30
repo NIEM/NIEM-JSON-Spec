@@ -396,7 +396,7 @@
         namespace not defined by a <termRef>reference schema document</termRef>
         or <termRef>extension schema document</termRef>. NIEM does not provide
         external content with an RDF mapping. As such, external content is outside the scope of
-        evaluation as conformance JSON documents. In addition,
+        evaluation of conformance of JSON documents. In addition,
         MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#section_5.6.3.3,5.6.3.3,Element as a property with
         unknown context), provides RDF identifying NIEM content carried by an external context.</p>
 

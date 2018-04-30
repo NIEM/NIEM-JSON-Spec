@@ -207,7 +207,9 @@
 
     <section>
       <title>JSON-LD</title>
-      <p><ref idref="JSON-LD"/> defines the term <termDef>JSON-LD document</termDef>.
+
+      <p><ref idref="JSON-LD"/> defines JSON-LD, a JSON-based format to serialize linked
+        data. <ref idref="JSON-LD"/> defines the term <termDef>JSON-LD document</termDef>.
         MACRO_REF_EXTERNAL(JSON-LD,MACRO_HREF_JSONLD#dfn-json-ld-document,7,Data Model) provides a
         summary of what constitutes a JSON-LD document.
         MACRO_REF_EXTERNAL(JSON-LD,MACRO_HREF_JSONLD#json-ld-grammar,8,JSON-LD Grammar) states:</p>

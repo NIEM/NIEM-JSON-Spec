@@ -323,7 +323,7 @@
       </rule>
 
       <p>Within this rule, the <em>schema</em> includes a <termRef>conformant schema document
-          set</termRef>, and will include include all other constraints of an <termRef>IEP
+          set</termRef>, and will include all other constraints of an <termRef>IEP
           conformance target</termRef> defined by an IEPD. The RDF entailed by a candidate JSON
           document is described by <ref idref="JSON-LD-API"/>. The RDF entailed by an XML document
           is described by <ref idref="NDR"/>. Note that this rule does not provide a translation of

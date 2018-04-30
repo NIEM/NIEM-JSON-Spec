@@ -14,7 +14,7 @@
 
     <p>The NIEM JSON Specification establishes the technical basis for using JavaScript Object
       Notation (JSON) as a data format for exchange of information consistent with NIEM-conformant
-      schemas and Information Exchange Package Descriptions (IEPDs).</p>
+      schemas and information exchange package documentations (IEPDs).</p>
 
     <p>The definition of conformance for NIEM JSON data primarily focuses on the relationship
       between the data in the JSON file and the definitions established by a NIEM-conformant schema,
@@ -133,7 +133,7 @@
       </blockquote>
 
       <p>Note the principle component of a NIEM exchange definition (an information exchange package
-        description, or IEPD) is a conformant schema document set.</p>
+        documentation, or IEPD) is a conformant schema document set.</p>
 
       <p>The term <termDef>conformant instance XML document</termDef> is defined by the
         MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#definition_conformant_instance_XML_document,4.1.4,Instance

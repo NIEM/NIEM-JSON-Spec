@@ -161,6 +161,19 @@
           scope than those defined by a reference schema document.</p>
       </blockquote>
 
+      <p>The term <termDef>external schema document</termDef> is defined by the
+        MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#definition_external_schema_document,10.2.3,External adapter types and external components), which states: </p>
+
+      <blockquote>
+        <p>An <strong>external schema document</strong>
+          is any schema document that is not one of</p>
+        <ul>
+          <li><p>a reference schema document,</p></li>
+          <li><p>an extension schema document, or</p></li>
+          <li><p>a schema document that has the structures namespace as its target namespace.</p></li>
+        </ul>
+
+      </blockquote>
     </section>
 
     <section>
@@ -377,7 +390,7 @@
       <title>External content omission</title>
 
       <p>NIEM content and schemas are defined with a precise RDF mapping. External content includes
-        any content with a namespace defined by an external schema document, or otherwise with a
+        any content with a namespace defined by an <termRef>external schema document</termRef>, or otherwise with a
         namespace not defined by a <termRef>reference schema document</termRef>
         or <termRef>extension schema document</termRef>. NIEM does not provide
         external content with an RDF mapping. As such, external content is outside the scope of

@@ -454,9 +454,11 @@
       <p>Dan Brickley, and R.V. Guha, eds. <q>RDF Schema 1.1.</q> The World Wide Web Consortium (W3C), February 25, 2014. <link>http://www.w3.org/TR/2014/REC-rdf-schema-20140225/</link>.</p>
     </reference>
   </section>
+  <!-- stand down the index until it can be useful.
   <section id="index"><title>Index</title>
     <index/>
   </section>
+  -->
   <section id="index-of-defns"><title>Index of definitions</title>
     <indexOfDefinitions/>
   </section>

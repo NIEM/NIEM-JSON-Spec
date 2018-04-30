@@ -144,6 +144,23 @@
           instance document valid to a conformant schema document set.</p>
       </blockquote>
       
+      <p>The term <termDef>reference schema document</termDef> is defined by the
+        MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#definition_reference_schema_document,4.1.1,Reference schema document), which states: </p>
+
+      <blockquote>
+        <p>A <strong>reference schema document</strong> is a schema document that is intended to
+          provide the authoritative definitions of broadly reusable schema components.</p>
+      </blockquote>
+      
+      <p>The term <termDef>extension schema document</termDef> is defined by the
+        MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#definition_extension_schema_document,4.1.2,Extension schema document), which states: </p>
+
+      <blockquote>
+        <p>An <strong>extension schema document</strong> is a schema document that is intended to
+          provide definitions of schema components that are intended for reuse within a more narrow
+          scope than those defined by a reference schema document.</p>
+      </blockquote>
+
     </section>
 
     <section>
@@ -361,7 +378,8 @@
 
       <p>NIEM content and schemas are defined with a precise RDF mapping. External content includes
         any content with a namespace defined by an external schema document, or otherwise with a
-        namespace not defined by a reference or extension schema document. NIEM does not provide
+        namespace not defined by a <termRef>reference schema document</termRef>
+        or <termRef>extension schema document</termRef>. NIEM does not provide
         external content with an RDF mapping. As such, external content is outside the scope of
         evaluation as conformance JSON documents. In addition,
         MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#section_5.6.3.3,5.6.3.3,Element as a property with

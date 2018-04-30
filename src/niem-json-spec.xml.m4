@@ -262,21 +262,21 @@
       </theadr>
       <tr>
         <td><conformance-target id="STRICT">STRICT</conformance-target></td>
-        <td><termRef>NIEM-JSON document strictly conformant to a schema</termRef></td>
+        <td><termRef>NIEM JSON document strictly conformant to a schema</termRef></td>
       </tr>
       <tr>
         <td><conformance-target id="LAX">LAX</conformance-target></td>
-        <td><termRef>NIEM-JSON document laxly conformant to a schema</termRef></td>
+        <td><termRef>NIEM JSON document laxly conformant to a schema</termRef></td>
       </tr>
     </table>
 
     <section>
-      <title>NIEM-JSON document strictly conformant to a schema</title>
-      <definition term="NIEM-JSON document strictly conformant to a schema">
-        <p>A <strong>NIEM-JSON document strictly conformant to a schema</strong> is
+      <title>NIEM JSON document strictly conformant to a schema</title>
+      <definition term="NIEM JSON document strictly conformant to a schema">
+        <p>A <strong>NIEM JSON document strictly conformant to a schema</strong> is
           a <termRef>JSON-LD document</termRef> that may be assigned a one-to-one correspondence to
           a <termRef>conformant instance XML document</termRef> valid against a NIEM schema.  It is
-          a <termRef>conformance target</termRef> of this specification. A NIEM-JSON document
+          a <termRef>conformance target</termRef> of this specification. A NIEM JSON document
           strictly conformant to a schema MUST conform to all rules of this specification that apply
           to this conformance target.  The <termRef>conformance target identifier</termRef> for this
           conformance target is <code>MACRO_CT_URI_STRICT</code>.</p>
@@ -284,12 +284,12 @@
     </section>
 
     <section>
-      <title>NIEM-JSON document laxly conformant to a schema</title>
-      <definition term="NIEM-JSON document laxly conformant to a schema">
-        <p>A <strong>NIEM-JSON document laxly conformant to a schema</strong> is a <termRef>JSON-LD
+      <title>NIEM JSON document laxly conformant to a schema</title>
+      <definition term="NIEM JSON document laxly conformant to a schema">
+        <p>A <strong>NIEM JSON document laxly conformant to a schema</strong> is a <termRef>JSON-LD
             document</termRef> that may be interpreted using the RDF vocabulary defined by a
           <termRef>conformant schema document set</termRef>.
-          It is a <termRef>conformance target</termRef> of this specification. A NIEM-JSON
+          It is a <termRef>conformance target</termRef> of this specification. A NIEM JSON
           document laxly conformant to a schema MUST conform to all rules of this specification that
           apply to this conformance target.  The <termRef>conformance target identifier</termRef>
           for this conformance target is <code>MACRO_CT_URI_LAX</code>.</p>
@@ -305,8 +305,8 @@
       <title>File must be a JSON-LD file</title>
 
       <rule applicability="STRICT LAX" id="is-json-ld" class="Constraint">
-        <p>A <termRef>NIEM-JSON document strictly conformant to a schema</termRef> or
-          <termRef>NIEM-JSON document laxly conformant to a schema</termRef> MUST be
+        <p>A <termRef>NIEM JSON document strictly conformant to a schema</termRef> or
+          <termRef>NIEM JSON document laxly conformant to a schema</termRef> MUST be
             a <termRef>JSON-LD document</termRef>.</p>
       </rule>
 
@@ -316,7 +316,7 @@
       <title>Strictly conformant JSON corresponds to valid XML</title>
 
       <rule applicability="STRICT" class="Constraint">
-        <p>The RDF entailed by a <termRef>NIEM-JSON document strictly conformant to a schema</termRef>
+        <p>The RDF entailed by a <termRef>NIEM JSON document strictly conformant to a schema</termRef>
           MUST be equal to the RDF entailed by a corresponding <termRef>conformant instance XML
           document</termRef> instance of the schema, accounting for
           <termRef>literal-to-object conversion</termRef> and the omission of external content.</p>
@@ -335,7 +335,7 @@
       <title>Laxly conformant JSON satisfiable with schema</title>
 
       <rule applicability="LAX" class="Constraint">
-        <p>A JSON-LD document MUST be a <termRef>NIEM-JSON document laxly conformant to a
+        <p>A JSON-LD document MUST be a <termRef>NIEM JSON document laxly conformant to a
             schema</termRef> only if the RDF graph entailed by the JSON document and the schema
             together is RDFS satisfiable, accounting for <termRef>literal-to-object
             conversion</termRef> and the omission of external content.</p>
@@ -352,8 +352,8 @@
       <title>JSON interpreted based on schema</title>
 
       <rule applicability="STRICT LAX" class="Interpretation">
-        <p>A <termRef>NIEM-JSON document strictly conformant to a schema</termRef> or
-          <termRef>NIEM-JSON document laxly conformant to a schema</termRef> MUST be interpreted as
+        <p>A <termRef>NIEM JSON document strictly conformant to a schema</termRef> or
+          <termRef>NIEM JSON document laxly conformant to a schema</termRef> MUST be interpreted as
           an RDFS interpretation of the RDF graph composed of the RDF entailed by the JSON document
           together with the RDF entailed by the schema.</p>
       </rule>

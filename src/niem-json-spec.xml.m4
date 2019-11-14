@@ -67,6 +67,24 @@
     <title>Introduction</title>
 
     MACRO_ABSTRACT_TEXT
+
+    <section>
+      <title>Audience</title>
+
+      <p>This document was developed as a technical specification, and is not intended to be a user
+        guide or an introduction to the use of JSON for NIEM. Its intended audience is developers of
+        tools that work with NIEM and NIEM JSON, or other individuals who require an understanding
+        of the details of the alignment between NIEM JSON and other representations of NIEM
+        data.</p>
+
+      <p>Developers of NIEM message formats with a JSON representation may prefer to read the NIEM
+        JSON documentation at <link>https://niem.github.io/json/</link>, specifically
+        the <em><a href="https://niem.github.io/json/tutorial/">NIEM JSON Tutorial</a></em>, which
+        proceeds step-by-step from data requirements to a conforming JSON representation. Developers
+        of systems that read and write NIEM JSON messages should conform to the relevant message
+        descriptions.</p>
+      
+    </section>
   </section>
 
   <section>

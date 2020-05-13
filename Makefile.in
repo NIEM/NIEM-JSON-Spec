@@ -80,6 +80,11 @@ else
 ifeq (${wildcard ${dependencies_mk}},${dependencies_mk})
 include ${dependencies_mk}
 endif
+
+.PHONY: depend
+depend:
+	@ echo "Run \"make depend=build\" to rebuild dependencies." >&2
+
 endif
 
 -include ${dependencies_mk}

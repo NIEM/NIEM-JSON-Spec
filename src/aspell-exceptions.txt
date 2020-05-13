@@ -11,6 +11,7 @@ IEPD
 IEPDs
 IEPs
 IETF
+IRI
 LD
 Lanthaler
 Leiba
@@ -35,3 +36,4 @@ pre
 rdf
 satisfiable
 schemas
+subgraph

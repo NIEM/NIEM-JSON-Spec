@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -o nounset -o errexit -o pipefail
+
 . "$HOME"/share/wrtools-core/opt_help.bash
 . "$HOME"/share/wrtools-core/fail.bash
 . "$HOME"/share/wrtools-core/opt_verbose.bash
@@ -45,7 +47,7 @@ case $1 in
     #HELP:      build something specific.
     build | rebuild )
         if [[ $1 == "rebuild" ]]
-        then vrun make distclean depend=no
+        then vrun make distclean
         fi
         if [[ -x ./config.status ]]
         then ./config.status
@@ -53,10 +55,14 @@ case $1 in
         fi
         vrun make depend depend=build
         if (( $# == 0 ))
-        then vrun make -j 8
-             vrun make -j 8 install
+        then vrun make -j 8 publish
         else vrun make -j 8 "${@:2}"
         fi
+        ;;
+    #HELP:  oh: "Open HTML": Quickly build the HTML file and open it.
+    oh )
+        vrun make -j 8 html
+        open build/niem-json-spec.html
         ;;
     * )
         fail "Unknown command \"$command\"";;

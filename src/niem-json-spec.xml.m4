@@ -409,18 +409,31 @@
     <section>
       <title>External content omission</title>
 
-      <p>NIEM content and schemas are defined with a precise RDF mapping. External content includes
-        any content with a namespace defined by an <termRef>external schema document</termRef>, or otherwise with a
+      <p>NIEM provides a mechanism for data that is not NIEM-conformant to be included within NIEM
+        data. Such data is called external content (see
+        MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#section_10.2.3,10.2.3,External adapter types and
+        external components)). External content includes
+        any content with a namespace defined by an <termRef>external schema document</termRef>, or with any
         namespace not defined by a <termRef>reference schema document</termRef>
-        or <termRef>extension schema document</termRef>. NIEM does not provide
-        external content with an RDF mapping. As such, external content is outside the scope of
-        evaluation of conformance of JSON documents. In addition,
-        MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#section_5.6.3.3,5.6.3.3,Element as a property with
-        unknown context), provides RDF identifying NIEM content carried by an external context.</p>
+        or <termRef>extension schema document</termRef>.</p>
 
-      <p>External content and unknown contexts are omitted from evaluation of conformance, and are
-        presumed to be conformant, as evaluating their conformance is outside the scope of this
-        specification.</p>
+      <p>NIEM provides a mapping from NIEM-conformant XML content and XML
+        Schemas to RDF (see MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#section_5,5,The NIEM conceptual
+        model)). The NDR rules do not provide a mapping from external content to RDF.</p>
+
+      <p>An object carried by an external element (i.e., an instance of an element that is in a
+        namespace not defined by NIEM-conformant schema documents) may be part of a subgraph of
+        resources and properties that are not described by NIEM-conformant schemas. Such an object
+        may be mapped to a resource that is assigned an IRI that is a blank node (described by
+        MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#section_5.4,5.4,Unique identification of data
+        objects)), or may be given a more meaningful resource identifier.</p>
+
+      <p>Since the structure and content of such a subgraph is not described by NIEM-conformant
+        schemas, its structure and content are not material to the conformance of a JSON document by
+        this specification. Such content may effectively be omitted from consideration of its
+        validity against a schema, as regards conformance to this specification.  Other
+        specifications may introduce introduce additional rules, but that is outside the scope of
+        this specification.</p>
 
     </section>
 

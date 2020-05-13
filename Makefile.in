@@ -16,11 +16,9 @@ SHELL = @bash@ -o pipefail -o errexit -o nounset
 #############################################################################
 # dirs
 
-abs_srcdir = @abs_srcdir@
-src_dir = ${abs_srcdir}/src
-abs_builddir = @abs_builddir@
-build_dir = ${abs_builddir}/build
-prefix = @prefix@
+srcdir = @srcdir@
+builddir = @builddir@
+publish_dir = ${builddir}/publish
 
 #############################################################################
 # COMMANDS
@@ -43,16 +41,18 @@ process_doc = @process_doc@
 #############################################################################
 # files
 
-dependencies_mk := ${build_dir}/dependencies.mk
+dependencies_mk := ${builddir}/build/dependencies.mk
 config_files = @config_files@
 
-m4_required_files = ${src_dir}/macros.m4
-m4_flags = --prefix-builtins --include=${build_dir} ${m4_required_files}
+m4_required_files = ${srcdir}/src/macros.m4
+m4_flags = --prefix-builtins --include=${builddir}/build ${m4_required_files}
 
 doc_name = niem-json-spec
-all_files_relative = ${doc_name}.html ${doc_name}.txt
-all_files = ${all_files_relative:%=${build_dir}/%}
-install_files = ${all_files_relative:%=${prefix}/%}
+
+all_files = ${builddir}/build/${doc_name}.html \
+  ${builddir}/build/${doc_name}.txt \
+
+publish_files = ${all_files:${builddir}/build/%=${publish_dir}/%}
 
 #############################################################################
 # depend
@@ -71,7 +71,7 @@ ifeq (${depend},build)
 .PHONY: depend #   Build dependencies file
 depend: ${dependencies_mk}
 
-${dependencies_mk}: ${build_dir}/niem-json-spec.xml
+${dependencies_mk}: ${builddir}/build/niem-json-spec.xml
 	@ ${MKDIR_P} ${dir $@}
 	${process_doc} --in=$< --out=$@ --format=makedepend
 
@@ -92,31 +92,23 @@ endif
 all: ${all_files}
 
 .PHONY: html #   Build HTML output
-html: ${build_dir}/${doc_name}.html
+html: ${builddir}/build/${doc_name}.html
 
 .PHONY: clean #   Remove built files
 clean:
 	${RM} ${all_files}
-
-
-
-.PHONY: install #   Install everything to $prefix (default @prefix@)
-install: ${install_files}
-
-.PHONY: uninstall #   Remove installed files
-uninstall:
-	${RM} ${install_files}
+	${RM} -r ${builddir}/build
 
 #############################################################################
 # build
 
-${build_dir}/${doc_name}.html: ${build_dir}/${doc_name}.xml ${doc_html_required_files}
+${builddir}/build/${doc_name}.html: ${builddir}/build/${doc_name}.xml ${doc_html_required_files}
 	${process_doc} --format=html --in=$< --out=$@
 
-${build_dir}/${doc_name}.txt: ${build_dir}/${doc_name}.xml ${doc_text_required_files}
+${builddir}/build/${doc_name}.txt: ${builddir}/build/${doc_name}.xml ${doc_text_required_files}
 	${process_doc} --format=text --in=$< --out=$@
 
-${build_dir}/%: ${build_dir}/%.m4 ${m4_required_files}
+${builddir}/build/%: ${builddir}/build/%.m4 ${m4_required_files}
 	${MKDIR_P} ${dir $@}
 	${m4} ${m4_flags} $< > $@
 	@ if ${fgrep} MACRO_ $@; then echo found unexpanded macro in $@; false; fi
@@ -125,14 +117,21 @@ ${build_dir}/%: ${build_dir}/%.m4 ${m4_required_files}
 # import from source
 
 # import from src
-${build_dir}/%: ${src_dir}/%
+${builddir}/build/%: ${srcdir}/src/%
 	${MKDIR_P} ${dir $@}
 	${INSTALL_DATA} $< $@
 
 #############################################################################
-# install
+# publish
 
-${prefix}/%: ${build_dir}/%
+.PHONY: publish #   Publish everything to $publish_dir (default @builddir@/publish)
+publish: ${publish_files}
+
+.PHONY: unpublish #   Remove published files
+unpublish:
+	${RM} ${publish_files}
+
+${publish_dir}/%: ${builddir}/build/%
 	${MKDIR_P} ${dir $@}
 	${INSTALL_DATA} $< $@
 
@@ -140,12 +139,12 @@ ${prefix}/%: ${build_dir}/%
 # check spelling
 
 .PHONY: spell #   Check spelling of text doc
-spell: ${build_dir}/${doc_name}.txt
+spell: ${builddir}/build/${doc_name}.txt
 	${cat} $< \
-	  | ${aspell} --home-dir=${src_dir} -p aspell-exceptions.txt list \
+	  | ${aspell} --home-dir=${srcdir}/src -p aspell-exceptions.txt list \
 	  | ${sort} -uf \
-	  > ${build_dir}/aspell-results.txt
-	if test -s ${build_dir}/aspell-results.txt; then cat ${build_dir}/aspell-results.txt; exit 1; fi
+	  > ${builddir}/build/aspell-results.txt
+	if test -s ${builddir}/build/aspell-results.txt; then cat ${builddir}/build/aspell-results.txt; exit 1; fi
 
 #############################################################################
 # convenience targets

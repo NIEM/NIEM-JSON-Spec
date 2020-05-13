@@ -1,0 +1,233 @@
+NIEM JSON Specification
+
+Version 4.0alpha1
+
+April 30, 2018
+
+NIEM Technical Architecture Committee (NTAC)
+
+Abstract
+
+   The NIEM JSON Specification establishes the technical basis for using JavaScript Object Notation (JSON) as a data format for exchange of information consistent with NIEM-conformant schemas and information exchange package documentations (IEPDs).
+
+   NIEM-conformance of JSON data is primarily focused on the relationship between the data in the JSON file and the definitions established by a NIEM-conformant schema, e.g., the schema defined by a NIEM IEPD. There are two forms of conformance of a NIEM JSON document to a NIEM-conformant schema:
+
+      *  Strict conformance establishes that the JSON instance follows all rules of the schema or IEPD. An instance that strictly conforms to an IEPD will contain all content that is required by the IEPD, will contain only content allowed by the IEPD, and will reflect the parent-child structure and cardinality constraints defined by the IEPD. This enables NIEM JSON to satisfy exchange requirements similar to traditional NIEM XML use cases.
+
+      *  Lax conformance enables the use of vocabularies that are defined by NIEM schemas or IEPDs via linked data and linked open data methods. It establishes that exchanges with NIEM-conformant vocabularies use those vocabularies properly; this allows data to be more flexible, and to combine terms from NIEM-conformant vocabularies with terms from other vocabularies.
+
+Authors
+
+   Webb Roberts, Georgia Tech Research Institute (<webb.roberts@gtri.gatech.edu>), Lead author
+
+Document status
+
+   This document is a draft of a specification product of the NIEM Technical Architecture Committee (NTAC).
+
+   Updates, revisions, and errata for this specification are posted to https://github.com/NIEM/NIEM-JSON-Spec. Please submit comments on this specification as issues at https://github.com/NIEM/NIEM-JSON-Spec/issues.
+
+Table of contents
+
+   The table of contents is omitted from this edition.
+
+1. Introduction
+
+   The NIEM JSON Specification establishes the technical basis for using JavaScript Object Notation (JSON) as a data format for exchange of information consistent with NIEM-conformant schemas and information exchange package documentations (IEPDs).
+
+   NIEM-conformance of JSON data is primarily focused on the relationship between the data in the JSON file and the definitions established by a NIEM-conformant schema, e.g., the schema defined by a NIEM IEPD. There are two forms of conformance of a NIEM JSON document to a NIEM-conformant schema:
+
+      *  Strict conformance establishes that the JSON instance follows all rules of the schema or IEPD. An instance that strictly conforms to an IEPD will contain all content that is required by the IEPD, will contain only content allowed by the IEPD, and will reflect the parent-child structure and cardinality constraints defined by the IEPD. This enables NIEM JSON to satisfy exchange requirements similar to traditional NIEM XML use cases.
+
+      *  Lax conformance enables the use of vocabularies that are defined by NIEM schemas or IEPDs via linked data and linked open data methods. It establishes that exchanges with NIEM-conformant vocabularies use those vocabularies properly; this allows data to be more flexible, and to combine terms from NIEM-conformant vocabularies with terms from other vocabularies.
+
+2. External terminology
+
+   This document uses terminology from other documents. This section identifies sources and definitions of externally-defined terminology.
+
+2.1. IETF Best Current Practice 14 terminology
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [BCP 14] [RFC 2119] [RFC 8174] when, and only when, they appear in all capitals, as shown here.
+
+2.2. Conformance Targets Attribute Specification
+
+   [CTAS] defines several terms used normatively within this specification.
+
+   The term conformance target is defined by [CTAS] Section 3.1, Conformance Target Defined which states:
+
+      A conformance target is a class of artifact, such as an interface, protocol, document, platform, process or service, that is the subject of conformance clauses and normative statements. There may be several conformance targets defined within a specification, and these targets may be diverse so as to reflect different aspects of a specification. For example, a protocol message and a protocol engine may be different conformance targets.
+
+   The term conformance target identifier is defined by [CTAS] Section 3.1, Conformance Target Defined, which states:
+
+      A conformance target identifier is an internationalized resource identifier that uniquely identifies a conformance target.
+
+   The term effective conformance target identifier is defined by [CTAS] Section 4, Semantics and Use, which states:
+
+      An effective conformance target identifier of a conformant document is an internationalized resource identifier reference that occurs in the document's effective conformance targets attribute.
+
+2.3. NIEM Naming and Design Rules
+
+   The term conformant schema document set is defined by the [NIEM NDR] Section 4.1.3, Schema document set, which states: 
+
+      A conformant schema document set is a collection of schema documents that together are capable of validating a conformant instance XML document.
+
+   Note the principle component of a NIEM exchange definition (an information exchange package documentation, or IEPD) is a conformant schema document set.
+
+   The term conformant instance XML document is defined by the [NIEM NDR] Section 4.1.4, Instance documents and elements, which states: 
+
+      A conformant instance XML document is an XML document that is [an] instance document valid to a conformant schema document set.
+
+   The term reference schema document is defined by the [NIEM NDR] Section 4.1.1, Reference schema document, which states: 
+
+      A reference schema document is a schema document that is intended to provide the authoritative definitions of broadly reusable schema components.
+
+   The term extension schema document is defined by the [NIEM NDR] Section 4.1.2, Extension schema document, which states: 
+
+      An extension schema document is a schema document that is intended to provide definitions of schema components that are intended for reuse within a more narrow scope than those defined by a reference schema document.
+
+   The term external schema document is defined by the [NIEM NDR] Section 10.2.3, External adapter types and external components, which states: 
+
+      An external schema document is any schema document that is not one of
+
+         *  a reference schema document,
+
+         *  an extension schema document, or
+
+         *  a schema document that has the structures namespace as its target namespace.
+
+2.4. Model Package Description Specification
+
+   The term IEP conformance target is defined by [MPD] Section 5.6, Defining Information Exchange Packages. An IEP conformance target defines a set of conformance criteria for a class of [information exchange package (IEP)].
+
+   The term information exchange package is defined by [MPD] Section 3.2.3, IEP Conformance Targets. An information exchange package (IEP) is an XML document that conforms to the criteria defined for an [IEP conformance target].
+
+2.5. JSON
+
+   The term JSON text is defined by [RFC8259] Section 2, JSON Grammar, which defines it as a single serialized JSON value.
+
+   The term JSON document, when used within this document, is synonymous with [JSON text].
+
+2.6. JSON-LD
+
+   [JSON-LD] defines JSON-LD, a JSON-based format to serialize linked data. [JSON-LD] defines the term JSON-LD document. [JSON-LD] Section 7, Data Model provides a summary of what constitutes a JSON-LD document. [JSON-LD] Section 8, JSON-LD Grammar states:
+
+      A JSON-LD document MUST be a valid JSON document as described in [RFC4627].
+
+   [JSON-LD] leverages [RFC4627] as a normative definition of JSON. That specification has been superseded by [RFC8259]. Consequently, this specification uses [RFC8259] as its normative definition of JSON.
+
+   [JSON-LD] normatively references the term JSON document in [RFC4627], which does not define that term. We interpret this to be a reference to JSON text as defined by [RFC8259].
+
+   The evaluation of a JSON-LD document as Resource Description Framework (RDF) is specified by [JSON-LD-API].
+
+2.7. RDF Schema
+
+   [RDF-Schema] describes RDF Schema (RDFS), which provides a data-modeling vocabulary for RDF data. [NIEM NDR] defines components of NIEM-conformant schema document sets in terms of RDF Schema.
+
+   Property rdf:value is defined by [RDF-Schema] Section 5.4.3, rdf:value. This property is used within an object to carry a simple value with no additional meaning.
+
+3. Conformance targets
+
+   This document defines multiple [conformance targets]. Each conformance target is defined normatively by this specification. Each conformance target has an associated abbreviation, which appears in rules to identify to which conformance targets a rule applies.
+
+   Table 3-1: Codes representing conformance targets
+
+      Code|Conformance target
+
+      STRICT|[NIEM JSON document strictly conformant to a schema]
+
+      LAX|[NIEM JSON document laxly conformant to a schema]
+
+3.1. NIEM JSON document strictly conformant to a schema
+
+   [Definition: NIEM JSON document strictly conformant to a schema]
+
+      A NIEM JSON document strictly conformant to a schema is a [JSON-LD document] that may be assigned a one-to-one correspondence to a [conformant instance XML document] valid against a NIEM schema. It is a [conformance target] of this specification. A NIEM JSON document strictly conformant to a schema MUST conform to all rules of this specification that apply to this conformance target. The [conformance target identifier] for this conformance target is http://reference.niem.gov/niem/specification/niem-json-spec/4.0alpha1/#Strict.
+
+3.2. NIEM JSON document laxly conformant to a schema
+
+   [Definition: NIEM JSON document laxly conformant to a schema]
+
+      A NIEM JSON document laxly conformant to a schema is a [JSON-LD document] that may be interpreted using the RDF vocabulary defined by a [conformant schema document set]. It is a [conformance target] of this specification. A NIEM JSON document laxly conformant to a schema MUST conform to all rules of this specification that apply to this conformance target. The [conformance target identifier] for this conformance target is http://reference.niem.gov/niem/specification/niem-json-spec/4.0alpha1/#Lax.
+
+4. Rules
+
+Rule 4-1. File must be a JSON-LD file
+
+   [Rule 4-1] (STRICT, LAX)
+
+      A [NIEM JSON document strictly conformant to a schema] or [NIEM JSON document laxly conformant to a schema] MUST be a [JSON-LD document].
+
+Rule 4-2. Strictly conformant JSON corresponds to valid XML
+
+   [Rule 4-2] (STRICT)
+
+      The RDF entailed by a [NIEM JSON document strictly conformant to a schema] MUST be equal to the RDF entailed by a corresponding [conformant instance XML document] instance of the schema, accounting for [literal-to-object conversion] and the omission of external content.
+
+   Within this rule, the schema includes a [conformant schema document set], and will include all other constraints of an [IEP conformance target] defined by an IEPD. The RDF entailed by a candidate JSON document is described by [JSON-LD-API]. The RDF entailed by an XML document is described by [NIEM NDR]. Note that this rule does not provide a translation of JSON to XML; it only requires that there is one.
+
+Rule 4-3. Laxly conformant JSON satisfiable with schema
+
+   [Rule 4-3] (LAX)
+
+      A JSON-LD document MUST be a [NIEM JSON document laxly conformant to a schema] only if the RDF graph entailed by the JSON document and the schema together is RDFS satisfiable, accounting for [literal-to-object conversion] and the omission of external content.
+
+   Within this rule, a schema is a [conformant schema document set]. The RDF entailed by a JSON-LD document is defined by [JSON-LD-API]. The RDF entailed by a schema is defined by [NIEM NDR]. The term RDFS satisfiable is defined by [RDF-Semantics].
+
+Rule 4-4. JSON interpreted based on schema
+
+   [Rule 4-4] (STRICT, LAX)
+
+      A [NIEM JSON document strictly conformant to a schema] or [NIEM JSON document laxly conformant to a schema] MUST be interpreted as an RDFS interpretation of the RDF graph composed of the RDF entailed by the JSON document together with the RDF entailed by the schema.
+
+   Within this rule, a schema is a [conformant schema document set]. The RDF entailed by a JSON-LD document is defined by [JSON-LD-API]. The RDF entailed by a schema is defined by [NIEM NDR]. The term RDFS interpretation is defined by [RDF-Semantics].
+
+4.1. Literal-to-object conversion
+
+   Although all NIEM elements have values that are complex types, which by [NIEM NDR] Section 5.6.3.2, Element instance entail an RDF object (rather than a literal value), JSON syntax for objects with simple values is cumbersome. As a result, NIEM JSON instances may use a shorthand syntax, in which any element with only a simple value may be represented as a literal, rather than as an object with a value carried by rdf:value. To accommodate these cases, conformant JSON documents are evaluated based on the results of [literal-to-object conversion], a process that yields a JSON object in which literal values are converted to idiomatic objects when appropriate.
+
+   [Definition: literal-to-object conversion]
+
+      Within this document, literal-to-object conversion is a process by which a JSON value is transformed from a value of false, null, true, number, or string, into an object containing only the property rdf:value. Evaluation of conformance of a [JSON document] is conducted on the results of literal-to-object conversion of that document.
+
+4.2. External content omission
+
+   NIEM content and schemas are defined with a precise RDF mapping. External content includes any content with a namespace defined by an [external schema document], or otherwise with a namespace not defined by a [reference schema document] or [extension schema document]. NIEM does not provide external content with an RDF mapping. As such, external content is outside the scope of evaluation of conformance of JSON documents. In addition, [NIEM NDR] Section 5.6.3.3, Element as a property with unknown context, provides RDF identifying NIEM content carried by an external context.
+
+   External content and unknown contexts are omitted from evaluation of conformance, and are presumed to be conformant, as evaluating their conformance is outside the scope of this specification.
+
+Appendix A. References
+
+   [BCP 14]: Internet Engineering Task Force Best Current Practice 14. Available from https://www.ietf.org/rfc/bcp/bcp14.txt. BCP 14 is composed of:
+
+         [RFC 2119]: Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997. Available from http://www.ietf.org/rfc/rfc2119.txt.
+
+         [RFC 8174]: Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words", BCP 14, RFC 8174, May 2017. Available from https://www.ietf.org/rfc/rfc8174.txt.
+
+   [CTAS]: Roberts, Webb. "NIEM Conformance Targets Attribute Specification, Version 3.0." NIEM Technical Architecture Committee, July 31, 2014. http://reference.niem.gov/niem/specification/conformance-targets-attribute/3.0/NIEM-CTAS-3.0-2014-07-31.html.
+
+   [JSON-LD]: Manu Sporny, Dave Longley, Gregg Kellogg, Markus Lanthaler, and Niklas Lindstrom. "JSON-LD 1.0, A JSON-Based Serialization for Linked Data, W3C Recommendation." Edited by Manu Sporny, Gregg Kellogg, and Markus Lanthaler. W3C, January 16, 2014. https://www.w3.org/TR/2014/REC-json-ld-20140116/.
+
+   [JSON-LD-API]: Dave Longley, Gregg Kellogg, Markus Lanthaler, and Manu Sporny. "JSON-LD 1.0 Processing Algorithms and API." Edited by Markus Lanthaler, Gregg Kellogg, and Manu Sporny. W3C, January 16, 2014. https://www.w3.org/TR/2014/REC-json-ld-api-20140116/.
+
+   [MPD]: NIEM Technical Architecture Committee. "National Information Exchange Model Model Package Description Specification, Version 3.0.1", April 27, 2015. https://reference.niem.gov/niem/specification/model-package-description/3.0.1/model-package-description-3.0.1.html.
+
+   [NIEM NDR]: Roberts, Webb. "National Information Exchange Model Naming and Design Rules, Version 4.0." NIEM Technical Architecture Committee, November 7, 2017. http://reference.niem.gov/niem/specification/naming-and-design-rules/4.0/niem-ndr-4.0.html.
+
+   [RDF-Semantics]: Patrick J. Hayes, and Peter F. Patel-Schneider, eds. "RDF 1.1 Semantics." The World Wide Web Consortium (W3C), February 25, 2014. http://www.w3.org/TR/2014/REC-rdf11-mt-20140225/.
+
+   [RFC4627]: D. Crockford. The application/json Media Type for JavaScript Object Notation (JSON) (RFC 4627). July 2006. RFC. http://www.ietf.org/rfc/rfc4627.txt
+
+   [RFC8259]: Bray, T., Ed., "The JavaScript Object Notation (JSON) Data Interchange Format", STD 90, RFC 8259, DOI 10.17487/RFC8259, December 2017, https://www.ietf.org/rfc/rfc8259.txt.
+
+   [RDF-Schema]: Dan Brickley, and R.V. Guha, eds. "RDF Schema 1.1." The World Wide Web Consortium (W3C), February 25, 2014. http://www.w3.org/TR/2014/REC-rdf-schema-20140225/.
+
+Appendix B. Index of definitions
+
+   The index of definitions is omitted from this edition.
+
+Appendix C. Index of rules
+
+   Rule 4-1, File must be a JSON-LD file: Section 4, Rules
+   Rule 4-2, Strictly conformant JSON corresponds to valid XML: Section 4, Rules
+   Rule 4-3, Laxly conformant JSON satisfiable with schema: Section 4, Rules
+   Rule 4-4, JSON interpreted based on schema: Section 4, Rules
+

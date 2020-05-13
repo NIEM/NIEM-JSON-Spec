@@ -45,19 +45,19 @@ case $1 in
     #HELP:  rebuild: Clean and then rebuild stuff starting from nothing.
     #HELP:      Default is to build & install everything. Provide targets if you want to
     #HELP:      build something specific.
-    build | rebuild )
-        if [[ $1 == "rebuild" ]]
-        then vrun make distclean
-        fi
-        if [[ -x ./config.status ]]
-        then ./config.status
-        else @srcdir@/configure
-        fi
+    build )
+        vrun make -j 8
+        vrun make spell
+        vrun make -j 8 publish
+        ;;
+    rebuild )
+        vrun make distclean
+        vrun @srcdir@/configure
         vrun make depend depend=build
-        if (( $# == 0 ))
-        then vrun make -j 8 publish
-        else vrun make -j 8 "${@:2}"
-        fi
+        vrun make -j 8
+        vrun make spell
+        vrun make -j 8 unpublish
+        vrun make -j 8 publish
         ;;
     #HELP:  oh: "Open HTML": Quickly build the HTML file and open it.
     oh )

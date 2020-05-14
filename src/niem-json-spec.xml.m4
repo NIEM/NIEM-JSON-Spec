@@ -141,7 +141,8 @@
     <section>
       <title>NIEM Naming and Design Rules</title>
 
-      <p>The term <termDef>conformant schema document set</termDef> is defined by the
+      <p>The term <termDef>conformant schema document set</termDef> is a <termRef>conformance target</termRef>
+        defined by the
         MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#definition_conformant_schema_document_set,4.1.3,Schema
         document set), which states: </p>
 
@@ -150,10 +151,11 @@
           that together are capable of validating a conformant instance XML document.</p>
       </blockquote>
 
-      <p>Note the principle component of a NIEM exchange definition (an information exchange package
+      <p>Note the principal component of a NIEM exchange definition (an information exchange package
         documentation, or IEPD) is a conformant schema document set.</p>
 
-      <p>The term <termDef>conformant instance XML document</termDef> is defined by the
+      <p>The term <termDef>conformant instance XML document</termDef> is a <termRef>conformance target</termRef>
+        defined by the
         MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#definition_conformant_instance_XML_document,4.1.4,Instance
         documents and elements), which states: </p>
 
@@ -161,8 +163,16 @@
         <p>A <strong>conformant instance XML document</strong> is an XML document that is [an]
           instance document valid to a conformant schema document set.</p>
       </blockquote>
+
+      <p>Although the above definitions for the <termRef term="conformance target">conformance targets</termRef>
+        <termRef>conformant schema
+      document set</termRef> and <termRef>conformant instance XML document</termRef> reference
+      each other, each conformance target is supported by a set of rules. Each artifact (i.e.,
+      document set or XML document) must conform to all rules for its conformance target in order
+      to conform to the conformance target.</p>
       
-      <p>The term <termDef>reference schema document</termDef> is defined by the
+      <p>The term <termDef>reference schema document</termDef> is a <termRef>conformance target</termRef>
+        defined by the
         MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#definition_reference_schema_document,4.1.1,Reference schema document), which states: </p>
 
       <blockquote>
@@ -170,7 +180,8 @@
           provide the authoritative definitions of broadly reusable schema components.</p>
       </blockquote>
       
-      <p>The term <termDef>extension schema document</termDef> is defined by the
+      <p>The term <termDef>extension schema document</termDef> is a <termRef>conformance target</termRef>
+        defined by the
         MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#definition_extension_schema_document,4.1.2,Extension schema document), which states: </p>
 
       <blockquote>
@@ -344,8 +355,8 @@
           set</termRef>, and will include all other constraints of an <termRef>IEP
           conformance target</termRef> defined by an IEPD. The RDF entailed by a candidate JSON
           document is described by <ref idref="JSON-LD-API"/>. The RDF entailed by an XML document
-          is described by <ref idref="NDR"/>. Note that this rule does not provide a translation of
-          JSON to XML; it only requires that there is one.</p>
+          is described by <ref idref="NDR"/>. This rule does not provide or require a translation of
+          JSON to XML, although such a translation may be helpful in validating this rule.</p>
       
     </ruleSection>
 
@@ -389,7 +400,7 @@
       <p>Although all NIEM elements have values that are complex types, which by
         MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#section_5.6.3.2,5.6.3.2,Element instance) entail an
         RDF object (rather than a literal value), JSON syntax for objects with simple values is
-        cumbersome. As a result, NIEM JSON instances may use a shorthand syntax, in which any
+        cumbersome. For this reason, NIEM JSON instances may use a shorthand syntax, in which any
         element with only a simple value may be represented as a literal, rather than as an object
         with a value carried by <qName>rdf:value</qName>. To accommodate these cases, conformant
         JSON documents are evaluated based on the results of <termRef>literal-to-object

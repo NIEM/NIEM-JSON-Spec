@@ -49,10 +49,8 @@ m4_flags = --prefix-builtins --include=${builddir}/build ${m4_required_files}
 
 doc_name = niem-json-spec
 
-all_files = ${builddir}/build/${doc_name}.html \
-  ${builddir}/build/${doc_name}.txt \
-
-publish_files = ${all_files:${builddir}/build/%=${publish_dir}/%}
+all_files = ${publish_dir}/${doc_name}.html \
+  ${publish_dir}/${doc_name}.txt \
 
 #############################################################################
 # depend
@@ -61,9 +59,6 @@ publish_files = ${all_files:${builddir}/build/%=${publish_dir}/%}
 #HELP:   'build': Build new dependencies file
 #HELP:   anything else: Include dependencies if they exist (the default)
 depend = include-if-present
-
-#HELP:Default target is "all". Targets include:
-.DEFAULT_GOAL = all
 
 ifeq (${depend},build)
 .DEFAULT_GOAL = depend
@@ -76,6 +71,9 @@ ${dependencies_mk}: ${builddir}/build/niem-json-spec.xml
 	${process_doc} --in=$< --out=$@ --format=makedepend
 
 else
+#HELP:Default target is "all". Targets include:
+.DEFAULT_GOAL = all
+
 # don't include if it doesn't exist, so that 'make clean' works w/o rebuilding dependencies
 ifeq (${wildcard ${dependencies_mk}},${dependencies_mk})
 include ${dependencies_mk}
@@ -87,25 +85,27 @@ depend:
 
 endif
 
--include ${dependencies_mk}
-
-
 #############################################################################
 # real targets
 
 .PHONY: all #   Build everything
 all: ${all_files}
 
-.PHONY: html #   Build HTML output
-html: ${builddir}/build/${doc_name}.html
-
 .PHONY: clean #   Remove built files
 clean:
 	${RM} ${all_files}
 	${RM} -r ${builddir}/build
 
+.PHONY: distclean #   Clean all build and configure products
+distclean: clean
+	${RM} ${dependencies_mk} ${config_files} config.log config.status
+
 #############################################################################
 # build
+
+${publish_dir}/%: ${builddir}/build/%
+	${MKDIR_P} ${dir $@}
+	${INSTALL_DATA} $< $@
 
 ${builddir}/build/${doc_name}.html: ${builddir}/build/${doc_name}.xml ${doc_html_required_files}
 	${process_doc} --format=html --in=$< --out=$@
@@ -128,17 +128,13 @@ ${builddir}/build/%: ${srcdir}/src/%
 
 #############################################################################
 # publish
-
-.PHONY: publish #   Publish everything to $publish_dir (default @builddir@/publish)
-publish: ${publish_files}
-
-.PHONY: unpublish #   Remove published files
-unpublish:
-	${RM} ${publish_files}
-
-${publish_dir}/%: ${builddir}/build/%
-	${MKDIR_P} ${dir $@}
-	${INSTALL_DATA} $< $@
+# 
+# .PHONY: publish #   Publish everything to $publish_dir (default @builddir@/publish)
+# publish: ${publish_files}
+# 
+# .PHONY: unpublish #   Remove published files
+# unpublish:
+# 	${RM} ${publish_files}
 
 #############################################################################
 # check spelling
@@ -154,9 +150,8 @@ spell: ${builddir}/build/${doc_name}.txt
 #############################################################################
 # convenience targets
 
-.PHONY: distclean #   Clean all build and configure products
-distclean: clean
-	${RM} ${dependencies_mk} ${config_files} config.log config.status
+.PHONY: html #   Build HTML output
+html: ${builddir}/build/${doc_name}.html
 
 #############################################################################
 # make help: this must be the last target

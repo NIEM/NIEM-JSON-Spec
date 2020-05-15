@@ -148,6 +148,19 @@ spell: ${builddir}/build/${doc_name}.txt
 	if test -s ${builddir}/build/aspell-results.txt; then cat ${builddir}/build/aspell-results.txt; exit 1; fi
 
 #############################################################################
+# push to pages
+
+pages_versions = v4.0alpha1 dev-4.0
+
+.PHONY: pages #   Make gh-pages
+pages:
+	${RM} -R ${builddir}/build/gh-pages
+	git clone --local --branch gh-pages .git ${builddir}/build/gh-pages
+	git publish --verbose --force --target-dir=${builddir}/build/gh-pages --source-dir=publish ${pages_versions}
+	git -C ${builddir}/build/gh-pages status -u
+	@ [[ -z $$(git -C ${builddir}/build/gh-pages status --porcelain=v2) ]] || echo You should probably commit and clean up repo ${builddir}/build/gh-pages >&2
+
+#############################################################################
 # convenience targets
 
 .PHONY: html #   Build HTML output

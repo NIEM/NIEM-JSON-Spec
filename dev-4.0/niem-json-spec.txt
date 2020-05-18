@@ -40,6 +40,12 @@ Table of contents
 
       *  Lax conformance enables the use of vocabularies that are defined by NIEM schemas or IEPDs via linked data and linked open data methods. It establishes that exchanges with NIEM-conformant vocabularies use those vocabularies properly; this allows data to be more flexible, and to combine terms from NIEM-conformant vocabularies with terms from other vocabularies.
 
+1.1. Audience
+
+   This document was developed as a technical specification, and is not intended to be a user guide or an introduction to the use of JSON for NIEM. Its intended audience is developers of tools that work with NIEM and NIEM JSON, or other individuals who require an understanding of the details of the alignment between NIEM JSON and other representations of NIEM data.
+
+   Developers of NIEM message formats with a JSON representation may prefer to read the NIEM JSON documentation at https://niem.github.io/json/, specifically the NIEM JSON Tutorial, which proceeds step-by-step from data requirements to a conforming JSON representation. Developers of systems that read and write NIEM JSON messages should conform to the relevant message descriptions.
+
 2. External terminology
 
    This document uses terminology from other documents. This section identifies sources and definitions of externally-defined terminology.
@@ -66,21 +72,23 @@ Table of contents
 
 2.3. NIEM Naming and Design Rules
 
-   The term conformant schema document set is defined by the [NIEM NDR] Section 4.1.3, Schema document set, which states: 
+   The term conformant schema document set is a [conformance target] defined by the [NIEM NDR] Section 4.1.3, Schema document set, which states: 
 
       A conformant schema document set is a collection of schema documents that together are capable of validating a conformant instance XML document.
 
-   Note the principle component of a NIEM exchange definition (an information exchange package documentation, or IEPD) is a conformant schema document set.
+   Note the principal component of a NIEM exchange definition (an information exchange package documentation, or IEPD) is a conformant schema document set.
 
-   The term conformant instance XML document is defined by the [NIEM NDR] Section 4.1.4, Instance documents and elements, which states: 
+   The term conformant instance XML document is a [conformance target] defined by the [NIEM NDR] Section 4.1.4, Instance documents and elements, which states: 
 
       A conformant instance XML document is an XML document that is [an] instance document valid to a conformant schema document set.
 
-   The term reference schema document is defined by the [NIEM NDR] Section 4.1.1, Reference schema document, which states: 
+   Although the above definitions for the [conformance targets] [conformant schema document set] and [conformant instance XML document] reference each other, each conformance target is supported by a set of rules. Each artifact (i.e., document set or XML document) must conform to all rules for its conformance target in order to conform to the conformance target.
+
+   The term reference schema document is a [conformance target] defined by the [NIEM NDR] Section 4.1.1, Reference schema document, which states: 
 
       A reference schema document is a schema document that is intended to provide the authoritative definitions of broadly reusable schema components.
 
-   The term extension schema document is defined by the [NIEM NDR] Section 4.1.2, Extension schema document, which states: 
+   The term extension schema document is a [conformance target] defined by the [NIEM NDR] Section 4.1.2, Extension schema document, which states: 
 
       An extension schema document is a schema document that is intended to provide definitions of schema components that are intended for reuse within a more narrow scope than those defined by a reference schema document.
 
@@ -162,7 +170,7 @@ Rule 4-2. Strictly conformant JSON corresponds to valid XML
 
       The RDF entailed by a [NIEM JSON document strictly conformant to a schema] MUST be equal to the RDF entailed by a corresponding [conformant instance XML document] instance of the schema, accounting for [literal-to-object conversion] and the omission of external content.
 
-   Within this rule, the schema includes a [conformant schema document set], and will include all other constraints of an [IEP conformance target] defined by an IEPD. The RDF entailed by a candidate JSON document is described by [JSON-LD-API]. The RDF entailed by an XML document is described by [NIEM NDR]. Note that this rule does not provide a translation of JSON to XML; it only requires that there is one.
+   Within this rule, the schema includes a [conformant schema document set], and will include all other constraints of an [IEP conformance target] defined by an IEPD. The RDF entailed by a candidate JSON document is described by [JSON-LD-API]. The RDF entailed by an XML document is described by [NIEM NDR]. This rule does not provide or require a translation of JSON to XML, although such a translation may be helpful in validating this rule.
 
 Rule 4-3. Laxly conformant JSON satisfiable with schema
 
@@ -182,7 +190,7 @@ Rule 4-4. JSON interpreted based on schema
 
 4.1. Literal-to-object conversion
 
-   Although all NIEM elements have values that are complex types, which by [NIEM NDR] Section 5.6.3.2, Element instance entail an RDF object (rather than a literal value), JSON syntax for objects with simple values is cumbersome. As a result, NIEM JSON instances may use a shorthand syntax, in which any element with only a simple value may be represented as a literal, rather than as an object with a value carried by rdf:value. To accommodate these cases, conformant JSON documents are evaluated based on the results of [literal-to-object conversion], a process that yields a JSON object in which literal values are converted to idiomatic objects when appropriate.
+   Although all NIEM elements have values that are complex types, which by [NIEM NDR] Section 5.6.3.2, Element instance entail an RDF object (rather than a literal value), JSON syntax for objects with simple values is cumbersome. For this reason, NIEM JSON instances may use a shorthand syntax, in which any element with only a simple value may be represented as a literal, rather than as an object with a value carried by rdf:value. To accommodate these cases, conformant JSON documents are evaluated based on the results of [literal-to-object conversion], a process that yields a JSON object in which literal values are converted to idiomatic objects when appropriate.
 
    [Definition: literal-to-object conversion]
 
@@ -190,9 +198,13 @@ Rule 4-4. JSON interpreted based on schema
 
 4.2. External content omission
 
-   NIEM content and schemas are defined with a precise RDF mapping. External content includes any content with a namespace defined by an [external schema document], or otherwise with a namespace not defined by a [reference schema document] or [extension schema document]. NIEM does not provide external content with an RDF mapping. As such, external content is outside the scope of evaluation of conformance of JSON documents. In addition, [NIEM NDR] Section 5.6.3.3, Element as a property with unknown context, provides RDF identifying NIEM content carried by an external context.
+   NIEM provides a mechanism for data that is not NIEM-conformant to be included within NIEM data. Such data is called external content (see [NIEM NDR] Section 10.2.3, External adapter types and external components). External content includes any content with a namespace defined by an [external schema document], or with any namespace not defined by a [reference schema document] or [extension schema document].
 
-   External content and unknown contexts are omitted from evaluation of conformance, and are presumed to be conformant, as evaluating their conformance is outside the scope of this specification.
+   NIEM provides a mapping from NIEM-conformant XML content and XML Schemas to RDF (see [NIEM NDR] Section 5, The NIEM conceptual model). The NDR rules do not provide a mapping from external content to RDF.
+
+   An object carried by an external element (i.e., an instance of an element that is in a namespace not defined by NIEM-conformant schema documents) may be part of a subgraph of resources and properties that are not described by NIEM-conformant schemas. Such an object may be mapped to a resource that is assigned an IRI that is a blank node (described by [NIEM NDR] Section 5.4, Unique identification of data objects), or may be given a more meaningful resource identifier.
+
+   Since the structure and content of such a subgraph is not described by NIEM-conformant schemas, its structure and content are not material to the conformance of a JSON document by this specification. Such content may effectively be omitted from consideration of its validity against a schema, as regards conformance to this specification. Other specifications may introduce introduce additional rules, but that is outside the scope of this specification.
 
 Appendix A. References
 

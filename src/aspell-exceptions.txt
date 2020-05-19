@@ -24,6 +24,8 @@ NDR
 NIEM
 NTAC
 Niklas
+PersonFullName
+PersonName
 RDF
 RDFS
 Sporny
@@ -31,9 +33,11 @@ cardinality
 conformant
 json
 namespace
+nc
 normatively
 pre
 rdf
 satisfiable
 schemas
 subgraph
+xmlns

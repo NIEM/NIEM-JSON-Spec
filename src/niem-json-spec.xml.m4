@@ -415,6 +415,81 @@
           conversion of that document.</p>
       </definition>
 
+      <section>
+        <title>Example of literal-to-object conversion</title>
+
+      <p>This section provides an example of literal-to-object conversion. It shows the conversion
+        of a simple XML instance document to a corresponding simple JSON-LD object. The following is
+        a simple XML instance document:</p>
+
+      <figure>
+        <title>XML representation of simple example</title>
+        <pre><![CDATA[
+<nc:PersonFullName xmlns:nc="http://release.niem.gov/niem/niem-core/4.0/"
+  >Sherlock Holmes</nc:PersonFullName>
+]]></pre>
+      </figure>
+
+      <p>MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#section_5.6.3.2,5.6.3.2,Element instance) specifies
+        that each element that is defined by a NIEM-conformant schema carries an object value, not a
+        literal value. The value of the above element <code>nc:PersonName</code> is an object with a
+        single simple value, which is reflected by the following RDF, in Turtle format:</p>
+
+      <figure>
+        <title>RDF representation of simple example</title>
+        <pre><![CDATA[
+@prefix nc:  <http://release.niem.gov/niem/niem-core/4.0/> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+_:b0    nc:PersonFullName  _:b1 .
+_:b1    rdf:value  "Sherlock Holmes" .
+]]></pre>
+      </figure>
+
+      <p>The JSON-LD versions of the example use the following JSON-LD context:</p>
+
+      <figure>
+        <title>JSON-LD context for simple example</title>
+        <pre><![CDATA[
+{
+    "nc" : "http://release.niem.gov/niem/niem-core/4.0/",
+    "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+}
+]]></pre>
+      </figure>
+
+      <p>The JSON-LD version of the above instance includes the object, with the literal name as an
+        <code>rdf:value</code> property:</p>
+
+      <figure id="convert-after">
+        <title>JSON-LD representation of simple example</title>
+        <pre><![CDATA[
+{
+  "nc:PersonFullName" : {
+    "rdf:value": "Sherlock Holmes"
+  }
+}
+]]></pre>
+      </figure>
+
+      <p>Users of NIEM JSON have expressed a preference for a representation of data that is less
+        verbose than the above. By converting from an object to a literal, the JSON-LD may be
+        simplified:</p>
+
+      <figure id="convert-before">
+        <title>JSON-LD example using literals</title>
+        <pre><![CDATA[
+{
+  "nc:PersonFullName" : "Sherlock Holmes"
+}
+]]></pre>
+      </figure>
+
+      <p><termRef term="literal-to-object conversion">Literal-to-object conversion</termRef> is the
+        transformation from <ref idref="convert-before"/> to <ref idref="convert-after"/>. Users may
+        express NIEM data using a brief format, with the knowledge that it represents the more
+        verbose use of objects instead of bare literals.</p>
+
+      </section>
     </section>
 
     <section>

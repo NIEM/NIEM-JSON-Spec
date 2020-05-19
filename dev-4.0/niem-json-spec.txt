@@ -196,6 +196,63 @@ Rule 4-4. JSON interpreted based on schema
 
       Within this document, literal-to-object conversion is a process by which a JSON value is transformed from a value of false, null, true, number, or string, into an object containing only the property rdf:value. Evaluation of conformance of a [JSON document] is conducted on the results of literal-to-object conversion of that document.
 
+4.1.1. Example of literal-to-object conversion
+
+   This section provides an example of literal-to-object conversion. It shows the conversion of a simple XML instance document to a corresponding simple JSON-LD object. The following is a simple XML instance document:
+
+   Figure 4-1: XML representation of simple example
+
+      
+      <nc:PersonFullName xmlns:nc="http://release.niem.gov/niem/niem-core/4.0/"
+        >Sherlock Holmes</nc:PersonFullName>
+      
+
+   [NIEM NDR] Section 5.6.3.2, Element instance specifies that each element that is defined by a NIEM-conformant schema carries an object value, not a literal value. The value of the above element nc:PersonName is an object with a single simple value, which is reflected by the following RDF, in Turtle format:
+
+   Figure 4-2: RDF representation of simple example
+
+      
+      @prefix nc:  <http://release.niem.gov/niem/niem-core/4.0/> .
+      @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+      _:b0    nc:PersonFullName  _:b1 .
+      _:b1    rdf:value  "Sherlock Holmes" .
+      
+
+   The JSON-LD versions of the example use the following JSON-LD context:
+
+   Figure 4-3: JSON-LD context for simple example
+
+      
+      {
+          "nc" : "http://release.niem.gov/niem/niem-core/4.0/",
+          "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      }
+      
+
+   The JSON-LD version of the above instance includes the object, with the literal name as an rdf:value property:
+
+   Figure 4-4: JSON-LD representation of simple example
+
+      
+      {
+        "nc:PersonFullName" : {
+          "rdf:value": "Sherlock Holmes"
+        }
+      }
+      
+
+   Users of NIEM JSON have expressed a preference for a representation of data that is less verbose than the above. By converting from an object to a literal, the JSON-LD may be simplified:
+
+   Figure 4-5: JSON-LD example using literals
+
+      
+      {
+        "nc:PersonFullName" : "Sherlock Holmes"
+      }
+      
+
+   [Literal-to-object conversion] is the transformation from Figure 4-5, JSON-LD example using literals, above, to Figure 4-4, JSON-LD representation of simple example, above. Users may express NIEM data using a brief format, with the knowledge that it represents the more verbose use of objects instead of bare literals.
+
 4.2. External content omission
 
    NIEM provides a mechanism for data that is not NIEM-conformant to be included within NIEM data. Such data is called external content (see [NIEM NDR] Section 10.2.3, External adapter types and external components). External content includes any content with a namespace defined by an [external schema document], or with any namespace not defined by a [reference schema document] or [extension schema document].

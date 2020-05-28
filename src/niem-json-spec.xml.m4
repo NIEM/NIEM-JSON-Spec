@@ -262,7 +262,20 @@
     </section>
 
     <section>
-      <title>RDF Schema</title>
+      <title>RDF and RDF Schema</title>
+
+      <p>MACRO_REF_EXTERNAL(RDF-Concepts,MACRO_HREF_RDF_CONCEPTS#dfn-rdf-graph,3,RDF Graphs) defines the term <termDef>RDF graph</termDef>:</p>
+
+      <blockquote>
+        <p>An RDF graph is a set of RDF triples.</p>
+      </blockquote>
+
+      <p>MACRO_REF_EXTERNAL(RDF-Concepts,MACRO_HREF_RDF_CONCEPTS#dfn-equivalence,1.7,[[[Equivalence,
+        Entailment and Inconsistency]]]) defines the term <termDef>equivalent</termDef>:</p>
+
+      <blockquote>
+        <p>Two RDF graphs A and B are equivalent if they make the same claim about the world. A is equivalent to B if and only if A entails B and B entails A.</p>
+      </blockquote>
 
       <p><ref idref="RDFS"/> describes RDF Schema (RDFS), which provides a data-modeling vocabulary
         for RDF data. <ref idref="NDR"/> defines components of NIEM-conformant schema document sets
@@ -345,18 +358,20 @@
       <title>Strictly conformant JSON corresponds to valid XML</title>
 
       <rule applicability="STRICT" class="Constraint">
-        <p>The RDF entailed by a <termRef>NIEM JSON document strictly conformant to a schema</termRef>
-          MUST be equal to the RDF entailed by a corresponding <termRef>conformant instance XML
+        <p>The <termRef>RDF graph</termRef> entailed by a <termRef>NIEM JSON document strictly
+          conformant to a schema</termRef> MUST be <termRef>equivalent</termRef> to the <termRef>RDF
+          graph</termRef> entailed by a corresponding <termRef>conformant instance XML
           document</termRef> instance of the schema, accounting for
           <termRef>literal-to-object conversion</termRef> and the omission of external content.</p>
       </rule>
 
       <p>Within this rule, the <em>schema</em> includes a <termRef>conformant schema document
-          set</termRef>, and will include all other constraints of an <termRef>IEP
-          conformance target</termRef> defined by an IEPD. The RDF entailed by a candidate JSON
-          document is described by <ref idref="JSON-LD-API"/>. The RDF entailed by an XML document
-          is described by <ref idref="NDR"/>. This rule does not provide or require a translation of
-          JSON to XML, although such a translation may be helpful in validating this rule.</p>
+          set</termRef>, and will include all other constraints of an <termRef>IEP conformance
+          target</termRef> defined by an IEPD. The <termRef>RDF graph</termRef> entailed by a
+          candidate JSON document is described by <ref idref="JSON-LD-API"/>. The <termRef>RDF
+          graph</termRef> entailed by an XML document is described by <ref idref="NDR"/>. This rule
+          does not provide or require a translation of JSON to XML, although such a translation may
+          be helpful in validating this rule.</p>
       
     </ruleSection>
 
@@ -568,10 +583,13 @@ _:b1    rdf:value  "Sherlock Holmes" .
           4.0.</q> NIEM Technical Architecture Committee, November 7,
         2017. <link>MACRO_HREF_NDR</link>.</p>
     </reference>
+    <reference id="RDF-Concepts">
+      <p>Richard Cyganiak, David Wood, and Markus Lanthaler, eds. <q>RDF 1.1 Concepts and Abstract Syntax.</q> W3C Recommendation. The World Wide Web Consortium (W3C), February 25, 2014. <link>MACRO_HREF_RDF_CONCEPTS</link>.</p>
+    </reference>
     <reference id="RDF-Semantics">
       <p>Patrick J. Hayes, and Peter F. Patel-Schneider, eds. <q>RDF 1.1 Semantics.</q> The World
         Wide Web Consortium (W3C), February 25,
-        2014. <link>http://www.w3.org/TR/2014/REC-rdf11-mt-20140225/</link>.</p>
+        2014. <link>MACRO_HREF_RDF_SEMANTICS</link>.</p>
     </reference>
     <reference id="RFC4627">
       <p>D. Crockford. The application/json Media Type for JavaScript Object Notation (JSON)

@@ -14,6 +14,8 @@ m4_define([[[MACRO_HREF_CTAS]]],[[[http://reference.niem.gov/niem/specification/
 m4_define([[[MACRO_HREF_JSONLD]]],[[[https://www.w3.org/TR/2014/REC-json-ld-20140116/]]])m4_dnl
 m4_define([[[MACRO_HREF_RFC8259]]],[[[https://tools.ietf.org/html/rfc8259]]])m4_dnl
 m4_define([[[MACRO_HREF_RDFS]]],[[[https://www.w3.org/TR/rdf-schema/]]])m4_dnl
+m4_define([[[MACRO_HREF_RDF_CONCEPTS]]],[[[https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/]]])m4_dnl
+m4_define([[[MACRO_HREF_RDF_SEMANTICS]]],[[[http://www.w3.org/TR/2014/REC-rdf11-mt-20140225/]]])m4_dnl
 m4_dnl
 m4_dnl  MACRO_ASSERT( $test, $message )
 m4_dnl

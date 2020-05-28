@@ -126,7 +126,15 @@ Table of contents
 
    The evaluation of a JSON-LD document as Resource Description Framework (RDF) is specified by [JSON-LD-API].
 
-2.7. RDF Schema
+2.7. RDF and RDF Schema
+
+   [RDF-Concepts] Section 3, RDF Graphs defines the term RDF graph:
+
+      An RDF graph is a set of RDF triples.
+
+   [RDF-Concepts] Section 1.7, Equivalence, Entailment and Inconsistency defines the term equivalent:
+
+      Two RDF graphs A and B are equivalent if they make the same claim about the world. A is equivalent to B if and only if A entails B and B entails A.
 
    [RDF-Schema] describes RDF Schema (RDFS), which provides a data-modeling vocabulary for RDF data. [NIEM NDR] defines components of NIEM-conformant schema document sets in terms of RDF Schema.
 
@@ -168,9 +176,9 @@ Rule 4-2. Strictly conformant JSON corresponds to valid XML
 
    [Rule 4-2] (STRICT)
 
-      The RDF entailed by a [NIEM JSON document strictly conformant to a schema] MUST be equal to the RDF entailed by a corresponding [conformant instance XML document] instance of the schema, accounting for [literal-to-object conversion] and the omission of external content.
+      The [RDF graph] entailed by a [NIEM JSON document strictly conformant to a schema] MUST be [equivalent] to the [RDF graph] entailed by a corresponding [conformant instance XML document] instance of the schema, accounting for [literal-to-object conversion] and the omission of external content.
 
-   Within this rule, the schema includes a [conformant schema document set], and will include all other constraints of an [IEP conformance target] defined by an IEPD. The RDF entailed by a candidate JSON document is described by [JSON-LD-API]. The RDF entailed by an XML document is described by [NIEM NDR]. This rule does not provide or require a translation of JSON to XML, although such a translation may be helpful in validating this rule.
+   Within this rule, the schema includes a [conformant schema document set], and will include all other constraints of an [IEP conformance target] defined by an IEPD. The [RDF graph] entailed by a candidate JSON document is described by [JSON-LD-API]. The [RDF graph] entailed by an XML document is described by [NIEM NDR]. This rule does not provide or require a translation of JSON to XML, although such a translation may be helpful in validating this rule.
 
 Rule 4-3. Laxly conformant JSON satisfiable with schema
 
@@ -280,6 +288,8 @@ Appendix A. References
    [MPD]: NIEM Technical Architecture Committee. "National Information Exchange Model Model Package Description Specification, Version 3.0.1", April 27, 2015. https://reference.niem.gov/niem/specification/model-package-description/3.0.1/model-package-description-3.0.1.html.
 
    [NIEM NDR]: Roberts, Webb. "National Information Exchange Model Naming and Design Rules, Version 4.0." NIEM Technical Architecture Committee, November 7, 2017. http://reference.niem.gov/niem/specification/naming-and-design-rules/4.0/niem-ndr-4.0.html.
+
+   [RDF-Concepts]: Richard Cyganiak, David Wood, and Markus Lanthaler, eds. "RDF 1.1 Concepts and Abstract Syntax." W3C Recommendation. The World Wide Web Consortium (W3C), February 25, 2014. https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/.
 
    [RDF-Semantics]: Patrick J. Hayes, and Peter F. Patel-Schneider, eds. "RDF 1.1 Semantics." The World Wide Web Consortium (W3C), February 25, 2014. http://www.w3.org/TR/2014/REC-rdf11-mt-20140225/.
 

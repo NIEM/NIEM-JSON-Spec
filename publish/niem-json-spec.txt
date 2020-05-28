@@ -156,7 +156,7 @@ Table of contents
 
    [Definition: NIEM JSON document strictly conformant to a schema]
 
-      A NIEM JSON document strictly conformant to a schema is a [JSON-LD document] that may be assigned a one-to-one correspondence to a [conformant instance XML document] valid against a NIEM schema. It is a [conformance target] of this specification. A NIEM JSON document strictly conformant to a schema MUST conform to all rules of this specification that apply to this conformance target. The [conformance target identifier] for this conformance target is http://reference.niem.gov/niem/specification/niem-json-spec/4.0alpha1/#Strict.
+      A NIEM JSON document strictly conformant to a schema is a [JSON-LD document] that may be assigned a one-to-one correspondence to a [conformant instance XML document] valid against a [conformant schema document set]. It is a [conformance target] of this specification. A NIEM JSON document strictly conformant to a schema MUST conform to all rules of this specification that apply to this conformance target. The [conformance target identifier] for this conformance target is http://reference.niem.gov/niem/specification/niem-json-spec/4.0alpha1/#Strict.
 
 3.2. NIEM JSON document laxly conformant to a schema
 
@@ -180,11 +180,17 @@ Rule 4-2. Strictly conformant JSON corresponds to valid XML
 
    Within this rule, the schema includes a [conformant schema document set], and will include all other constraints of an [IEP conformance target] defined by an IEPD. The [RDF graph] entailed by a candidate JSON document is described by [JSON-LD-API]. The [RDF graph] entailed by an XML document is described by [NIEM NDR]. This rule does not provide or require a translation of JSON to XML, although such a translation may be helpful in validating this rule.
 
-Rule 4-3. Laxly conformant JSON satisfiable with schema
+Rule 4-3. JSON is satisfiable with schema
 
-   [Rule 4-3] (LAX)
+   [Rule 4-3] (STRICT, LAX)
 
-      A JSON-LD document MUST be a [NIEM JSON document laxly conformant to a schema] only if the RDF graph entailed by the JSON document and the schema together is RDFS satisfiable, accounting for [literal-to-object conversion] and the omission of external content.
+      The [RDF graph] consisting of the union of:
+
+         1. the [RDF graph] entailed by the [JSON document] and
+
+         2. the [RDF graph] entailed by the schema
+
+      MUST be RDFS satisfiable, accounting for [literal-to-object conversion] and the omission of external content.
 
    Within this rule, a schema is a [conformant schema document set]. The RDF entailed by a JSON-LD document is defined by [JSON-LD-API]. The RDF entailed by a schema is defined by [NIEM NDR]. The term RDFS satisfiable is defined by [RDF-Semantics].
 
@@ -307,6 +313,6 @@ Appendix C. Index of rules
 
    Rule 4-1, File must be a JSON-LD file: Section 4, Rules
    Rule 4-2, Strictly conformant JSON corresponds to valid XML: Section 4, Rules
-   Rule 4-3, Laxly conformant JSON satisfiable with schema: Section 4, Rules
+   Rule 4-3, JSON is satisfiable with schema: Section 4, Rules
    Rule 4-4, JSON interpreted based on schema: Section 4, Rules
 

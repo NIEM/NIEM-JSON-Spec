@@ -48,7 +48,6 @@ case $1 in
     build )
         vrun make -j 8
         vrun make spell
-        vrun make -j 8 publish
         ;;
     rebuild )
         vrun make distclean
@@ -56,8 +55,6 @@ case $1 in
         vrun make depend depend=build
         vrun make -j 8
         vrun make spell
-        vrun make -j 8 unpublish
-        vrun make -j 8 publish
         ;;
     #HELP:  oh: "Open HTML": Quickly build the HTML file and open it.
     oh )
@@ -65,7 +62,7 @@ case $1 in
         open build/niem-json-spec.html
         ;;
     * )
-        fail "Unknown command \"$command\"";;
+        fail "Unknown command \"$1\"";;
 esac
          
 

@@ -291,13 +291,13 @@ Appendix A. References
 
    [RDF-Concepts]: Richard Cyganiak, David Wood, and Markus Lanthaler, eds. "RDF 1.1 Concepts and Abstract Syntax." W3C Recommendation. The World Wide Web Consortium (W3C), February 25, 2014. https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/.
 
+   [RDF-Schema]: Dan Brickley, and R.V. Guha, eds. "RDF Schema 1.1." The World Wide Web Consortium (W3C), February 25, 2014. http://www.w3.org/TR/2014/REC-rdf-schema-20140225/.
+
    [RDF-Semantics]: Patrick J. Hayes, and Peter F. Patel-Schneider, eds. "RDF 1.1 Semantics." The World Wide Web Consortium (W3C), February 25, 2014. http://www.w3.org/TR/2014/REC-rdf11-mt-20140225/.
 
    [RFC4627]: D. Crockford. The application/json Media Type for JavaScript Object Notation (JSON) (RFC 4627). July 2006. RFC. http://www.ietf.org/rfc/rfc4627.txt
 
    [RFC8259]: Bray, T., Ed., "The JavaScript Object Notation (JSON) Data Interchange Format", STD 90, RFC 8259, DOI 10.17487/RFC8259, December 2017, https://www.ietf.org/rfc/rfc8259.txt.
-
-   [RDF-Schema]: Dan Brickley, and R.V. Guha, eds. "RDF Schema 1.1." The World Wide Web Consortium (W3C), February 25, 2014. http://www.w3.org/TR/2014/REC-rdf-schema-20140225/.
 
 Appendix B. Index of definitions
 

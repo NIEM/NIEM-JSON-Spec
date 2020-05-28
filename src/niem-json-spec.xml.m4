@@ -586,6 +586,9 @@ _:b1    rdf:value  "Sherlock Holmes" .
     <reference id="RDF-Concepts">
       <p>Richard Cyganiak, David Wood, and Markus Lanthaler, eds. <q>RDF 1.1 Concepts and Abstract Syntax.</q> W3C Recommendation. The World Wide Web Consortium (W3C), February 25, 2014. <link>MACRO_HREF_RDF_CONCEPTS</link>.</p>
     </reference>
+    <reference id="RDFS" label="RDF-Schema">
+      <p>Dan Brickley, and R.V. Guha, eds. <q>RDF Schema 1.1.</q> The World Wide Web Consortium (W3C), February 25, 2014. <link>http://www.w3.org/TR/2014/REC-rdf-schema-20140225/</link>.</p>
+    </reference>
     <reference id="RDF-Semantics">
       <p>Patrick J. Hayes, and Peter F. Patel-Schneider, eds. <q>RDF 1.1 Semantics.</q> The World
         Wide Web Consortium (W3C), February 25,
@@ -599,9 +602,6 @@ _:b1    rdf:value  "Sherlock Holmes" .
       <p>Bray, T., Ed., <q>The JavaScript Object Notation (JSON) Data Interchange Format</q>, STD
         90, RFC 8259, DOI 10.17487/RFC8259, December
         2017, <link>https://www.ietf.org/rfc/rfc8259.txt</link>.</p>
-    </reference>
-    <reference id="RDFS" label="RDF-Schema">
-      <p>Dan Brickley, and R.V. Guha, eds. <q>RDF Schema 1.1.</q> The World Wide Web Consortium (W3C), February 25, 2014. <link>http://www.w3.org/TR/2014/REC-rdf-schema-20140225/</link>.</p>
     </reference>
   </section>
   <!-- stand down the index until it can be useful.

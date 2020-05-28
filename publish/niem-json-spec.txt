@@ -46,15 +46,101 @@ Table of contents
 
    Developers of NIEM message formats with a JSON representation may prefer to read the NIEM JSON documentation at https://niem.github.io/json/, specifically the NIEM JSON Tutorial, which proceeds step-by-step from data requirements to a conforming JSON representation. Developers of systems that read and write NIEM JSON messages should conform to the relevant message descriptions.
 
-2. External terminology
+2. Document conventions and normative content
+
+   This document uses formatting and syntactic conventions to clarify meaning and avoid ambiguity.
+
+2.1. Document references
+
+   This document relies on references to many outside documents. Such references are noted by bold, bracketed inline terms. For example, a reference to RFC 2119 is shown as [RFC 2119]. All reference documents are recorded in Appendix A, References, below.
+
+2.2. Normative and informative content
+
+   This document includes a variety of content. Some content of this document is [normative], while other content is [informative]. In general, the informative material appears as supporting text, description, and rationales for the normative material.
+
+   [Definition: normative]
+
+      The term "normative" is as defined by [ConfReq] Section 7.2, Conformance by key words, which states:
+
+         NORMATIVE -- statements provided for the prescriptive parts of the specification, providing that which is necessary in order to be able to claim conformance to the specification.
+
+   [Definition: informative]
+
+      The term "informative" is as defined by [ConfReq] Section 7.2, Conformance by key words, which states:
+
+         INFORMATIVE (NON-NORMATIVE) -- statements provided for informational purposes, intended to assist the understanding or use of the specification and shall not contain provisions that are required for conformance.
+
+   Definitions within this document are [normative], and are given special formatting.
+
+   [Definition: <term>]
+
+      A formal definition of a word or phrase.
+
+   Uses of these terms are given special formatting, using raised dots to identify the term. For example the use of the term [conformance target] has special formatting.
+
+2.2.1. Rules
+
+   A rule states a specific requirement on a [conformance target] or on the interpretation of a [conformance target]. The classes of [conformance target] are enumerated in Section 4, Conformance targets, below. Rules are normative. Human-readable text in rules uses [BCP 14] terminology as described in Section 3.1, IETF Best Current Practice 14 terminology, below, for normative requirements and recommendations.
+
+   [Rule <section>-<number>] (<applicability>)
+
+      An enforceable rule.
+
+   Each rule has a classification, which is either "Constraint" or "Interpretation". If the classification is "Constraint", then the rule is a [constraint rule]. If the classification is "Interpretation", then the rule is an [interpretation rule].
+
+   [Definition: constraint rule]
+
+      A constraint rule is a rule that sets a requirement on an artifact with respect to its conformance to a [conformance target].
+
+   [Definition: interpretation rule]
+
+      An interpretation rule is a rule that sets the methodology, pattern, or procedure for understanding some aspect of an instance of a conformance target.
+
+   Each rule identifies its applicability. This identifies the conformance targets to which the rule applies. Each entry in the list is a code from Table Table 4-1, Codes representing conformance targets, below. If a code appears in the applicability list for a rule, then the rule applies to the corresponding conformance target. For example, a rule with applicability "(STRICT)" is applicable to [NIEM JSON document strictly conformant to a schema].
+
+   Rules are numbered according to the section in which they appear and the order in which they appear within that section. For example, the second rule in Section 4 is Rule 4-2.
+
+2.3. Additional formatting
+
+   In addition to the special formatting above, this document uses additional formatting conventions.
+
+   Courier: All words appearing in Courier font are values, objects, keywords, or literal XML text.
+
+   Italics: A phrase appearing in italics is one of:
+
+      *  a title of a section of document or a rule,
+
+      *  a locally-defined term, often one that is not normatively defined, or
+
+      *  is emphasized for importance or prominence.
+
+   Bold: A phrase appearing in bold is one of:
+
+      *  a term being defined within a definition,
+
+      *  a term that was bold in the original source text for a quote
+
+      *  a heading, such as for a section, figure, definition, or rule, or
+
+      *  a cross-reference within the document or to a reference to an outside document.
+
+   Throughout the document, fragments of code appear, including XML, RDF, and JSON-LD. These fragments are specially formatted in Courier font and appear in text boxes. An example of such a fragment follows:
+
+   Figure 2-1: Example of an XML fragment
+
+      <xs:complexType name="PersonType">
+        ...
+      </xs:complexType>
+
+3. External terminology
 
    This document uses terminology from other documents. This section identifies sources and definitions of externally-defined terminology.
 
-2.1. IETF Best Current Practice 14 terminology
+3.1. IETF Best Current Practice 14 terminology
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [BCP 14] [RFC 2119] [RFC 8174] when, and only when, they appear in all capitals, as shown here.
 
-2.2. Conformance Targets Attribute Specification
+3.2. Conformance Targets Attribute Specification
 
    [CTAS] defines several terms used normatively within this specification.
 
@@ -70,7 +156,7 @@ Table of contents
 
       An effective conformance target identifier of a conformant document is an internationalized resource identifier reference that occurs in the document's effective conformance targets attribute.
 
-2.3. NIEM Naming and Design Rules
+3.3. NIEM Naming and Design Rules
 
    The term conformant schema document set is a [conformance target] defined by the [NIEM NDR] Section 4.1.3, Schema document set, which states: 
 
@@ -102,19 +188,19 @@ Table of contents
 
          *  a schema document that has the structures namespace as its target namespace.
 
-2.4. Model Package Description Specification
+3.4. Model Package Description Specification
 
    The term IEP conformance target is defined by [MPD] Section 5.6, Defining Information Exchange Packages. An IEP conformance target defines a set of conformance criteria for a class of [information exchange package (IEP)].
 
    The term information exchange package is defined by [MPD] Section 3.2.3, IEP Conformance Targets. An information exchange package (IEP) is an XML document that conforms to the criteria defined for an [IEP conformance target].
 
-2.5. JSON
+3.5. JSON
 
    The term JSON text is defined by [RFC8259] Section 2, JSON Grammar, which defines it as a single serialized JSON value.
 
    The term JSON document, when used within this document, is synonymous with [JSON text].
 
-2.6. JSON-LD
+3.6. JSON-LD
 
    [JSON-LD] defines JSON-LD, a JSON-based format to serialize linked data. [JSON-LD] defines the term JSON-LD document. [JSON-LD] Section 7, Data Model provides a summary of what constitutes a JSON-LD document. [JSON-LD] Section 8, JSON-LD Grammar states:
 
@@ -126,7 +212,7 @@ Table of contents
 
    The evaluation of a JSON-LD document as Resource Description Framework (RDF) is specified by [JSON-LD-API].
 
-2.7. RDF and RDF Schema
+3.7. RDF and RDF Schema
 
    [RDF-Concepts] Section 3, RDF Graphs defines the term RDF graph:
 
@@ -140,11 +226,11 @@ Table of contents
 
    Property rdf:value is defined by [RDF-Schema] Section 5.4.3, rdf:value. This property is used within an object to carry a simple value with no additional meaning.
 
-3. Conformance targets
+4. Conformance targets
 
    This document defines multiple [conformance targets]. Each conformance target is defined normatively by this specification. Each conformance target has an associated abbreviation, which appears in rules to identify to which conformance targets a rule applies.
 
-   Table 3-1: Codes representing conformance targets
+   Table 4-1: Codes representing conformance targets
 
       Code|Conformance target
 
@@ -152,37 +238,37 @@ Table of contents
 
       LAX|[NIEM JSON document laxly conformant to a schema]
 
-3.1. NIEM JSON document strictly conformant to a schema
+4.1. NIEM JSON document strictly conformant to a schema
 
    [Definition: NIEM JSON document strictly conformant to a schema]
 
       A NIEM JSON document strictly conformant to a schema is a [JSON-LD document] that may be assigned a one-to-one correspondence to a [conformant instance XML document] valid against a [conformant schema document set]. It is a [conformance target] of this specification. A NIEM JSON document strictly conformant to a schema MUST conform to all rules of this specification that apply to this conformance target. The [conformance target identifier] for this conformance target is http://reference.niem.gov/niem/specification/niem-json-spec/4.0alpha1/#Strict.
 
-3.2. NIEM JSON document laxly conformant to a schema
+4.2. NIEM JSON document laxly conformant to a schema
 
    [Definition: NIEM JSON document laxly conformant to a schema]
 
       A NIEM JSON document laxly conformant to a schema is a [JSON-LD document] that may be interpreted using the RDF vocabulary defined by a [conformant schema document set]. It is a [conformance target] of this specification. A NIEM JSON document laxly conformant to a schema MUST conform to all rules of this specification that apply to this conformance target. The [conformance target identifier] for this conformance target is http://reference.niem.gov/niem/specification/niem-json-spec/4.0alpha1/#Lax.
 
-4. Rules
+5. Rules
 
-Rule 4-1. File must be a JSON-LD file
+Rule 5-1. File must be a JSON-LD file
 
-   [Rule 4-1] (STRICT, LAX)
+   [Rule 5-1] (STRICT, LAX)
 
       A [NIEM JSON document strictly conformant to a schema] or [NIEM JSON document laxly conformant to a schema] MUST be a [JSON-LD document].
 
-Rule 4-2. Strictly conformant JSON corresponds to valid XML
+Rule 5-2. Strictly conformant JSON corresponds to valid XML
 
-   [Rule 4-2] (STRICT)
+   [Rule 5-2] (STRICT)
 
       The [RDF graph] entailed by a [NIEM JSON document strictly conformant to a schema] MUST be [equivalent] to the [RDF graph] entailed by a corresponding [conformant instance XML document] instance of the schema, accounting for [literal-to-object conversion] and the omission of external content.
 
    Within this rule, the schema includes a [conformant schema document set], and will include all other constraints of an [IEP conformance target] defined by an IEPD. The [RDF graph] entailed by a candidate JSON document is described by [JSON-LD-API]. The [RDF graph] entailed by an XML document is described by [NIEM NDR]. This rule does not provide or require a translation of JSON to XML, although such a translation may be helpful in validating this rule.
 
-Rule 4-3. JSON is satisfiable with schema
+Rule 5-3. JSON is satisfiable with schema
 
-   [Rule 4-3] (STRICT, LAX)
+   [Rule 5-3] (STRICT, LAX)
 
       The [RDF graph] consisting of the union of:
 
@@ -194,15 +280,15 @@ Rule 4-3. JSON is satisfiable with schema
 
    Within this rule, a schema is a [conformant schema document set]. The RDF entailed by a JSON-LD document is defined by [JSON-LD-API]. The RDF entailed by a schema is defined by [NIEM NDR]. The term RDFS satisfiable is defined by [RDF-Semantics].
 
-Rule 4-4. JSON interpreted based on schema
+Rule 5-4. JSON interpreted based on schema
 
-   [Rule 4-4] (STRICT, LAX)
+   [Rule 5-4] (STRICT, LAX)
 
       A [NIEM JSON document strictly conformant to a schema] or [NIEM JSON document laxly conformant to a schema] MUST be interpreted as an RDFS interpretation of the RDF graph composed of the RDF entailed by the JSON document together with the RDF entailed by the schema.
 
    Within this rule, a schema is a [conformant schema document set]. The RDF entailed by a JSON-LD document is defined by [JSON-LD-API]. The RDF entailed by a schema is defined by [NIEM NDR]. The term RDFS interpretation is defined by [RDF-Semantics].
 
-4.1. Literal-to-object conversion
+5.1. Literal-to-object conversion
 
    Although all NIEM elements have values that are complex types, which by [NIEM NDR] Section 5.6.3.2, Element instance entail an RDF object (rather than a literal value), JSON syntax for objects with simple values is cumbersome. For this reason, NIEM JSON instances may use a shorthand syntax, in which any element with only a simple value may be represented as a literal, rather than as an object with a value carried by rdf:value. To accommodate these cases, conformant JSON documents are evaluated based on the results of [literal-to-object conversion], a process that yields a JSON object in which literal values are converted to idiomatic objects when appropriate.
 
@@ -210,11 +296,11 @@ Rule 4-4. JSON interpreted based on schema
 
       Within this document, literal-to-object conversion is a process by which a JSON value is transformed from a value of false, null, true, number, or string, into an object containing only the property rdf:value. Evaluation of conformance of a [JSON document] is conducted on the results of literal-to-object conversion of that document.
 
-4.1.1. Example of literal-to-object conversion
+5.1.1. Example of literal-to-object conversion
 
    This section provides an example of literal-to-object conversion. It shows the conversion of a simple XML instance document to a corresponding simple JSON-LD object. The following is a simple XML instance document:
 
-   Figure 4-1: XML representation of simple example
+   Figure 5-1: XML representation of simple example
 
       
       <nc:PersonFullName xmlns:nc="http://release.niem.gov/niem/niem-core/4.0/"
@@ -223,7 +309,7 @@ Rule 4-4. JSON interpreted based on schema
 
    [NIEM NDR] Section 5.6.3.2, Element instance specifies that each element that is defined by a NIEM-conformant schema carries an object value, not a literal value. The value of the above element nc:PersonName is an object with a single simple value, which is reflected by the following RDF, in Turtle format:
 
-   Figure 4-2: RDF representation of simple example
+   Figure 5-2: RDF representation of simple example
 
       
       @prefix nc:  <http://release.niem.gov/niem/niem-core/4.0/> .
@@ -234,7 +320,7 @@ Rule 4-4. JSON interpreted based on schema
 
    The JSON-LD versions of the example use the following JSON-LD context:
 
-   Figure 4-3: JSON-LD context for simple example
+   Figure 5-3: JSON-LD context for simple example
 
       
       {
@@ -245,7 +331,7 @@ Rule 4-4. JSON interpreted based on schema
 
    The JSON-LD version of the above instance includes the object, with the literal name as an rdf:value property:
 
-   Figure 4-4: JSON-LD representation of simple example
+   Figure 5-4: JSON-LD representation of simple example
 
       
       {
@@ -257,7 +343,7 @@ Rule 4-4. JSON interpreted based on schema
 
    Users of NIEM JSON have expressed a preference for a representation of data that is less verbose than the above. By converting from an object to a literal, the JSON-LD may be simplified:
 
-   Figure 4-5: JSON-LD example using literals
+   Figure 5-5: JSON-LD example using literals
 
       
       {
@@ -265,9 +351,9 @@ Rule 4-4. JSON interpreted based on schema
       }
       
 
-   [Literal-to-object conversion] is the transformation from Figure 4-5, JSON-LD example using literals, above, to Figure 4-4, JSON-LD representation of simple example, above. Users may express NIEM data using a brief format, with the knowledge that it represents the more verbose use of objects instead of bare literals.
+   [Literal-to-object conversion] is the transformation from Figure 5-5, JSON-LD example using literals, above, to Figure 5-4, JSON-LD representation of simple example, above. Users may express NIEM data using a brief format, with the knowledge that it represents the more verbose use of objects instead of bare literals.
 
-4.2. External content omission
+5.2. External content omission
 
    NIEM provides a mechanism for data that is not NIEM-conformant to be included within NIEM data. Such data is called external content (see [NIEM NDR] Section 10.2.3, External adapter types and external components). External content includes any content with a namespace defined by an [external schema document], or with any namespace not defined by a [reference schema document] or [extension schema document].
 
@@ -284,6 +370,8 @@ Appendix A. References
          [RFC 2119]: Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997. Available from http://www.ietf.org/rfc/rfc2119.txt.
 
          [RFC 8174]: Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words", BCP 14, RFC 8174, May 2017. Available from https://www.ietf.org/rfc/rfc8174.txt.
+
+   [ConfReq]: Lynne Rosenthal, and Mark Skall, eds. "Conformance Requirements for Specifications v1.0." The Organization for the Advancement of Structured Information Standards (OASIS), March 15, 2002. https://www.oasis-open.org/committees/download.php/305/conformance_requirements-v1.pdf.
 
    [CTAS]: Roberts, Webb. "NIEM Conformance Targets Attribute Specification, Version 3.0." NIEM Technical Architecture Committee, July 31, 2014. http://reference.niem.gov/niem/specification/conformance-targets-attribute/3.0/NIEM-CTAS-3.0-2014-07-31.html.
 
@@ -311,8 +399,8 @@ Appendix B. Index of definitions
 
 Appendix C. Index of rules
 
-   Rule 4-1, File must be a JSON-LD file: Section 4, Rules
-   Rule 4-2, Strictly conformant JSON corresponds to valid XML: Section 4, Rules
-   Rule 4-3, JSON is satisfiable with schema: Section 4, Rules
-   Rule 4-4, JSON interpreted based on schema: Section 4, Rules
+   Rule 5-1, File must be a JSON-LD file: Section 5, Rules
+   Rule 5-2, Strictly conformant JSON corresponds to valid XML: Section 5, Rules
+   Rule 5-3, JSON is satisfiable with schema: Section 5, Rules
+   Rule 5-4, JSON interpreted based on schema: Section 5, Rules
 

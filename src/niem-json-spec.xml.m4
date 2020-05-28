@@ -87,6 +87,116 @@
     </section>
   </section>
 
+  <section><title>Document conventions and normative content</title>
+
+    <p>This document uses formatting and syntactic conventions to clarify meaning and avoid ambiguity.</p>
+
+    <section><title>Document references</title>
+      <p>This document relies on references to many outside documents. Such references are noted by bold,
+        bracketed inline terms. For example, a reference to RFC 2119 is shown as <ref idref="RFC2119"/>. All
+        reference documents are recorded in <ref idref="references"/>.</p>
+    </section>
+
+      <section id="SectionNormativeAndInformativeContent">
+        <title>Normative and informative content</title>
+        <p>This document includes a variety of content. Some content of this document
+          is <termRef>normative</termRef>, while other content is <termRef>informative</termRef>. In general, the
+          informative material appears as supporting text, description, and rationales for the normative
+          material.</p>
+
+        <definition term="normative">
+          <p>The term <q>normative</q> is as defined by MACRO_REF_EXTERNAL(ConfReq,,7.2,Conformance by key words), which states:</p>
+          <blockquote>
+            <p>NORMATIVE <char name="mdash"/> statements provided for the prescriptive parts of the specification, providing that which is necessary in order to be able to claim conformance to the specification.</p>
+          </blockquote>
+        </definition>
+        <definition term="informative">
+          <p>The term <q>informative</q> is as defined by MACRO_REF_EXTERNAL(ConfReq,,7.2,Conformance by key words), which states:</p>
+          <blockquote>
+            <p>INFORMATIVE (NON-NORMATIVE) <char name="mdash"/> statements provided for informational purposes,
+              intended to assist the understanding or use of the specification and shall not contain provisions
+              that are required for conformance.</p>
+          </blockquote>
+        </definition>
+
+        <p>Definitions within this document are <termRef>normative</termRef>, and are given special formatting.</p>
+
+        <bogusDefinition term="&lt;term&gt;">
+          <p>A formal definition of a word or phrase.</p>
+        </bogusDefinition>
+
+        <p>Uses of these terms
+        are given special formatting, using raised dots to identify the term. For example the use
+          of the term <termRef>conformance target</termRef> has special formatting.</p>
+
+        <section id="section-rules">
+          <title>Rules</title>
+
+          <p>A rule states a specific requirement on a <termRef>conformance target</termRef>
+            or on the interpretation of a <termRef>conformance target</termRef>. The classes of
+            <termRef>conformance target</termRef> 
+            are enumerated in <ref idref="section-conformance-targets"/>. Rules are
+            normative. Human-readable text in rules uses <ref idref="BCP14"/> terminology as described in <ref idref="section-terminology-bcp-14"/> for normative requirements and recommendations.</p>
+
+          <bogusRule section="&lt;section&gt;" number="&lt;number&gt;" applicability="&lt;applicability&gt;" class="&lt;classification&gt;">
+            <p>An enforceable rule.</p>
+          </bogusRule>
+
+          <p>Each rule has a <em>classification</em>, which is either <q>Constraint</q> or <q>Interpretation</q>. If
+            the classification is <q>Constraint</q>, then the rule is a <termRef>constraint rule</termRef>. If the classification
+            is <q>Interpretation</q>, then the rule is an <termRef>interpretation rule</termRef>.</p>
+
+          <definition term="constraint rule">
+            <p>A <strong>constraint rule</strong> is a rule that sets a requirement on an artifact with respect to
+              its conformance to a <termRef>conformance target</termRef>.</p>
+          </definition>
+
+          <definition term="interpretation rule">
+            <p>An <strong>interpretation rule</strong> is a rule that sets the methodology, pattern, or procedure
+              for understanding some aspect of an instance of a conformance target.</p>
+          </definition>
+
+          <p>Each rule identifies its <em>applicability</em>. This identifies the conformance
+            targets to which the rule applies. Each entry in the list is a code from
+            <ref idref="table-ct-list" />. If a code appears in the applicability list for a rule,
+            then the rule applies to the corresponding conformance target. For example, a rule with
+            applicability <q>(STRICT)</q> is applicable to <termRef>NIEM JSON document strictly conformant to a schema</termRef>.</p>
+
+          <p>Rules are numbered according to the section in which they appear and the order in which they appear
+            within that section. For example, the second rule in Section 4 is Rule 4-2.</p>
+
+        </section>
+      </section>
+    <section>
+      <title>Additional formatting</title>
+
+        <p>In addition to the special formatting above, this document uses additional formatting conventions.</p>
+
+        <p><code>Courier</code>: All words appearing in <code>Courier</code> font are values, objects, keywords, or literal XML text.</p>
+        <p><em>Italics</em>: A phrase appearing in <em>italics</em> is one of:</p>
+        <ul>
+          <li><p>a title of a section of document or a rule,</p></li>
+          <li><p>a locally-defined term, often one that is not normatively defined, or</p></li>
+          <li><p>is emphasized for importance or prominence.</p></li>
+        </ul>
+        <p><strong>Bold</strong>: A phrase appearing in <strong>bold</strong> is one of:</p>
+        <ul>
+          <li><p>a term being defined within a definition,</p></li>
+          <li><p>a term that was bold in the original source text for a quote</p></li>
+          <li><p>a heading, such as for a section, figure, definition, or rule, or</p></li>
+          <li><p>a cross-reference within the document or to a reference to an outside document.</p></li>
+        </ul>
+
+        <p>Throughout the document, fragments of code appear, including XML, RDF, and JSON-LD. These fragments are specially formatted in <code>Courier</code> font and appear in text boxes. An example of such a fragment follows:</p>
+        <figure>
+          <title>Example of an XML fragment</title>
+          <pre><![CDATA[<xs:complexType name="PersonType">
+  ...
+</xs:complexType>]]></pre>
+        </figure>
+      </section>
+  </section>
+
   <section>
     <title>External terminology</title>
     
@@ -287,7 +397,7 @@
     </section>
   </section>
 
-  <section>
+  <section id="section-conformance-targets">
     <title>Conformance targets</title>
 
     <p>This document defines multiple <termRef term="conformance target">conformance
@@ -543,7 +653,7 @@ _:b1    rdf:value  "Sherlock Holmes" .
 
   </section>
 
-  <section isAppendix="true">
+  <section id="references" isAppendix="true">
     <title>References</title>
     <reference id="BCP14" label="BCP 14">
       <p>Internet Engineering Task Force Best Current Practice 14. Available
@@ -560,6 +670,9 @@ _:b1    rdf:value  "Sherlock Holmes" .
             from <link>https://www.ietf.org/rfc/rfc8174.txt</link>.</p>
         </reference>
       </sub>
+    </reference>
+    <reference id="ConfReq">
+      <p>Lynne Rosenthal, and Mark Skall, eds. <q>Conformance Requirements for Specifications v1.0.</q> The Organization for the Advancement of Structured Information Standards (OASIS), March 15, 2002. <link>https://www.oasis-open.org/committees/download.php/305/conformance_requirements-v1.pdf</link>.</p>
     </reference>
     <reference id="CTAS">
       <p>Roberts, Webb. <q>NIEM Conformance Targets Attribute Specification, Version 3.0.</q> NIEM

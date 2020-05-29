@@ -1,6 +1,11 @@
 
 # NIEM JSON Specification
 
+# Publication checklist
+
+- [ ] Update document version
+- [ ] Update document date
+
 # Issues & Notes
 
 - The conformance of the JSON-LD to a specific IEPD may involve converting the

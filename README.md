@@ -25,7 +25,4 @@ NIEM-conformant vocabularies with terms from other vocabularies.
 
 Versions of the NIEM JSON Specification:
 
-- [v4.0rc1](v4.0rc1)
-- [v4.0beta1](v4.0beta1)
-- [v4.0alpha1](v4.0alpha1)
-- The current development branch: [dev-4.0](dev-4.0)
+- [v4.0](v4.0)

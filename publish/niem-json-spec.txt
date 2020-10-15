@@ -1,8 +1,8 @@
 NIEM JSON Specification
 
-Version 4.0
+Version 5.0
 
-August 24, 2020
+October 15, 2020
 
 NIEM Technical Architecture Committee (NTAC)
 
@@ -242,13 +242,13 @@ Table of contents
 
    [Definition: NIEM JSON document strictly conformant to a schema]
 
-      A NIEM JSON document strictly conformant to a schema is a [JSON-LD document] that may be assigned a one-to-one correspondence to a [conformant instance XML document] valid against a [conformant schema document set]. It is a [conformance target] of this specification. A NIEM JSON document strictly conformant to a schema MUST conform to all rules of this specification that apply to this conformance target. The [conformance target identifier] for this conformance target is http://reference.niem.gov/niem/specification/niem-json-spec/4.0/#Strict.
+      A NIEM JSON document strictly conformant to a schema is a [JSON-LD document] that may be assigned a one-to-one correspondence to a [conformant instance XML document] valid against a [conformant schema document set]. It is a [conformance target] of this specification. A NIEM JSON document strictly conformant to a schema MUST conform to all rules of this specification that apply to this conformance target. The [conformance target identifier] for this conformance target is http://reference.niem.gov/niem/specification/niem-json-spec/5.0/#Strict.
 
 4.2. NIEM JSON document laxly conformant to a schema
 
    [Definition: NIEM JSON document laxly conformant to a schema]
 
-      A NIEM JSON document laxly conformant to a schema is a [JSON-LD document] that may be interpreted using the RDF vocabulary defined by a [conformant schema document set]. It is a [conformance target] of this specification. A NIEM JSON document laxly conformant to a schema MUST conform to all rules of this specification that apply to this conformance target. The [conformance target identifier] for this conformance target is http://reference.niem.gov/niem/specification/niem-json-spec/4.0/#Lax.
+      A NIEM JSON document laxly conformant to a schema is a [JSON-LD document] that may be interpreted using the RDF vocabulary defined by a [conformant schema document set]. It is a [conformance target] of this specification. A NIEM JSON document laxly conformant to a schema MUST conform to all rules of this specification that apply to this conformance target. The [conformance target identifier] for this conformance target is http://reference.niem.gov/niem/specification/niem-json-spec/5.0/#Lax.
 
 5. Rules
 

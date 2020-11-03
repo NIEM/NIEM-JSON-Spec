@@ -14,22 +14,22 @@
 
     <p>The NIEM JSON Specification establishes the technical basis for using JavaScript Object
       Notation (JSON) as a data format for exchange of information consistent with NIEM-conformant
-      schemas and information exchange package documentations (IEPDs).</p>
+      schemas and message specifications.</p>
 
     <p>NIEM-conformance of JSON data is primarily focused on the relationship
       between the data in the JSON file and the definitions established by a NIEM-conformant schema,
-      e.g., the schema defined by a NIEM IEPD. There are two forms of conformance of a NIEM JSON
+      such as the schema defined by a NIEM message specification. There are two forms of conformance of a NIEM JSON
       document to a NIEM-conformant schema:</p>
 
     <ul>
       <li><p><strong>Strict conformance</strong> establishes that the JSON instance follows all
-          rules of the schema or IEPD. An instance that strictly conforms to an IEPD will contain
-          all content that is required by the IEPD, will contain only content allowed by the IEPD,
+          rules of the schema or message specification. An instance that strictly conforms to a message specification will contain
+          all content that is required by the message specification, will contain only content allowed by the message specification,
           and will reflect the parent-child structure and cardinality constraints defined by the
-          IEPD. This enables NIEM JSON to satisfy exchange requirements similar to
+          message specification. This enables NIEM JSON to satisfy exchange requirements similar to
           traditional NIEM XML use cases.</p></li>
       <li><p><strong>Lax conformance</strong> enables the use of vocabularies that are
-          defined by NIEM schemas or IEPDs via <em>linked data</em> and <em>linked open data</em>
+          defined by NIEM schemas or message specifications via <em>linked data</em> and <em>linked open data</em>
           methods. It establishes that exchanges with NIEM-conformant vocabularies
           use those vocabularies properly; this allows data to be more flexible, and to combine
           terms from NIEM-conformant vocabularies with terms from other vocabularies.</p></li>
@@ -261,8 +261,7 @@
           that together are capable of validating a conformant instance XML document.</p>
       </blockquote>
 
-      <p>Note the principal component of a NIEM exchange definition (an information exchange package
-        documentation, or IEPD) is a conformant schema document set.</p>
+      <p>Note the principal component of a NIEM message specification is a conformant schema document set.</p>
 
       <p>The term <termDef>conformant instance XML document</termDef> is a <termRef>conformance target</termRef>
         defined by the
@@ -329,6 +328,8 @@
         Conformance Targets). An information exchange package (<termDef>IEP</termDef>) is an XML
         document that conforms to the criteria defined for an <termRef>IEP conformance
           target</termRef>.</p>
+
+      <p>This document refers to an artifact that specifies NIEM-conformant information exchanges as a <em>message specification</em>. An information exchange package documentation (IEPD), as defined by <ref idref="MPD"/>, is a form of message specification.</p>
 
     </section>
     
@@ -476,8 +477,10 @@
       </rule>
 
       <p>Within this rule, the <em>schema</em> includes a <termRef>conformant schema document
-          set</termRef>, and will include all other constraints of an <termRef>IEP conformance
-          target</termRef> defined by an IEPD. The <termRef>RDF graph</termRef> entailed by a
+          set</termRef>, as well as all other constraints of an <termRef>IEP conformance
+          target</termRef> defined by an IEPD.</p>
+
+      <p>The <termRef>RDF graph</termRef> entailed by a
           candidate JSON document is described by <ref idref="JSON-LD-API"/>. The <termRef>RDF
           graph</termRef> entailed by an XML document is described by <ref idref="NDR"/>. This rule
           does not provide or require a translation of JSON to XML, although such a translation may
@@ -735,5 +738,5 @@ _:b1    rdf:value  "Sherlock Holmes" .
 m4_dnl Local Variables:
 m4_dnl mode: sgml
 m4_dnl indent-tabs-mode: nil
-m4_dnl fill-column: 100
+m4_dnl fill-column: 9999
 m4_dnl End:

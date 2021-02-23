@@ -1,8 +1,8 @@
 NIEM JSON Specification
 
-Version 5.0
+Version 5.0alpha2
 
-October 15, 2020
+February 23, 2021
 
 NIEM Technical Architecture Committee (NTAC)
 
@@ -307,19 +307,22 @@ Rule 5-4. JSON interpreted based on schema
    Figure 5-1: XML representation of simple example
 
       
-      <nc:PersonFullName xmlns:nc="http://release.niem.gov/niem/niem-core/4.0/"
-        >Sherlock Holmes</nc:PersonFullName>
+      <nc:PersonFullName xmlns:nc="http://release.niem.gov/niem/niem-core/4.0/">
+          Sherlock Holmes
+      </nc:PersonFullName>
       
 
-   [NIEM NDR] Section 5.6.3.2, Element instance specifies that each element that is defined by a NIEM-conformant schema carries an object value, not a literal value. The value of the above element nc:PersonName is an object with a single simple value, which is reflected by the following RDF, in Turtle format:
+   [NIEM NDR] Section 5.6.3.2, Element instance specifies that each element that is defined by a NIEM-conformant schema carries an object value, not a literal value. The value of the above element nc:PersonName is an object with a single simple value of type string, which is reflected by the following RDF, in Turtle format (defined by [RDF-Turtle]):
 
    Figure 5-2: RDF representation of simple example
 
       
       @prefix nc:  <http://release.niem.gov/niem/niem-core/4.0/> .
       @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+      @prefix xs:  <http://www.w3.org/2001/XMLSchema> .
       _:b0    nc:PersonFullName  _:b1 .
       _:b1    rdf:value  "Sherlock Holmes" .
+      _:b1    rdf:type   "xs:string"
       
 
    The JSON-LD versions of the example use the following JSON-LD context:
@@ -329,7 +332,8 @@ Rule 5-4. JSON interpreted based on schema
       
       {
           "nc" : "http://release.niem.gov/niem/niem-core/4.0/",
-          "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+          "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+          "xs" : "http://www.w3.org/2001/XMLSchema"
       }
       
 
@@ -341,6 +345,7 @@ Rule 5-4. JSON interpreted based on schema
       {
         "nc:PersonFullName" : {
           "rdf:value": "Sherlock Holmes"
+          "rdf:type: "xs:string"
         }
       }
       
@@ -357,7 +362,97 @@ Rule 5-4. JSON interpreted based on schema
 
    [Literal-to-object conversion] is the transformation from Figure 5-5, JSON-LD example using literals, above, to Figure 5-4, JSON-LD representation of simple example, above. Users may express NIEM data using a brief format, with the knowledge that it represents the more verbose use of objects instead of bare literals.
 
-5.2. External content omission
+   Following the [Literal-to-object conversion] process ensures that the resulting JSON can be mapped to the same RDF as with the XML version.
+
+5.2. NIEM JSON Normalization
+
+   The literal-to-object conversion process forms the core of NIEM JSON Normalization, a process allowing for even briefer JSON expressions of NIEM data while maintaining a deterministic transformation to NIEM JSON-LD.
+
+      1. Apply a context to map simple JSON names to fully qualified NIEM names
+
+      2. Iteratively convert each literal to an object
+
+   [Definition: NIEM JSON normalization]
+
+      Within this document, NIEM JSON normalization is a process by which simple JSON name/value pair is transformed from simple names with a value of false, null, true, number, or string, into an object containing properties rdf:value and rdf:type. Evaluation of conformance of a [JSON document] is conducted on the results of NIEM JSON normalization of that document.
+
+5.2.1. Example of NIEM JSON Normalization
+
+   This section provides an example of [NIEM JSON normalization]. It shows the conversion of a simple JSON document to a corresponding Normalized JSON-LD object. The following is a simple plain NIEM JSON document:
+
+   Figure 5-6: Plain NIEM JSON
+
+      
+      {
+        "birth": {
+          "date": "1978-01-01"
+        }
+      }
+      
+
+   A JSON-LD context maps the simple JSON names to the corresponding NIEM names:
+
+   Figure 5-7: JSON-LD Context
+
+      
+      {
+        "nc": "http://release.niem.gov/niem/niem-core/5.0/#",
+        "birth": "nc:PersonBirthDate",
+        "date": "nc:Date"
+      }
+      
+
+   Applying that JSON-LD context to the simple plain NIEM JSON document produces this plain NIEM JSON plus context document:
+
+   Figure 5-8: Plain NIEM JSON + Context
+
+      
+      {
+        "@context": {
+          "nc": "http://release.niem.gov/niem/niem-core/5.0/#"
+        },
+        "nc:PersonBirthDate": {
+          "nc:Date": "1978-01-01"
+        }
+      }
+      
+
+   Using the techniques in Section 5.1, Literal-to-object conversion, above, to replace the literal string, we get the following normalized NIEM JSON-LD:
+
+   Figure 5-9: Normalized NIEM JSON-LD
+
+      
+       {
+        "@context": {
+          "nc": "http://release.niem.gov/niem/niem-core/5.0/#",
+          "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+          "xs": "http://www.w3.org/2001/XMLSchema#"
+        },
+        "nc:PersonBirthDate": {
+          "nc:Date": {
+            "rdf:value": {
+              "@value": "1978-01-01",
+              "@type": "xs:date"
+            }
+          }
+        }
+      }
+      
+
+   The advantage to normalization is that the real-time payload document being exchanged is not required to be the fully normalized NIEM JSON document. The real-time payload document can be the Figure 5-6, Plain NIEM JSON, above. That document needs to be able to be converted into Figure 5-9, Normalized NIEM JSON-LD, above, but the fully normalized version is not required to be the payload document.
+
+   Figure 5-9, Normalized NIEM JSON-LD, above, maps to the same RDF as Figure 5-10, NIEM XML, below, establishing that they are the same NIEM structures and data:
+
+   Figure 5-10: NIEM XML
+
+      
+      <?xml version="1.0" encoding="US-ASCII"?>
+      <nc:PersonBirthDate xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/">
+        <nc:Date>1978-01-01</nc:Date>
+      </nc:PersonBirthDate>
+      
+
+5.3. External content omission
 
    NIEM provides a mechanism for data that is not NIEM-conformant to be included within NIEM data. Such data is called external content (see [NIEM NDR] Section 10.2.3, External adapter types and external components). External content includes any content with a namespace defined by an [external schema document], or with any namespace not defined by a [reference schema document] or [extension schema document].
 
@@ -392,6 +487,8 @@ Appendix A. References
    [RDF-Schema]: Dan Brickley, and R.V. Guha, eds. "RDF Schema 1.1." The World Wide Web Consortium (W3C), February 25, 2014. http://www.w3.org/TR/2014/REC-rdf-schema-20140225/.
 
    [RDF-Semantics]: Patrick J. Hayes, and Peter F. Patel-Schneider, eds. "RDF 1.1 Semantics." The World Wide Web Consortium (W3C), February 25, 2014. http://www.w3.org/TR/2014/REC-rdf11-mt-20140225/.
+
+   [RDF-Turtle]: RDF 1.1 Turtle, Terse RDF Triple Language, W3C Recommendation 25 February 2014. https://www.w3.org/TR/2014/REC-turtle-20140225/.
 
    [RFC4627]: D. Crockford. The application/json Media Type for JavaScript Object Notation (JSON) (RFC 4627). July 2006. RFC. http://www.ietf.org/rfc/rfc4627.txt
 

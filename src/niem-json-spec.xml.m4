@@ -525,7 +525,7 @@
       
     </ruleSection>
 
-    <section>
+    <section id="literal-to-object-conversion">
       <title>Literal-to-object conversion</title>
 
       <p>Although all NIEM elements have values that are complex types, which by
@@ -556,23 +556,26 @@
       <figure>
         <title>XML representation of simple example</title>
         <pre><![CDATA[
-<nc:PersonFullName xmlns:nc="http://release.niem.gov/niem/niem-core/4.0/"
-  >Sherlock Holmes</nc:PersonFullName>
+<nc:PersonFullName xmlns:nc="http://release.niem.gov/niem/niem-core/4.0/">
+    Sherlock Holmes
+</nc:PersonFullName>
 ]]></pre>
       </figure>
 
       <p>MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#section_5.6.3.2,5.6.3.2,Element instance) specifies
         that each element that is defined by a NIEM-conformant schema carries an object value, not a
         literal value. The value of the above element <code>nc:PersonName</code> is an object with a
-        single simple value, which is reflected by the following RDF, in Turtle format:</p>
+        single simple value of type string, which is reflected by the following RDF, in Turtle format (defined by <ref idref="RDF-Turtle"/>):</p>
 
       <figure>
         <title>RDF representation of simple example</title>
         <pre><![CDATA[
 @prefix nc:  <http://release.niem.gov/niem/niem-core/4.0/> .
 @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xs:  <http://www.w3.org/2001/XMLSchema> .
 _:b0    nc:PersonFullName  _:b1 .
 _:b1    rdf:value  "Sherlock Holmes" .
+_:b1    rdf:type   "xs:string"
 ]]></pre>
       </figure>
 
@@ -583,7 +586,8 @@ _:b1    rdf:value  "Sherlock Holmes" .
         <pre><![CDATA[
 {
     "nc" : "http://release.niem.gov/niem/niem-core/4.0/",
-    "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "xs" : "http://www.w3.org/2001/XMLSchema"
 }
 ]]></pre>
       </figure>
@@ -597,6 +601,7 @@ _:b1    rdf:value  "Sherlock Holmes" .
 {
   "nc:PersonFullName" : {
     "rdf:value": "Sherlock Holmes"
+    "rdf:type: "xs:string"
   }
 }
 ]]></pre>
@@ -615,13 +620,124 @@ _:b1    rdf:value  "Sherlock Holmes" .
 ]]></pre>
       </figure>
 
-      <p><termRef term="literal-to-object conversion">Literal-to-object conversion</termRef> is the
+        <p><termRef term="literal-to-object conversion">Literal-to-object conversion</termRef> is the
         transformation from <ref idref="convert-before"/> to <ref idref="convert-after"/>. Users may
         express NIEM data using a brief format, with the knowledge that it represents the more
         verbose use of objects instead of bare literals.</p>
+        
+        <p>Following the <termRef term="literal-to-object conversion">Literal-to-object conversion</termRef> process ensures that the resulting JSON can be mapped to the same RDF as with the XML version.</p>
 
       </section>
+
     </section>
+
+    <section>
+      <title>NIEM JSON Normalization</title>
+
+      <p>The literal-to-object conversion process forms the core of NIEM JSON Normalization, a process allowing for even briefer JSON expressions of NIEM data while maintaining a deterministic transformation to NIEM JSON-LD.</p>
+
+      <ol>
+        <li>
+          <p>Apply a context to map simple JSON names to fully qualified NIEM names</p>
+        </li>
+        <li>
+          <p>Iteratively convert each literal to an object</p>
+        </li>
+      </ol>
+
+      <definition term="NIEM JSON normalization">
+        <p>Within this document, <strong>NIEM JSON normalization</strong> is a process by which
+          simple JSON name/value pair is transformed from simple names with a value of false, null, true, number, or string, into an
+          object containing properties <qName>rdf:value</qName> and <qName>rdf:type</qName>. Evaluation of conformance of
+          a <termRef>JSON document</termRef> is conducted on the results of NIEM JSON normalization of that document.</p>
+      </definition>
+
+
+      <section>
+        <title>Example of NIEM JSON Normalization</title>
+
+        <p>This section provides an example of <termRef term="NIEM JSON normalization">NIEM JSON normalization</termRef>. It shows the conversion of a simple JSON document to a corresponding Normalized JSON-LD object. The following is a simple plain NIEM JSON document:</p>
+
+        <figure id="plain-niem-json">
+          <title>Plain NIEM JSON</title>
+          <pre><![CDATA[
+{
+  "birth": {
+    "date": "1978-01-01"
+  }
+}
+]]></pre>
+        </figure>
+
+        <p>A JSON-LD context maps the simple JSON names to the corresponding NIEM names:</p>
+
+        <figure id="json-ld-context">
+          <title>JSON-LD Context</title>
+          <pre><![CDATA[
+{
+  "nc": "http://release.niem.gov/niem/niem-core/5.0/#",
+  "birth": "nc:PersonBirthDate",
+  "date": "nc:Date"
+}
+]]></pre>
+        </figure>
+
+        <p>Applying that JSON-LD context to the simple plain NIEM JSON document produces this plain NIEM JSON plus context document:</p>
+
+        <figure id="plain-niem-json-plus-context">
+          <title>Plain NIEM JSON + Context</title>
+          <pre><![CDATA[
+{
+  "@context": {
+    "nc": "http://release.niem.gov/niem/niem-core/5.0/#"
+  },
+  "nc:PersonBirthDate": {
+    "nc:Date": "1978-01-01"
+  }
+}
+]]></pre>
+        </figure>
+
+        <p>Using the techniques in <ref idref="literal-to-object-conversion"/> to replace the literal string, we get the following normalized NIEM JSON-LD:</p>
+          
+        <figure id="normalized-niem-json-ld">
+          <title>Normalized NIEM JSON-LD</title>
+          <pre><![CDATA[
+ {
+  "@context": {
+    "nc": "http://release.niem.gov/niem/niem-core/5.0/#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "xs": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "nc:PersonBirthDate": {
+    "nc:Date": {
+      "rdf:value": {
+        "@value": "1978-01-01",
+        "@type": "xs:date"
+      }
+    }
+  }
+}
+]]></pre>
+        </figure>
+        <p>The advantage to normalization is that the real-time payload document being exchanged is not required to be the fully normalized NIEM JSON document. The real-time payload document can be the <ref idref="plain-niem-json"/>. That document needs to be able to be converted into <ref idref="normalized-niem-json-ld"/>, but the fully normalized version is not required to be the payload document.</p>
+        
+        <p><ref idref="normalized-niem-json-ld"/> maps to the same RDF as <ref idref="niem-xml"/>, establishing that they are the same NIEM structures and data:</p>
+
+        <figure id="niem-xml">
+          <title>NIEM XML</title>
+          <pre><![CDATA[
+<?xml version="1.0" encoding="US-ASCII"?>
+<nc:PersonBirthDate xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/">
+  <nc:Date>1978-01-01</nc:Date>
+</nc:PersonBirthDate>
+]]></pre>
+        </figure>
+
+      </section>
+
+    </section>
+
 
     <section>
       <title>External content omission</title>
@@ -712,6 +828,9 @@ _:b1    rdf:value  "Sherlock Holmes" .
       <p>Patrick J. Hayes, and Peter F. Patel-Schneider, eds. <q>RDF 1.1 Semantics.</q> The World
         Wide Web Consortium (W3C), February 25,
         2014. <link>MACRO_HREF_RDF_SEMANTICS</link>.</p>
+    </reference>
+    <reference id="RDF-Turtle">
+      <p>RDF 1.1 Turtle, Terse RDF Triple Language, W3C Recommendation 25 February 2014. <link>MACRO_HREF_RDF_TURTLE</link>.</p>
     </reference>
     <reference id="RFC4627">
       <p>D. Crockford. The application/json Media Type for JavaScript Object Notation (JSON)

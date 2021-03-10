@@ -541,7 +541,7 @@
       <definition term="literal-to-object conversion">
         <p>Within this document, <strong>literal-to-object conversion</strong> is a process by which
           a JSON value is transformed from a value of false, null, true, number, or string, into an
-          object containing only the property <qName>rdf:value</qName>. Evaluation of conformance of
+          object containing only the properties <qName>rdf:value</qName> and <qName>rdf:type</qName>. Evaluation of conformance of
           a <termRef>JSON document</termRef> is conducted on the results of literal-to-object
           conversion of that document.</p>
       </definition>
@@ -621,12 +621,12 @@ _:b1    rdf:type   "xs:string"
       </figure>
 
         <p><termRef term="literal-to-object conversion">Literal-to-object conversion</termRef> is the
-        transformation from <ref idref="convert-before"/> to <ref idref="convert-after"/>. Users may
-        express NIEM data using a brief format, with the knowledge that it represents the more
-        verbose use of objects instead of bare literals.</p>
+        transformation from <ref idref="convert-before"/> to <ref idref="convert-after"/>. Following the <termRef term="literal-to-object conversion">literal-to-object conversion</termRef> process ensures that the resulting JSON can be mapped to the same RDF as for the XML version.</p>
         
-        <p>Following the <termRef term="literal-to-object conversion">Literal-to-object conversion</termRef> process ensures that the resulting JSON can be mapped to the same RDF as with the XML version.</p>
-
+        <p>Users may
+        express NIEM data using a brief format, with the knowledge that it represents the more
+        verbose use of objects instead of bare literals through the <termRef term="NIEM JSON normalization">NIEM JSON Normalization</termRef> process.</p>
+        
       </section>
 
     </section>
@@ -634,7 +634,7 @@ _:b1    rdf:type   "xs:string"
     <section>
       <title>NIEM JSON Normalization</title>
 
-      <p>The literal-to-object conversion process forms the core of NIEM JSON Normalization, a process allowing for even briefer JSON expressions of NIEM data while maintaining a deterministic transformation to NIEM JSON-LD.</p>
+      <p>The literal-to-object conversion process forms the core of NIEM JSON Normalization, a process allowing for even briefer JSON expressions of NIEM data while maintaining a deterministic transformation to NIEM JSON-LD. The process consists of two steps:</p>
 
       <ol>
         <li>
@@ -647,8 +647,8 @@ _:b1    rdf:type   "xs:string"
 
       <definition term="NIEM JSON normalization">
         <p>Within this document, <strong>NIEM JSON normalization</strong> is a process by which
-          simple JSON name/value pair is transformed from simple names with a value of false, null, true, number, or string, into an
-          object containing properties <qName>rdf:value</qName> and <qName>rdf:type</qName>. Evaluation of conformance of
+          simple JSON name/value pairs are transformed from simple names with values of false, null, true, number, or string, into
+          NIEM conformant objects containing properties <qName>rdf:value</qName> and <qName>rdf:type</qName>. Evaluation of conformance of
           a <termRef>JSON document</termRef> is conducted on the results of NIEM JSON normalization of that document.</p>
       </definition>
 
@@ -720,9 +720,10 @@ _:b1    rdf:type   "xs:string"
 }
 ]]></pre>
         </figure>
-        <p>The advantage to normalization is that the real-time payload document being exchanged is not required to be the fully normalized NIEM JSON document. The real-time payload document can be the <ref idref="plain-niem-json"/>. That document needs to be able to be converted into <ref idref="normalized-niem-json-ld"/>, but the fully normalized version is not required to be the payload document.</p>
-        
-        <p><ref idref="normalized-niem-json-ld"/> maps to the same RDF as <ref idref="niem-xml"/>, establishing that they are the same NIEM structures and data:</p>
+
+        <p>The RDF graph entailed by <ref idref="normalized-niem-json-ld"/> is equivalent to the RDF graph entailed by the conformant instance XML document shown in <ref idref="niem-xml"/>. This demonstrates conformance of the JSON-LD in <ref idref="normalized-niem-json-ld"/>. The plain NIEM JSON in <ref idref="plain-niem-json"/> is therefore also conforming.</p>
+
+        <p>The advantage of normalization is that it allows the runtime exchange of plain NIEM JSON like that shown in <ref idref="plain-niem-json"/>, while also allowing the evaluation of that data for conformance when necessary.</p>
 
         <figure id="niem-xml">
           <title>NIEM XML</title>
@@ -815,8 +816,7 @@ _:b1    rdf:type   "xs:string"
     </reference>
     <reference id="NDR" label="NIEM NDR">
       <p>Roberts, Webb. <q>National Information Exchange Model Naming and Design Rules, Version
-          4.0.</q> NIEM Technical Architecture Committee, November 7,
-        2017. <link>MACRO_HREF_NDR</link>.</p>
+          5.0.</q> NIEM Technical Architecture Committee, December 18, 2020. <link>MACRO_HREF_NDR</link>.</p>
     </reference>
     <reference id="RDF-Concepts">
       <p>Richard Cyganiak, David Wood, and Markus Lanthaler, eds. <q>RDF 1.1 Concepts and Abstract Syntax.</q> W3C Recommendation. The World Wide Web Consortium (W3C), February 25, 2014. <link>MACRO_HREF_RDF_CONCEPTS</link>.</p>

@@ -318,18 +318,18 @@
       <title>Model Package Description Specification</title>
 
       <p>The term <termDef>IEP conformance target</termDef> is defined by
-        MACRO_REF_EXTERNAL(MPD,MACRO_HREF_MPD#definition_IEP_conformance_target,5.6,Defining
+        MACRO_REF_EXTERNAL(IEPD,MACRO_HREF_IEPD#definition_IEP_conformance_target,5.6,Defining
         Information Exchange Packages). An IEP conformance target defines a set of conformance
         criteria for a class of <termRef term="information exchange package">information exchange
           package (IEP)</termRef>.</p>
 
       <p>The term <termDef>information exchange package</termDef> is defined by
-        MACRO_REF_EXTERNAL(MPD,MACRO_HREF_MPD#definition_information_exchange_package,3.2.3,IEP
+        MACRO_REF_EXTERNAL(IEPD,MACRO_HREF_IEPD#definition_information_exchange_package,3.2.3,IEP
         Conformance Targets). An information exchange package (<termDef>IEP</termDef>) is an XML
         document that conforms to the criteria defined for an <termRef>IEP conformance
           target</termRef>.</p>
 
-      <p>This document refers to an artifact that specifies NIEM-conformant information exchanges as a <em>message specification</em>. An information exchange package documentation (IEPD), as defined by <ref idref="MPD"/>, is a form of message specification.</p>
+      <p>This document refers to an artifact that specifies NIEM-conformant information exchanges as a <em>message specification</em>. An information exchange package documentation (IEPD), as defined by <ref idref="IEPD"/>, is a form of message specification.</p>
 
     </section>
     
@@ -792,54 +792,53 @@ _:b1    rdf:type   "xs:string"
       </sub>
     </reference>
     <reference id="ConfReq">
-      <p>Lynne Rosenthal, and Mark Skall, eds. <q>Conformance Requirements for Specifications v1.0.</q> The Organization for the Advancement of Structured Information Standards (OASIS), March 15, 2002. <link>https://www.oasis-open.org/committees/download.php/305/conformance_requirements-v1.pdf</link>.</p>
+      <p>Lynne Rosenthal, and Mark Skall, eds. <q>Conformance Requirements for Specifications v1.0.</q> The Organization for the Advancement of Structured Information Standards (OASIS), March 15, 2002. Available from <link>https://www.oasis-open.org/committees/download.php/305/conformance_requirements-v1.pdf</link>.</p>
     </reference>
     <reference id="CTAS">
       <p>Roberts, Webb. <q>NIEM Conformance Targets Attribute Specification, Version 3.0.</q> NIEM
-        Technical Architecture Committee, July 31, 2014. <link>MACRO_HREF_CTAS</link>.</p>
+        Technical Architecture Committee. Available from <link>MACRO_HREF_CTAS</link>.</p>
     </reference>
     <reference id="JSON-LD">
       <p>Manu Sporny, Dave Longley, Gregg Kellogg, Markus Lanthaler, and Niklas
         Lindstr<char name="ouml"/>m. <q>JSON-LD 1.0, A JSON-Based Serialization for Linked Data,
           W3C Recommendation.</q> Edited by Manu Sporny, Gregg Kellogg, and Markus Lanthaler. W3C,
-        January 16, 2014. <link>MACRO_HREF_JSONLD</link>.</p>
+        January 16, 2014. Available from <link>MACRO_HREF_JSONLD</link>.</p>
     </reference>
     <reference id="JSON-LD-API">
       <p>Dave Longley, Gregg Kellogg, Markus Lanthaler, and Manu Sporny. <q>JSON-LD 1.0 Processing
           Algorithms and API.</q> Edited by Markus Lanthaler, Gregg Kellogg, and Manu Sporny. W3C,
-        January 16, 2014. <link>https://www.w3.org/TR/2014/REC-json-ld-api-20140116/</link>.</p>
+        January 16, 2014. Available from <link>https://www.w3.org/TR/2014/REC-json-ld-api-20140116/</link>.</p>
     </reference>
-    <reference id="MPD">
-      <p>NIEM Technical Architecture Committee. <q>National Information Exchange Model Model Package
-          Description Specification, Version 3.0.1</q>, April 27,
-        2015. <link>MACRO_HREF_MPD</link>.</p>
+    <reference id="IEPD">
+      <p>NIEM Technical Architecture Committee. <q>National Information Exchange Package
+          Description (IEPD) Specification, Version 5.0</q>. Available from <link>MACRO_HREF_IEPD</link>.</p>
     </reference>
     <reference id="NDR" label="NIEM NDR">
       <p>Roberts, Webb. <q>National Information Exchange Model Naming and Design Rules, Version
-          5.0.</q> NIEM Technical Architecture Committee, December 18, 2020. <link>MACRO_HREF_NDR</link>.</p>
+          5.0.</q> NIEM Technical Architecture Committee. Available from <link>MACRO_HREF_NDR</link>.</p>
     </reference>
     <reference id="RDF-Concepts">
-      <p>Richard Cyganiak, David Wood, and Markus Lanthaler, eds. <q>RDF 1.1 Concepts and Abstract Syntax.</q> W3C Recommendation. The World Wide Web Consortium (W3C), February 25, 2014. <link>MACRO_HREF_RDF_CONCEPTS</link>.</p>
+      <p>Richard Cyganiak, David Wood, and Markus Lanthaler, eds. <q>RDF 1.1 Concepts and Abstract Syntax.</q> W3C Recommendation. The World Wide Web Consortium (W3C), February 25, 2014. Available from <link>MACRO_HREF_RDF_CONCEPTS</link>.</p>
     </reference>
     <reference id="RDFS" label="RDF-Schema">
-      <p>Dan Brickley, and R.V. Guha, eds. <q>RDF Schema 1.1.</q> The World Wide Web Consortium (W3C), February 25, 2014. <link>http://www.w3.org/TR/2014/REC-rdf-schema-20140225/</link>.</p>
+      <p>Dan Brickley, and R.V. Guha, eds. <q>RDF Schema 1.1.</q> The World Wide Web Consortium (W3C), February 25, 2014. Available from <link>http://www.w3.org/TR/2014/REC-rdf-schema-20140225/</link>.</p>
     </reference>
     <reference id="RDF-Semantics">
       <p>Patrick J. Hayes, and Peter F. Patel-Schneider, eds. <q>RDF 1.1 Semantics.</q> The World
         Wide Web Consortium (W3C), February 25,
-        2014. <link>MACRO_HREF_RDF_SEMANTICS</link>.</p>
+        2014. Available from <link>MACRO_HREF_RDF_SEMANTICS</link>.</p>
     </reference>
     <reference id="RDF-Turtle">
-      <p>RDF 1.1 Turtle, Terse RDF Triple Language, W3C Recommendation 25 February 2014. <link>MACRO_HREF_RDF_TURTLE</link>.</p>
+      <p><q>RDF 1.1 Turtle, Terse RDF Triple Language,</q> W3C Recommendation 25 February 2014. Available from <link>MACRO_HREF_RDF_TURTLE</link>.</p>
     </reference>
     <reference id="RFC4627">
-      <p>D. Crockford. The application/json Media Type for JavaScript Object Notation (JSON)
-        (RFC 4627). July 2006. RFC. <link>http://www.ietf.org/rfc/rfc4627.txt</link></p>
+      <p>D. Crockford. <q>The application/json Media Type for JavaScript Object Notation (JSON)
+        (RFC 4627).</q> July 2006. RFC. Available from <link>http://www.ietf.org/rfc/rfc4627.txt</link></p>
     </reference>
     <reference id="RFC8259">
-      <p>Bray, T., Ed., <q>The JavaScript Object Notation (JSON) Data Interchange Format</q>, STD
+      <p>Bray, T., Ed., <q>The JavaScript Object Notation (JSON) Data Interchange Format,</q> STD
         90, RFC 8259, DOI 10.17487/RFC8259, December
-        2017, <link>https://www.ietf.org/rfc/rfc8259.txt</link>.</p>
+        2017, Available from <link>https://www.ietf.org/rfc/rfc8259.txt</link>.</p>
     </reference>
   </section>
   <!-- stand down the index until it can be useful.

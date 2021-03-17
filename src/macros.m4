@@ -1,7 +1,7 @@
 m4_changequote([[[,]]])m4_dnl
 m4_changecom(,)m4_dnl
 m4_define([[[MACRO_SPECIFIED_VERSION]]],[[[5.0]]])m4_dnl What version is the spec representing? (e.g., 4.0, 4.1)
-m4_define([[[MACRO_DOCUMENT_VERSION]]],[[[5.0alpha3]]])m4_dnl What version is the spec representing? (e.g., 4.0, 4.1)
+m4_define([[[MACRO_DOCUMENT_VERSION]]],[[[5.0beta1]]])m4_dnl What version is the spec representing? (e.g., 4.0, 4.1)
 m4_define([[[MACRO_DOCUMENT_DATE]]],[[[2021-03-10]]])m4_dnl
 m4_define([[[MACRO_SHORT_NAME]]],[[[niem-json-spec]]])m4_dnl
 m4_define([[[MACRO_DOCUMENT_URI]]],[[[http://reference.niem.gov/niem/specification/MACRO_SHORT_NAME/MACRO_SPECIFIED_VERSION/]]])m4_dnl
@@ -9,14 +9,14 @@ m4_dnl conformance targets
 m4_define([[[MACRO_CT_URI_LAX]]],[[[MACRO_DOCUMENT_URI[[[]]]#Lax]]])m4_dnl
 m4_define([[[MACRO_CT_URI_STRICT]]],[[[MACRO_DOCUMENT_URI[[[]]]#Strict]]])m4_dnl
 m4_dnl
-m4_define([[[MACRO_HREF_NDR]]],[[[https://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/niem-ndr-5.0.html]]])m4_dnl
-m4_define([[[MACRO_HREF_MPD]]],[[[https://reference.niem.gov/niem/specification/model-package-description/3.0.1/model-package-description-3.0.1.html]]])m4_dnl
-m4_define([[[MACRO_HREF_CTAS]]],[[[http://reference.niem.gov/niem/specification/conformance-targets-attribute/3.0/NIEM-CTAS-3.0-2014-07-31.html]]])m4_dnl
+m4_define([[[MACRO_HREF_NDR]]],[[[https://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/]]])m4_dnl
+m4_define([[[MACRO_HREF_IEPD]]],[[[https://reference.niem.gov/niem/specification/model-package-description/5.0/]]])m4_dnl
+m4_define([[[MACRO_HREF_CTAS]]],[[[https://reference.niem.gov/niem/specification/conformance-targets-attribute/3.0/]]])m4_dnl
 m4_define([[[MACRO_HREF_JSONLD]]],[[[https://www.w3.org/TR/2014/REC-json-ld-20140116/]]])m4_dnl
 m4_define([[[MACRO_HREF_RFC8259]]],[[[https://tools.ietf.org/html/rfc8259]]])m4_dnl
 m4_define([[[MACRO_HREF_RDFS]]],[[[https://www.w3.org/TR/rdf-schema/]]])m4_dnl
 m4_define([[[MACRO_HREF_RDF_CONCEPTS]]],[[[https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/]]])m4_dnl
-m4_define([[[MACRO_HREF_RDF_SEMANTICS]]],[[[http://www.w3.org/TR/2014/REC-rdf11-mt-20140225/]]])m4_dnl
+m4_define([[[MACRO_HREF_RDF_SEMANTICS]]],[[[https://www.w3.org/TR/2014/REC-rdf11-mt-20140225/]]])m4_dnl
 m4_define([[[MACRO_HREF_RDF_TURTLE]]],[[[https://www.w3.org/TR/2014/REC-turtle-20140225/]]])m4_dnl
 m4_dnl
 m4_dnl  MACRO_ASSERT( $test, $message )

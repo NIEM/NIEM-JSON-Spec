@@ -570,12 +570,12 @@
       <figure>
         <title>RDF representation of simple example</title>
         <pre><![CDATA[
-@prefix nc:  <http://release.niem.gov/niem/niem-core/4.0/> .
+@prefix nc:  <http://release.niem.gov/niem/niem-core/5.0/> .
 @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xs:  <http://www.w3.org/2001/XMLSchema> .
 _:b0    nc:PersonFullName  _:b1 .
 _:b1    rdf:value  "Sherlock Holmes" .
-_:b1    rdf:type   "xs:string"
+_:b1    rdf:type   "xs:string" .
 ]]></pre>
       </figure>
 
@@ -585,7 +585,7 @@ _:b1    rdf:type   "xs:string"
         <title>JSON-LD context for simple example</title>
         <pre><![CDATA[
 {
-    "nc" : "http://release.niem.gov/niem/niem-core/4.0/",
+    "nc" : "http://release.niem.gov/niem/niem-core/5.0/",
     "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "xs" : "http://www.w3.org/2001/XMLSchema"
 }
@@ -600,8 +600,8 @@ _:b1    rdf:type   "xs:string"
         <pre><![CDATA[
 {
   "nc:PersonFullName" : {
-    "rdf:value": "Sherlock Holmes"
-    "rdf:type: "xs:string"
+    "rdf:value": "Sherlock Holmes",
+    "rdf:type": "xs:string"
   }
 }
 ]]></pre>
@@ -675,7 +675,7 @@ _:b1    rdf:type   "xs:string"
           <title>JSON-LD Context</title>
           <pre><![CDATA[
 {
-  "nc": "http://release.niem.gov/niem/niem-core/5.0/#",
+  "nc": "http://release.niem.gov/niem/niem-core/5.0/",
   "birth": "nc:PersonBirthDate",
   "date": "nc:Date"
 }
@@ -689,7 +689,7 @@ _:b1    rdf:type   "xs:string"
           <pre><![CDATA[
 {
   "@context": {
-    "nc": "http://release.niem.gov/niem/niem-core/5.0/#"
+    "nc": "http://release.niem.gov/niem/niem-core/5.0/"
   },
   "nc:PersonBirthDate": {
     "nc:Date": "1978-01-01"
@@ -705,9 +705,9 @@ _:b1    rdf:type   "xs:string"
           <pre><![CDATA[
  {
   "@context": {
-    "nc": "http://release.niem.gov/niem/niem-core/5.0/#",
+    "nc": "http://release.niem.gov/niem/niem-core/5.0/",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-    "xs": "http://www.w3.org/2001/XMLSchema#"
+    "xs": "http://www.w3.org/2001/XMLSchema"
   },
   "nc:PersonBirthDate": {
     "nc:Date": {
@@ -728,7 +728,6 @@ _:b1    rdf:type   "xs:string"
         <figure id="niem-xml">
           <title>NIEM XML</title>
           <pre><![CDATA[
-<?xml version="1.0" encoding="US-ASCII"?>
 <nc:PersonBirthDate xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/">
   <nc:Date>1978-01-01</nc:Date>
 </nc:PersonBirthDate>

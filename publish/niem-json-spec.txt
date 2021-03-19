@@ -2,7 +2,7 @@ NIEM JSON Specification
 
 Version 5.0beta1
 
-March 10, 2021
+March 19, 2021
 
 NIEM Technical Architecture Committee (NTAC)
 
@@ -317,12 +317,12 @@ Rule 5-4. JSON interpreted based on schema
    Figure 5-2: RDF representation of simple example
 
       
-      @prefix nc:  <http://release.niem.gov/niem/niem-core/4.0/> .
+      @prefix nc:  <http://release.niem.gov/niem/niem-core/5.0/> .
       @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
       @prefix xs:  <http://www.w3.org/2001/XMLSchema> .
       _:b0    nc:PersonFullName  _:b1 .
       _:b1    rdf:value  "Sherlock Holmes" .
-      _:b1    rdf:type   "xs:string"
+      _:b1    rdf:type   "xs:string" .
       
 
    The JSON-LD versions of the example use the following JSON-LD context:
@@ -331,7 +331,7 @@ Rule 5-4. JSON interpreted based on schema
 
       
       {
-          "nc" : "http://release.niem.gov/niem/niem-core/4.0/",
+          "nc" : "http://release.niem.gov/niem/niem-core/5.0/",
           "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
           "xs" : "http://www.w3.org/2001/XMLSchema"
       }
@@ -344,8 +344,8 @@ Rule 5-4. JSON interpreted based on schema
       
       {
         "nc:PersonFullName" : {
-          "rdf:value": "Sherlock Holmes"
-          "rdf:type: "xs:string"
+          "rdf:value": "Sherlock Holmes",
+          "rdf:type": "xs:string"
         }
       }
       
@@ -396,7 +396,7 @@ Rule 5-4. JSON interpreted based on schema
 
       
       {
-        "nc": "http://release.niem.gov/niem/niem-core/5.0/#",
+        "nc": "http://release.niem.gov/niem/niem-core/5.0/",
         "birth": "nc:PersonBirthDate",
         "date": "nc:Date"
       }
@@ -409,7 +409,7 @@ Rule 5-4. JSON interpreted based on schema
       
       {
         "@context": {
-          "nc": "http://release.niem.gov/niem/niem-core/5.0/#"
+          "nc": "http://release.niem.gov/niem/niem-core/5.0/"
         },
         "nc:PersonBirthDate": {
           "nc:Date": "1978-01-01"
@@ -424,9 +424,9 @@ Rule 5-4. JSON interpreted based on schema
       
        {
         "@context": {
-          "nc": "http://release.niem.gov/niem/niem-core/5.0/#",
+          "nc": "http://release.niem.gov/niem/niem-core/5.0/",
           "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-          "xs": "http://www.w3.org/2001/XMLSchema#"
+          "xs": "http://www.w3.org/2001/XMLSchema"
         },
         "nc:PersonBirthDate": {
           "nc:Date": {
@@ -446,7 +446,6 @@ Rule 5-4. JSON interpreted based on schema
    Figure 5-10: NIEM XML
 
       
-      <?xml version="1.0" encoding="US-ASCII"?>
       <nc:PersonBirthDate xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/">
         <nc:Date>1978-01-01</nc:Date>
       </nc:PersonBirthDate>

@@ -29,5 +29,5 @@ This document is tracked in version control at <https://github.com/NIEM/NIEM-JSO
 
 # Files
 
-- HTML version: [niem-json-spec.html](niem-json-spec.html): NIEM JSON Specification (HTML)
-- Text version: [niem-json-spec.txt](niem-json-spec.txt): NIEM JSON Specification (plain text)
+- [niem-json-spec.html](niem-json-spec.html): NIEM JSON Specification (HTML)
+- [niem-json-spec.txt](niem-json-spec.txt): NIEM JSON Specification (plain text)

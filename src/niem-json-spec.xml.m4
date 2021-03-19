@@ -318,18 +318,18 @@
       <title>Model Package Description Specification</title>
 
       <p>The term <termDef>IEP conformance target</termDef> is defined by
-        MACRO_REF_EXTERNAL(MPD,MACRO_HREF_MPD#definition_IEP_conformance_target,5.6,Defining
+        MACRO_REF_EXTERNAL(IEPD,MACRO_HREF_IEPD#definition_IEP_conformance_target,5.6,Defining
         Information Exchange Packages). An IEP conformance target defines a set of conformance
         criteria for a class of <termRef term="information exchange package">information exchange
           package (IEP)</termRef>.</p>
 
       <p>The term <termDef>information exchange package</termDef> is defined by
-        MACRO_REF_EXTERNAL(MPD,MACRO_HREF_MPD#definition_information_exchange_package,3.2.3,IEP
+        MACRO_REF_EXTERNAL(IEPD,MACRO_HREF_IEPD#definition_information_exchange_package,3.2.3,IEP
         Conformance Targets). An information exchange package (<termDef>IEP</termDef>) is an XML
         document that conforms to the criteria defined for an <termRef>IEP conformance
           target</termRef>.</p>
 
-      <p>This document refers to an artifact that specifies NIEM-conformant information exchanges as a <em>message specification</em>. An information exchange package documentation (IEPD), as defined by <ref idref="MPD"/>, is a form of message specification.</p>
+      <p>This document refers to an artifact that specifies NIEM-conformant information exchanges as a <em>message specification</em>. An information exchange package documentation (IEPD), as defined by <ref idref="IEPD"/>, is a form of message specification.</p>
 
     </section>
     
@@ -525,7 +525,7 @@
       
     </ruleSection>
 
-    <section>
+    <section id="literal-to-object-conversion">
       <title>Literal-to-object conversion</title>
 
       <p>Although all NIEM elements have values that are complex types, which by
@@ -541,7 +541,7 @@
       <definition term="literal-to-object conversion">
         <p>Within this document, <strong>literal-to-object conversion</strong> is a process by which
           a JSON value is transformed from a value of false, null, true, number, or string, into an
-          object containing only the property <qName>rdf:value</qName>. Evaluation of conformance of
+          object containing only the properties <qName>rdf:value</qName> and <qName>rdf:type</qName>. Evaluation of conformance of
           a <termRef>JSON document</termRef> is conducted on the results of literal-to-object
           conversion of that document.</p>
       </definition>
@@ -556,23 +556,26 @@
       <figure>
         <title>XML representation of simple example</title>
         <pre><![CDATA[
-<nc:PersonFullName xmlns:nc="http://release.niem.gov/niem/niem-core/4.0/"
-  >Sherlock Holmes</nc:PersonFullName>
+<nc:PersonFullName xmlns:nc="http://release.niem.gov/niem/niem-core/4.0/">
+    Sherlock Holmes
+</nc:PersonFullName>
 ]]></pre>
       </figure>
 
       <p>MACRO_REF_EXTERNAL(NDR,MACRO_HREF_NDR#section_5.6.3.2,5.6.3.2,Element instance) specifies
         that each element that is defined by a NIEM-conformant schema carries an object value, not a
         literal value. The value of the above element <code>nc:PersonName</code> is an object with a
-        single simple value, which is reflected by the following RDF, in Turtle format:</p>
+        single simple value of type string, which is reflected by the following RDF, in Turtle format (defined by <ref idref="RDF-Turtle"/>):</p>
 
       <figure>
         <title>RDF representation of simple example</title>
         <pre><![CDATA[
-@prefix nc:  <http://release.niem.gov/niem/niem-core/4.0/> .
+@prefix nc:  <http://release.niem.gov/niem/niem-core/5.0/> .
 @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xs:  <http://www.w3.org/2001/XMLSchema> .
 _:b0    nc:PersonFullName  _:b1 .
 _:b1    rdf:value  "Sherlock Holmes" .
+_:b1    rdf:type   "xs:string" .
 ]]></pre>
       </figure>
 
@@ -582,8 +585,9 @@ _:b1    rdf:value  "Sherlock Holmes" .
         <title>JSON-LD context for simple example</title>
         <pre><![CDATA[
 {
-    "nc" : "http://release.niem.gov/niem/niem-core/4.0/",
-    "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    "nc" : "http://release.niem.gov/niem/niem-core/5.0/",
+    "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "xs" : "http://www.w3.org/2001/XMLSchema"
 }
 ]]></pre>
       </figure>
@@ -596,7 +600,8 @@ _:b1    rdf:value  "Sherlock Holmes" .
         <pre><![CDATA[
 {
   "nc:PersonFullName" : {
-    "rdf:value": "Sherlock Holmes"
+    "rdf:value": "Sherlock Holmes",
+    "rdf:type": "xs:string"
   }
 }
 ]]></pre>
@@ -615,13 +620,124 @@ _:b1    rdf:value  "Sherlock Holmes" .
 ]]></pre>
       </figure>
 
-      <p><termRef term="literal-to-object conversion">Literal-to-object conversion</termRef> is the
-        transformation from <ref idref="convert-before"/> to <ref idref="convert-after"/>. Users may
+        <p><termRef term="literal-to-object conversion">Literal-to-object conversion</termRef> is the
+        transformation from <ref idref="convert-before"/> to <ref idref="convert-after"/>. Following the <termRef term="literal-to-object conversion">literal-to-object conversion</termRef> process ensures that the resulting JSON can be mapped to the same RDF as for the XML version.</p>
+        
+        <p>Users may
         express NIEM data using a brief format, with the knowledge that it represents the more
-        verbose use of objects instead of bare literals.</p>
+        verbose use of objects instead of bare literals through the <termRef term="NIEM JSON normalization">NIEM JSON Normalization</termRef> process.</p>
+        
+      </section>
+
+    </section>
+
+    <section>
+      <title>NIEM JSON Normalization</title>
+
+      <p>The literal-to-object conversion process forms the core of NIEM JSON Normalization, a process allowing for even briefer JSON expressions of NIEM data while maintaining a deterministic transformation to NIEM JSON-LD. The process consists of two steps:</p>
+
+      <ol>
+        <li>
+          <p>Apply a context to map simple JSON names to fully qualified NIEM names</p>
+        </li>
+        <li>
+          <p>Iteratively convert each literal to an object</p>
+        </li>
+      </ol>
+
+      <definition term="NIEM JSON normalization">
+        <p>Within this document, <strong>NIEM JSON normalization</strong> is a process by which
+          simple JSON name/value pairs are transformed from simple names with values of false, null, true, number, or string, into
+          NIEM conformant objects containing properties <qName>rdf:value</qName> and <qName>rdf:type</qName>. Evaluation of conformance of
+          a <termRef>JSON document</termRef> is conducted on the results of NIEM JSON normalization of that document.</p>
+      </definition>
+
+
+      <section>
+        <title>Example of NIEM JSON Normalization</title>
+
+        <p>This section provides an example of <termRef term="NIEM JSON normalization">NIEM JSON normalization</termRef>. It shows the conversion of a simple JSON document to a corresponding Normalized JSON-LD object. The following is a simple plain NIEM JSON document:</p>
+
+        <figure id="plain-niem-json">
+          <title>Plain NIEM JSON</title>
+          <pre><![CDATA[
+{
+  "birth": {
+    "date": "1978-01-01"
+  }
+}
+]]></pre>
+        </figure>
+
+        <p>A JSON-LD context maps the simple JSON names to the corresponding NIEM names:</p>
+
+        <figure id="json-ld-context">
+          <title>JSON-LD Context</title>
+          <pre><![CDATA[
+{
+  "nc": "http://release.niem.gov/niem/niem-core/5.0/",
+  "birth": "nc:PersonBirthDate",
+  "date": "nc:Date"
+}
+]]></pre>
+        </figure>
+
+        <p>Applying that JSON-LD context to the simple plain NIEM JSON document produces this plain NIEM JSON plus context document:</p>
+
+        <figure id="plain-niem-json-plus-context">
+          <title>Plain NIEM JSON + Context</title>
+          <pre><![CDATA[
+{
+  "@context": {
+    "nc": "http://release.niem.gov/niem/niem-core/5.0/"
+  },
+  "nc:PersonBirthDate": {
+    "nc:Date": "1978-01-01"
+  }
+}
+]]></pre>
+        </figure>
+
+        <p>Using the techniques in <ref idref="literal-to-object-conversion"/> to replace the literal string, we get the following normalized NIEM JSON-LD:</p>
+          
+        <figure id="normalized-niem-json-ld">
+          <title>Normalized NIEM JSON-LD</title>
+          <pre><![CDATA[
+ {
+  "@context": {
+    "nc": "http://release.niem.gov/niem/niem-core/5.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "xs": "http://www.w3.org/2001/XMLSchema"
+  },
+  "nc:PersonBirthDate": {
+    "nc:Date": {
+      "rdf:value": {
+        "@value": "1978-01-01",
+        "@type": "xs:date"
+      }
+    }
+  }
+}
+]]></pre>
+        </figure>
+
+        <p>The RDF graph entailed by <ref idref="normalized-niem-json-ld"/> is equivalent to the RDF graph entailed by the conformant instance XML document shown in <ref idref="niem-xml"/>. This demonstrates conformance of the JSON-LD in <ref idref="normalized-niem-json-ld"/>. The plain NIEM JSON in <ref idref="plain-niem-json"/> is therefore also conforming.</p>
+
+        <p>The advantage of normalization is that it allows the runtime exchange of plain NIEM JSON like that shown in <ref idref="plain-niem-json"/>, while also allowing the evaluation of that data for conformance when necessary.</p>
+
+        <figure id="niem-xml">
+          <title>NIEM XML</title>
+          <pre><![CDATA[
+<nc:PersonBirthDate xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/">
+  <nc:Date>1978-01-01</nc:Date>
+</nc:PersonBirthDate>
+]]></pre>
+        </figure>
 
       </section>
+
     </section>
+
 
     <section>
       <title>External content omission</title>
@@ -675,52 +791,53 @@ _:b1    rdf:value  "Sherlock Holmes" .
       </sub>
     </reference>
     <reference id="ConfReq">
-      <p>Lynne Rosenthal, and Mark Skall, eds. <q>Conformance Requirements for Specifications v1.0.</q> The Organization for the Advancement of Structured Information Standards (OASIS), March 15, 2002. <link>https://www.oasis-open.org/committees/download.php/305/conformance_requirements-v1.pdf</link>.</p>
+      <p>Lynne Rosenthal, and Mark Skall, eds. <q>Conformance Requirements for Specifications v1.0.</q> The Organization for the Advancement of Structured Information Standards (OASIS), March 15, 2002. Available from <link>https://www.oasis-open.org/committees/download.php/305/conformance_requirements-v1.pdf</link>.</p>
     </reference>
     <reference id="CTAS">
       <p>Roberts, Webb. <q>NIEM Conformance Targets Attribute Specification, Version 3.0.</q> NIEM
-        Technical Architecture Committee, July 31, 2014. <link>MACRO_HREF_CTAS</link>.</p>
+        Technical Architecture Committee. Available from <link>MACRO_HREF_CTAS</link>.</p>
     </reference>
     <reference id="JSON-LD">
       <p>Manu Sporny, Dave Longley, Gregg Kellogg, Markus Lanthaler, and Niklas
         Lindstr<char name="ouml"/>m. <q>JSON-LD 1.0, A JSON-Based Serialization for Linked Data,
           W3C Recommendation.</q> Edited by Manu Sporny, Gregg Kellogg, and Markus Lanthaler. W3C,
-        January 16, 2014. <link>MACRO_HREF_JSONLD</link>.</p>
+        January 16, 2014. Available from <link>MACRO_HREF_JSONLD</link>.</p>
     </reference>
     <reference id="JSON-LD-API">
       <p>Dave Longley, Gregg Kellogg, Markus Lanthaler, and Manu Sporny. <q>JSON-LD 1.0 Processing
           Algorithms and API.</q> Edited by Markus Lanthaler, Gregg Kellogg, and Manu Sporny. W3C,
-        January 16, 2014. <link>https://www.w3.org/TR/2014/REC-json-ld-api-20140116/</link>.</p>
+        January 16, 2014. Available from <link>https://www.w3.org/TR/2014/REC-json-ld-api-20140116/</link>.</p>
     </reference>
-    <reference id="MPD">
-      <p>NIEM Technical Architecture Committee. <q>National Information Exchange Model Model Package
-          Description Specification, Version 3.0.1</q>, April 27,
-        2015. <link>MACRO_HREF_MPD</link>.</p>
+    <reference id="IEPD">
+      <p>NIEM Technical Architecture Committee. <q>National Information Exchange Package
+          Description (IEPD) Specification, Version 5.0</q>. Available from <link>MACRO_HREF_IEPD</link>.</p>
     </reference>
     <reference id="NDR" label="NIEM NDR">
       <p>Roberts, Webb. <q>National Information Exchange Model Naming and Design Rules, Version
-          4.0.</q> NIEM Technical Architecture Committee, November 7,
-        2017. <link>MACRO_HREF_NDR</link>.</p>
+          5.0.</q> NIEM Technical Architecture Committee. Available from <link>MACRO_HREF_NDR</link>.</p>
     </reference>
     <reference id="RDF-Concepts">
-      <p>Richard Cyganiak, David Wood, and Markus Lanthaler, eds. <q>RDF 1.1 Concepts and Abstract Syntax.</q> W3C Recommendation. The World Wide Web Consortium (W3C), February 25, 2014. <link>MACRO_HREF_RDF_CONCEPTS</link>.</p>
+      <p>Richard Cyganiak, David Wood, and Markus Lanthaler, eds. <q>RDF 1.1 Concepts and Abstract Syntax.</q> W3C Recommendation. The World Wide Web Consortium (W3C), February 25, 2014. Available from <link>MACRO_HREF_RDF_CONCEPTS</link>.</p>
     </reference>
     <reference id="RDFS" label="RDF-Schema">
-      <p>Dan Brickley, and R.V. Guha, eds. <q>RDF Schema 1.1.</q> The World Wide Web Consortium (W3C), February 25, 2014. <link>http://www.w3.org/TR/2014/REC-rdf-schema-20140225/</link>.</p>
+      <p>Dan Brickley, and R.V. Guha, eds. <q>RDF Schema 1.1.</q> The World Wide Web Consortium (W3C), February 25, 2014. Available from <link>http://www.w3.org/TR/2014/REC-rdf-schema-20140225/</link>.</p>
     </reference>
     <reference id="RDF-Semantics">
       <p>Patrick J. Hayes, and Peter F. Patel-Schneider, eds. <q>RDF 1.1 Semantics.</q> The World
         Wide Web Consortium (W3C), February 25,
-        2014. <link>MACRO_HREF_RDF_SEMANTICS</link>.</p>
+        2014. Available from <link>MACRO_HREF_RDF_SEMANTICS</link>.</p>
+    </reference>
+    <reference id="RDF-Turtle">
+      <p><q>RDF 1.1 Turtle, Terse RDF Triple Language,</q> W3C Recommendation 25 February 2014. Available from <link>MACRO_HREF_RDF_TURTLE</link>.</p>
     </reference>
     <reference id="RFC4627">
-      <p>D. Crockford. The application/json Media Type for JavaScript Object Notation (JSON)
-        (RFC 4627). July 2006. RFC. <link>http://www.ietf.org/rfc/rfc4627.txt</link></p>
+      <p>D. Crockford. <q>The application/json Media Type for JavaScript Object Notation (JSON)
+        (RFC 4627).</q> July 2006. RFC. Available from <link>http://www.ietf.org/rfc/rfc4627.txt</link></p>
     </reference>
     <reference id="RFC8259">
-      <p>Bray, T., Ed., <q>The JavaScript Object Notation (JSON) Data Interchange Format</q>, STD
+      <p>Bray, T., Ed., <q>The JavaScript Object Notation (JSON) Data Interchange Format,</q> STD
         90, RFC 8259, DOI 10.17487/RFC8259, December
-        2017, <link>https://www.ietf.org/rfc/rfc8259.txt</link>.</p>
+        2017, Available from <link>https://www.ietf.org/rfc/rfc8259.txt</link>.</p>
     </reference>
   </section>
   <!-- stand down the index until it can be useful.

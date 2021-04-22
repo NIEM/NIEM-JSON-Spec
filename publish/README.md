@@ -25,7 +25,7 @@ NIEM-conformant vocabularies with terms from other vocabularies.
 
 Please submit comments on this specification as issues at <https://github.com/NIEM/NIEM-JSON-Spec/issues>.
 
-This document is tracked in version control at <https://github.com/NIEM/NIEM-JSON-Spec>. This version is tagged in GitHub at <https://github.com/NIEM/NIEM-JSON-Spec/releases/tag/v5.0RC1>.
+This document is tracked in version control at <https://github.com/NIEM/NIEM-JSON-Spec>. This version is tagged in GitHub at <https://github.com/NIEM/NIEM-JSON-Spec/releases/tag/v5.0rc1>.
 
 # Files
 

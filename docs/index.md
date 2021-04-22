@@ -6,7 +6,7 @@ The NIEM JSON Specification establishes the technical basis for using JavaScript
 
 ## Latest draft
 
-- [Version 5.0beta1](draft)
+- [Version 5.0RC1](draft)
 
 ## Current version
 

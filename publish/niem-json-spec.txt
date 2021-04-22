@@ -1,8 +1,8 @@
 NIEM JSON Specification
 
-Version 5.0beta1
+Version 5.0RC1
 
-March 19, 2021
+April 22, 2021
 
 NIEM Technical Architecture Committee (NTAC)
 

@@ -6,8 +6,8 @@ The NIEM JSON Specification establishes the technical basis for using JavaScript
 
 # Current version
 
-- [Version 5.0beta1](draft)
+- [Version 5.0RC1](draft)
 
 # Previous versions
 
-- Version 4.0beta1
+- [Version 4.0](v4.0)

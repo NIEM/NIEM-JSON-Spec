@@ -17,7 +17,7 @@
       schemas and message specifications.</p>
 
     <p>NIEM-conformance of JSON data is primarily focused on the relationship
-      between the data in the JSON file and the definitions established by a NIEM-conformant schema,
+      between the data in a JSON document and definitions established by a NIEM-conformant schema,
       such as the schema defined by a NIEM message specification. There are two forms of conformance of a NIEM JSON
       document to a NIEM-conformant schema:</p>
 
@@ -261,7 +261,7 @@
           that together are capable of validating a conformant instance XML document.</p>
       </blockquote>
 
-      <p>Note the principal component of a NIEM message specification is a conformant schema document set.</p>
+      <p>Note that the principal component of a NIEM message specification is a conformant schema document set.</p>
 
       <p>The term <termDef>conformant instance XML document</termDef> is a <termRef>conformance target</termRef>
         defined by the

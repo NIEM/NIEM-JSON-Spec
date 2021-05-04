@@ -1,8 +1,8 @@
 m4_changequote([[[,]]])m4_dnl
 m4_changecom(,)m4_dnl
 m4_define([[[MACRO_SPECIFIED_VERSION]]],[[[5.0]]])m4_dnl What version is the spec representing? (e.g., 4.0, 4.1)
-m4_define([[[MACRO_DOCUMENT_VERSION]]],[[[5.0RC1]]])m4_dnl What version is the spec representing? (e.g., 4.0, 4.1)
-m4_define([[[MACRO_DOCUMENT_DATE]]],[[[2021-04-22]]])m4_dnl
+m4_define([[[MACRO_DOCUMENT_VERSION]]],[[[5.0RC2]]])m4_dnl What version is the spec representing? (e.g., 4.0, 4.1)
+m4_define([[[MACRO_DOCUMENT_DATE]]],[[[2021-05-04]]])m4_dnl
 m4_define([[[MACRO_SHORT_NAME]]],[[[niem-json-spec]]])m4_dnl
 m4_define([[[MACRO_DOCUMENT_URI]]],[[[http://reference.niem.gov/niem/specification/MACRO_SHORT_NAME/MACRO_SPECIFIED_VERSION/]]])m4_dnl
 m4_dnl conformance targets
@@ -18,6 +18,7 @@ m4_define([[[MACRO_HREF_RDFS]]],[[[https://www.w3.org/TR/rdf-schema/]]])m4_dnl
 m4_define([[[MACRO_HREF_RDF_CONCEPTS]]],[[[https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/]]])m4_dnl
 m4_define([[[MACRO_HREF_RDF_SEMANTICS]]],[[[https://www.w3.org/TR/2014/REC-rdf11-mt-20140225/]]])m4_dnl
 m4_define([[[MACRO_HREF_RDF_TURTLE]]],[[[https://www.w3.org/TR/2014/REC-turtle-20140225/]]])m4_dnl
+m4_define([[[MACRO_HREF_RDF_TYPES]]],[[[https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/#xsd-datatypes]]])m4_dnl
 m4_dnl
 m4_dnl  MACRO_ASSERT( $test, $message )
 m4_dnl

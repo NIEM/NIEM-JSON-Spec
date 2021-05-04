@@ -591,7 +591,7 @@ _:b1    rdf:value  "Sherlock Holmes" .
       </figure>
 
       <p>The JSON-LD version of the above instance includes the object, with the literal name as an
-        <code>rdf:value</code> property:</p>
+        <code>rdf:value</code> property. The type for the literal is the nearest base type that appears within the list of RDF-compatible XSD types provided by <ref idref="RDF-Types"/>.</p>
 
       <figure id="convert-after">
         <title>JSON-LD representation of simple example</title>
@@ -830,6 +830,9 @@ _:b1    rdf:value  "Sherlock Holmes" .
     </reference>
     <reference id="RDF-Turtle">
       <p><q>RDF 1.1 Turtle, Terse RDF Triple Language,</q> W3C Recommendation 25 February 2014. Available from <link>MACRO_HREF_RDF_TURTLE</link>.</p>
+    </reference>
+    <reference id="RDF-Types">
+      <p><q>RDF 1.1 Concepts and Abstract Syntax, Section 5.1 The XML Schema Built-in Datatypes</q> W3C Recommendation 25 February 2014. Available from <link>MACRO_HREF_RDF_TYPES</link>.</p>
     </reference>
     <reference id="RFC4627">
       <p>D. Crockford. <q>The application/json Media Type for JavaScript Object Notation (JSON)

@@ -473,7 +473,7 @@
           conformant to a schema</termRef> MUST be <termRef>equivalent</termRef> to the <termRef>RDF
           graph</termRef> entailed by a corresponding <termRef>conformant instance XML
           document</termRef> instance of the schema, accounting for
-          <termRef>literal-to-object conversion</termRef> and the omission of external content.</p>
+          <termRef>NIEM JSON normalization</termRef> and the omission of external content.</p>
       </rule>
 
       <p>Within this rule, the <em>schema</em> includes a <termRef>conformant schema document
@@ -541,7 +541,7 @@
       <definition term="literal-to-object conversion">
         <p>Within this document, <strong>literal-to-object conversion</strong> is a process by which
           a JSON value is transformed from a value of false, null, true, number, or string, into an
-          object containing only the properties <qName>rdf:value</qName> and <qName>rdf:type</qName>. Evaluation of conformance of
+          object containing only the property <qName>rdf:value</qName>. Evaluation of conformance of
           a <termRef>JSON document</termRef> is conducted on the results of literal-to-object
           conversion of that document.</p>
       </definition>
@@ -572,10 +572,8 @@
         <pre><![CDATA[
 @prefix nc:  <http://release.niem.gov/niem/niem-core/5.0/> .
 @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xs:  <http://www.w3.org/2001/XMLSchema> .
 _:b0    nc:PersonFullName  _:b1 .
 _:b1    rdf:value  "Sherlock Holmes" .
-_:b1    rdf:type   "xs:string" .
 ]]></pre>
       </figure>
 
@@ -600,8 +598,10 @@ _:b1    rdf:type   "xs:string" .
         <pre><![CDATA[
 {
   "nc:PersonFullName" : {
-    "rdf:value": "Sherlock Holmes",
-    "rdf:type": "xs:string"
+    "rdf:value": {
+	  "@value": "Sherlock Holmes",
+      "@type": "xs:string"
+    }
   }
 }
 ]]></pre>
@@ -646,10 +646,11 @@ _:b1    rdf:type   "xs:string" .
       </ol>
 
       <definition term="NIEM JSON normalization">
-        <p>Within this document, <strong>NIEM JSON normalization</strong> is a process by which
-          simple JSON name/value pairs are transformed from simple names with values of false, null, true, number, or string, into
-          NIEM conformant objects containing properties <qName>rdf:value</qName> and <qName>rdf:type</qName>. Evaluation of conformance of
-          a <termRef>JSON document</termRef> is conducted on the results of NIEM JSON normalization of that document.</p>
+        <p>Within this document, <strong>NIEM JSON normalization</strong> is a process by which a JSON document
+          is transformed into a NIEM conformant document via the application of a context and an iterative
+          application of <termRef term="literal-to-object conversion">literal-to-object conversions</termRef>, transforming simple JSON name/value pairs from simple names with values of false, null, true, number, or string, into NIEM conformant objects containing only the property <qName>rdf:value</qName>.</p>
+          
+        <p>Evaluation of conformance of a <termRef>JSON document</termRef> is conducted on the results of NIEM JSON normalization of that document.</p>
       </definition>
 
 

@@ -599,7 +599,7 @@ _:b1    rdf:value  "Sherlock Holmes" .
 {
   "nc:PersonFullName" : {
     "rdf:value": {
-	  "@value": "Sherlock Holmes",
+      "@value": "Sherlock Holmes",
       "@type": "xs:string"
     }
   }
@@ -646,7 +646,7 @@ _:b1    rdf:value  "Sherlock Holmes" .
       </ol>
 
       <definition term="NIEM JSON normalization">
-        <p>Within this document, <strong>NIEM JSON normalization</strong> is a process by which a JSON document
+        <p>Within this document, <strong>NIEM JSON normalization</strong> is a process by which a <termRef>JSON document</termRef>
           is transformed into a NIEM conformant document via the application of a context and an iterative
           application of <termRef term="literal-to-object conversion">literal-to-object conversions</termRef>, transforming simple JSON name/value pairs from simple names with values of false, null, true, number, or string, into NIEM conformant objects containing only the property <qName>rdf:value</qName>.</p>
           

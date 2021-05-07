@@ -1,4 +1,4 @@
-# NIEM JSON Specification, version 5.0RC1
+# NIEM JSON Specification, version 5.0rc2
 
 The NIEM JSON Specification establishes the technical basis for using JavaScript
 Object Notation (JSON) as a data format for exchange of information consistent
@@ -25,7 +25,7 @@ NIEM-conformant vocabularies with terms from other vocabularies.
 
 Please submit comments on this specification as issues at <https://github.com/NIEM/NIEM-JSON-Spec/issues>.
 
-This document is tracked in version control at <https://github.com/NIEM/NIEM-JSON-Spec>. This version is tagged in GitHub at <https://github.com/NIEM/NIEM-JSON-Spec/releases/tag/v5.0rc1>.
+This document is tracked in version control at <https://github.com/NIEM/NIEM-JSON-Spec>. This version is tagged in GitHub at <https://github.com/NIEM/NIEM-JSON-Spec/releases/tag/v5.0rc2>.
 
 # Files
 

@@ -17,7 +17,7 @@
       schemas and message specifications.</p>
 
     <p>NIEM-conformance of JSON data is primarily focused on the relationship
-      between the data in the JSON file and the definitions established by a NIEM-conformant schema,
+      between the data in a JSON document and definitions established by a NIEM-conformant schema,
       such as the schema defined by a NIEM message specification. There are two forms of conformance of a NIEM JSON
       document to a NIEM-conformant schema:</p>
 
@@ -50,7 +50,7 @@
 
   <subsection>
     <title>Document status</title>
-    <p>This document is a draft of a specification product of the NIEM Technical Architecture
+    <p>This specification is a product of the NIEM Technical Architecture
       Committee (NTAC).</p>
 
     <p>Updates, revisions, and errata for this specification are posted to
@@ -71,8 +71,8 @@
     <section>
       <title>Audience</title>
 
-      <p>This document was developed as a technical specification, and is not intended to be a user
-        guide or an introduction to the use of JSON for NIEM. Its intended audience is developers of
+      <p>This document was developed as a technical specification and is intended to be neither a user
+        guide nor an introduction to the use of JSON for NIEM. Its intended audience is developers of
         tools that work with NIEM and NIEM JSON, or other individuals who require an understanding
         of the details of the alignment between NIEM JSON and other representations of NIEM
         data.</p>
@@ -261,7 +261,7 @@
           that together are capable of validating a conformant instance XML document.</p>
       </blockquote>
 
-      <p>Note the principal component of a NIEM message specification is a conformant schema document set.</p>
+      <p>Note that the principal component of a NIEM message specification is a conformant schema document set.</p>
 
       <p>The term <termDef>conformant instance XML document</termDef> is a <termRef>conformance target</termRef>
         defined by the
@@ -473,7 +473,7 @@
           conformant to a schema</termRef> MUST be <termRef>equivalent</termRef> to the <termRef>RDF
           graph</termRef> entailed by a corresponding <termRef>conformant instance XML
           document</termRef> instance of the schema, accounting for
-          <termRef>literal-to-object conversion</termRef> and the omission of external content.</p>
+          <termRef>NIEM JSON normalization</termRef> and the omission of external content.</p>
       </rule>
 
       <p>Within this rule, the <em>schema</em> includes a <termRef>conformant schema document
@@ -541,7 +541,7 @@
       <definition term="literal-to-object conversion">
         <p>Within this document, <strong>literal-to-object conversion</strong> is a process by which
           a JSON value is transformed from a value of false, null, true, number, or string, into an
-          object containing only the properties <qName>rdf:value</qName> and <qName>rdf:type</qName>. Evaluation of conformance of
+          object containing only the property <qName>rdf:value</qName>. Evaluation of conformance of
           a <termRef>JSON document</termRef> is conducted on the results of literal-to-object
           conversion of that document.</p>
       </definition>
@@ -556,7 +556,7 @@
       <figure>
         <title>XML representation of simple example</title>
         <pre><![CDATA[
-<nc:PersonFullName xmlns:nc="http://release.niem.gov/niem/niem-core/4.0/">
+<nc:PersonFullName xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/">
     Sherlock Holmes
 </nc:PersonFullName>
 ]]></pre>
@@ -572,10 +572,8 @@
         <pre><![CDATA[
 @prefix nc:  <http://release.niem.gov/niem/niem-core/5.0/> .
 @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xs:  <http://www.w3.org/2001/XMLSchema> .
 _:b0    nc:PersonFullName  _:b1 .
 _:b1    rdf:value  "Sherlock Holmes" .
-_:b1    rdf:type   "xs:string" .
 ]]></pre>
       </figure>
 
@@ -593,15 +591,17 @@ _:b1    rdf:type   "xs:string" .
       </figure>
 
       <p>The JSON-LD version of the above instance includes the object, with the literal name as an
-        <code>rdf:value</code> property:</p>
+        <code>rdf:value</code> property. The type for the literal is the nearest base type that appears within the list of RDF-compatible XSD types provided by MACRO_REF_EXTERNAL(RDF-Types,MACRO_HREF_RDF_TYPES#xsd-datatypes,5.1,The XML Schema Built-in Datatypes).</p>
 
       <figure id="convert-after">
         <title>JSON-LD representation of simple example</title>
         <pre><![CDATA[
 {
   "nc:PersonFullName" : {
-    "rdf:value": "Sherlock Holmes",
-    "rdf:type": "xs:string"
+    "rdf:value": {
+      "@value": "Sherlock Holmes",
+      "@type": "xs:string"
+    }
   }
 }
 ]]></pre>
@@ -646,10 +646,11 @@ _:b1    rdf:type   "xs:string" .
       </ol>
 
       <definition term="NIEM JSON normalization">
-        <p>Within this document, <strong>NIEM JSON normalization</strong> is a process by which
-          simple JSON name/value pairs are transformed from simple names with values of false, null, true, number, or string, into
-          NIEM conformant objects containing properties <qName>rdf:value</qName> and <qName>rdf:type</qName>. Evaluation of conformance of
-          a <termRef>JSON document</termRef> is conducted on the results of NIEM JSON normalization of that document.</p>
+        <p>Within this document, <strong>NIEM JSON normalization</strong> is a process by which a <termRef>JSON document</termRef>
+          is transformed into a NIEM conformant document via the application of a context and an iterative
+          application of <termRef term="literal-to-object conversion">literal-to-object conversions</termRef>, transforming simple JSON name/value pairs from simple names with values of false, null, true, number, or string, into NIEM conformant objects containing only the property <qName>rdf:value</qName>.</p>
+          
+        <p>Evaluation of conformance of a <termRef>JSON document</termRef> is conducted on the results of NIEM JSON normalization of that document.</p>
       </definition>
 
 
@@ -703,7 +704,7 @@ _:b1    rdf:type   "xs:string" .
         <figure id="normalized-niem-json-ld">
           <title>Normalized NIEM JSON-LD</title>
           <pre><![CDATA[
- {
+{
   "@context": {
     "nc": "http://release.niem.gov/niem/niem-core/5.0/",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
@@ -829,6 +830,9 @@ _:b1    rdf:type   "xs:string" .
     </reference>
     <reference id="RDF-Turtle">
       <p><q>RDF 1.1 Turtle, Terse RDF Triple Language,</q> W3C Recommendation 25 February 2014. Available from <link>MACRO_HREF_RDF_TURTLE</link>.</p>
+    </reference>
+    <reference id="RDF-Types">
+      <p><q>RDF 1.1 Concepts and Abstract Syntax,</q> W3C Recommendation 25 February 2014. Available from <link>MACRO_HREF_RDF_TYPES</link>.</p>
     </reference>
     <reference id="RFC4627">
       <p>D. Crockford. <q>The application/json Media Type for JavaScript Object Notation (JSON)

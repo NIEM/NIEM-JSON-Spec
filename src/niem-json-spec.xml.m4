@@ -50,7 +50,7 @@
 
   <subsection>
     <title>Document status</title>
-    <p>This document is a draft of a specification product of the NIEM Technical Architecture
+    <p>This specification is a product of the NIEM Technical Architecture
       Committee (NTAC).</p>
 
     <p>Updates, revisions, and errata for this specification are posted to
@@ -71,8 +71,8 @@
     <section>
       <title>Audience</title>
 
-      <p>This document was developed as a technical specification, and is not intended to be a user
-        guide or an introduction to the use of JSON for NIEM. Its intended audience is developers of
+      <p>This document was developed as a technical specification and is intended to be neither a user
+        guide nor an introduction to the use of JSON for NIEM. Its intended audience is developers of
         tools that work with NIEM and NIEM JSON, or other individuals who require an understanding
         of the details of the alignment between NIEM JSON and other representations of NIEM
         data.</p>
@@ -556,7 +556,7 @@
       <figure>
         <title>XML representation of simple example</title>
         <pre><![CDATA[
-<nc:PersonFullName xmlns:nc="http://release.niem.gov/niem/niem-core/4.0/">
+<nc:PersonFullName xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/">
     Sherlock Holmes
 </nc:PersonFullName>
 ]]></pre>
@@ -591,7 +591,7 @@ _:b1    rdf:value  "Sherlock Holmes" .
       </figure>
 
       <p>The JSON-LD version of the above instance includes the object, with the literal name as an
-        <code>rdf:value</code> property. The type for the literal is the nearest base type that appears within the list of RDF-compatible XSD types provided by <ref idref="RDF-Types"/>.</p>
+        <code>rdf:value</code> property. The type for the literal is the nearest base type that appears within the list of RDF-compatible XSD types provided by MACRO_REF_EXTERNAL(RDF-Types,MACRO_HREF_RDF_TYPES#xsd-datatypes,5.1,The XML Schema Built-in Datatypes).</p>
 
       <figure id="convert-after">
         <title>JSON-LD representation of simple example</title>
@@ -704,7 +704,7 @@ _:b1    rdf:value  "Sherlock Holmes" .
         <figure id="normalized-niem-json-ld">
           <title>Normalized NIEM JSON-LD</title>
           <pre><![CDATA[
- {
+{
   "@context": {
     "nc": "http://release.niem.gov/niem/niem-core/5.0/",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
@@ -832,7 +832,7 @@ _:b1    rdf:value  "Sherlock Holmes" .
       <p><q>RDF 1.1 Turtle, Terse RDF Triple Language,</q> W3C Recommendation 25 February 2014. Available from <link>MACRO_HREF_RDF_TURTLE</link>.</p>
     </reference>
     <reference id="RDF-Types">
-      <p><q>RDF 1.1 Concepts and Abstract Syntax, Section 5.1 The XML Schema Built-in Datatypes</q> W3C Recommendation 25 February 2014. Available from <link>MACRO_HREF_RDF_TYPES</link>.</p>
+      <p><q>RDF 1.1 Concepts and Abstract Syntax,</q> W3C Recommendation 25 February 2014. Available from <link>MACRO_HREF_RDF_TYPES</link>.</p>
     </reference>
     <reference id="RFC4627">
       <p>D. Crockford. <q>The application/json Media Type for JavaScript Object Notation (JSON)

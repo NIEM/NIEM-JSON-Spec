@@ -1,8 +1,8 @@
 NIEM JSON Specification
 
-Version 5.0RC2
+Version 5.0
 
-May 4, 2021
+May 7, 2021
 
 NIEM Technical Architecture Committee (NTAC)
 
@@ -22,7 +22,7 @@ Authors
 
 Document status
 
-   This document is a draft of a specification product of the NIEM Technical Architecture Committee (NTAC).
+   This specification is a product of the NIEM Technical Architecture Committee (NTAC).
 
    Updates, revisions, and errata for this specification are posted to https://github.com/NIEM/NIEM-JSON-Spec. Please submit comments on this specification as issues at https://github.com/NIEM/NIEM-JSON-Spec/issues.
 
@@ -42,7 +42,7 @@ Table of contents
 
 1.1. Audience
 
-   This document was developed as a technical specification, and is not intended to be a user guide or an introduction to the use of JSON for NIEM. Its intended audience is developers of tools that work with NIEM and NIEM JSON, or other individuals who require an understanding of the details of the alignment between NIEM JSON and other representations of NIEM data.
+   This document was developed as a technical specification and is intended to be neither a user guide nor an introduction to the use of JSON for NIEM. Its intended audience is developers of tools that work with NIEM and NIEM JSON, or other individuals who require an understanding of the details of the alignment between NIEM JSON and other representations of NIEM data.
 
    Developers of NIEM message formats with a JSON representation may prefer to read the NIEM JSON documentation at https://niem.github.io/json/, specifically the NIEM JSON Tutorial, which proceeds step-by-step from data requirements to a conforming JSON representation. Developers of systems that read and write NIEM JSON messages should conform to the relevant message descriptions.
 
@@ -307,7 +307,7 @@ Rule 5-4. JSON interpreted based on schema
    Figure 5-1: XML representation of simple example
 
       
-      <nc:PersonFullName xmlns:nc="http://release.niem.gov/niem/niem-core/4.0/">
+      <nc:PersonFullName xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/">
           Sherlock Holmes
       </nc:PersonFullName>
       
@@ -335,7 +335,7 @@ Rule 5-4. JSON interpreted based on schema
       }
       
 
-   The JSON-LD version of the above instance includes the object, with the literal name as an rdf:value property. The type for the literal is the nearest base type that appears within the list of RDF-compatible XSD types provided by [RDF-Types].
+   The JSON-LD version of the above instance includes the object, with the literal name as an rdf:value property. The type for the literal is the nearest base type that appears within the list of RDF-compatible XSD types provided by [RDF-Types] Section 5.1, The XML Schema Built-in Datatypes.
 
    Figure 5-4: JSON-LD representation of simple example
 
@@ -424,7 +424,7 @@ Rule 5-4. JSON interpreted based on schema
    Figure 5-9: Normalized NIEM JSON-LD
 
       
-       {
+      {
         "@context": {
           "nc": "http://release.niem.gov/niem/niem-core/5.0/",
           "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
@@ -491,7 +491,7 @@ Appendix A. References
 
    [RDF-Turtle]: "RDF 1.1 Turtle, Terse RDF Triple Language," W3C Recommendation 25 February 2014. Available from https://www.w3.org/TR/2014/REC-turtle-20140225/.
 
-   [RDF-Types]: "RDF 1.1 Concepts and Abstract Syntax, Section 5.1 The XML Schema Built-in Datatypes" W3C Recommendation 25 February 2014. Available from https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/#xsd-datatypes.
+   [RDF-Types]: "RDF 1.1 Concepts and Abstract Syntax," W3C Recommendation 25 February 2014. Available from https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/.
 
    [RFC4627]: D. Crockford. "The application/json Media Type for JavaScript Object Notation (JSON) (RFC 4627)." July 2006. RFC. Available from http://www.ietf.org/rfc/rfc4627.txt
 

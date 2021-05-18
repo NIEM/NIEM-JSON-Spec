@@ -23,13 +23,13 @@ test "x$[]$bash" = "x" && AC_MSG_ERROR([bash not found])
 AC_PATH_PROGS(cat,gcat cat)
 test "x$[]$cat" = "x" && AC_MSG_ERROR([cat not found])
 
-AC_PATH_PROG(fgrep,gfgrep fgrep)
+AC_PATH_PROGS(fgrep,gfgrep fgrep)
 test "x$[]$fgrep" = "x" && AC_MSG_ERROR([fgrep not found])
 
-AC_PATH_PROG(m4,gm4 m4)
+AC_PATH_PROGS(m4,gm4 m4)
 test "x$[]$m4" = "x" && AC_MSG_ERROR([m4 not found])
 
-AC_PATH_PROG(sort,gsort sort)
+AC_PATH_PROGS(sort,gsort sort)
 test "x$[]$sort" = "x" && AC_MSG_ERROR([sort not found])
 
 # webb stuff

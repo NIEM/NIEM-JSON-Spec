@@ -2053,8 +2053,10 @@ done
 
 test "x$$cat" = "x" && as_fn_error $? "cat not found" "$LINENO" 5
 
-# Extract the first word of "gfgrep fgrep", so it can be a program name with args.
-set dummy gfgrep fgrep; ac_word=$2
+for ac_prog in gfgrep fgrep
+do
+  # Extract the first word of "$ac_prog", so it can be a program name with args.
+set dummy $ac_prog; ac_word=$2
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
 $as_echo_n "checking for $ac_word... " >&6; }
 if ${ac_cv_path_fgrep+:} false; then :
@@ -2093,10 +2095,15 @@ $as_echo "no" >&6; }
 fi
 
 
+  test -n "$fgrep" && break
+done
+
 test "x$$fgrep" = "x" && as_fn_error $? "fgrep not found" "$LINENO" 5
 
-# Extract the first word of "gm4 m4", so it can be a program name with args.
-set dummy gm4 m4; ac_word=$2
+for ac_prog in gm4 m4
+do
+  # Extract the first word of "$ac_prog", so it can be a program name with args.
+set dummy $ac_prog; ac_word=$2
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
 $as_echo_n "checking for $ac_word... " >&6; }
 if ${ac_cv_path_m4+:} false; then :
@@ -2135,10 +2142,15 @@ $as_echo "no" >&6; }
 fi
 
 
+  test -n "$m4" && break
+done
+
 test "x$$m4" = "x" && as_fn_error $? "m4 not found" "$LINENO" 5
 
-# Extract the first word of "gsort sort", so it can be a program name with args.
-set dummy gsort sort; ac_word=$2
+for ac_prog in gsort sort
+do
+  # Extract the first word of "$ac_prog", so it can be a program name with args.
+set dummy $ac_prog; ac_word=$2
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
 $as_echo_n "checking for $ac_word... " >&6; }
 if ${ac_cv_path_sort+:} false; then :
@@ -2176,6 +2188,9 @@ else
 $as_echo "no" >&6; }
 fi
 
+
+  test -n "$sort" && break
+done
 
 test "x$$sort" = "x" && as_fn_error $? "sort not found" "$LINENO" 5
 

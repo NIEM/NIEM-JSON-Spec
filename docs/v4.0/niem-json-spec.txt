@@ -1,20 +1,20 @@
 NIEM JSON Specification
 
-Version 5.0
+Version 4.0
 
-May 7, 2021
+August 24, 2020
 
 NIEM Technical Architecture Committee (NTAC)
 
 Abstract
 
-   The NIEM JSON Specification establishes the technical basis for using JavaScript Object Notation (JSON) as a data format for exchange of information consistent with NIEM-conformant schemas and message specifications.
+   The NIEM JSON Specification establishes the technical basis for using JavaScript Object Notation (JSON) as a data format for exchange of information consistent with NIEM-conformant schemas and information exchange package documentations (IEPDs).
 
-   NIEM-conformance of JSON data is primarily focused on the relationship between the data in a JSON document and definitions established by a NIEM-conformant schema, such as the schema defined by a NIEM message specification. There are two forms of conformance of a NIEM JSON document to a NIEM-conformant schema:
+   NIEM-conformance of JSON data is primarily focused on the relationship between the data in the JSON file and the definitions established by a NIEM-conformant schema, e.g., the schema defined by a NIEM IEPD. There are two forms of conformance of a NIEM JSON document to a NIEM-conformant schema:
 
-      *  Strict conformance establishes that the JSON instance follows all rules of the schema or message specification. An instance that strictly conforms to a message specification will contain all content that is required by the message specification, will contain only content allowed by the message specification, and will reflect the parent-child structure and cardinality constraints defined by the message specification. This enables NIEM JSON to satisfy exchange requirements similar to traditional NIEM XML use cases.
+      *  Strict conformance establishes that the JSON instance follows all rules of the schema or IEPD. An instance that strictly conforms to an IEPD will contain all content that is required by the IEPD, will contain only content allowed by the IEPD, and will reflect the parent-child structure and cardinality constraints defined by the IEPD. This enables NIEM JSON to satisfy exchange requirements similar to traditional NIEM XML use cases.
 
-      *  Lax conformance enables the use of vocabularies that are defined by NIEM schemas or message specifications via linked data and linked open data methods. It establishes that exchanges with NIEM-conformant vocabularies use those vocabularies properly; this allows data to be more flexible, and to combine terms from NIEM-conformant vocabularies with terms from other vocabularies.
+      *  Lax conformance enables the use of vocabularies that are defined by NIEM schemas or IEPDs via linked data and linked open data methods. It establishes that exchanges with NIEM-conformant vocabularies use those vocabularies properly; this allows data to be more flexible, and to combine terms from NIEM-conformant vocabularies with terms from other vocabularies.
 
 Authors
 
@@ -22,7 +22,7 @@ Authors
 
 Document status
 
-   This specification is a product of the NIEM Technical Architecture Committee (NTAC).
+   This document is a draft of a specification product of the NIEM Technical Architecture Committee (NTAC).
 
    Updates, revisions, and errata for this specification are posted to https://github.com/NIEM/NIEM-JSON-Spec. Please submit comments on this specification as issues at https://github.com/NIEM/NIEM-JSON-Spec/issues.
 
@@ -32,17 +32,17 @@ Table of contents
 
 1. Introduction
 
-   The NIEM JSON Specification establishes the technical basis for using JavaScript Object Notation (JSON) as a data format for exchange of information consistent with NIEM-conformant schemas and message specifications.
+   The NIEM JSON Specification establishes the technical basis for using JavaScript Object Notation (JSON) as a data format for exchange of information consistent with NIEM-conformant schemas and information exchange package documentations (IEPDs).
 
-   NIEM-conformance of JSON data is primarily focused on the relationship between the data in a JSON document and definitions established by a NIEM-conformant schema, such as the schema defined by a NIEM message specification. There are two forms of conformance of a NIEM JSON document to a NIEM-conformant schema:
+   NIEM-conformance of JSON data is primarily focused on the relationship between the data in the JSON file and the definitions established by a NIEM-conformant schema, e.g., the schema defined by a NIEM IEPD. There are two forms of conformance of a NIEM JSON document to a NIEM-conformant schema:
 
-      *  Strict conformance establishes that the JSON instance follows all rules of the schema or message specification. An instance that strictly conforms to a message specification will contain all content that is required by the message specification, will contain only content allowed by the message specification, and will reflect the parent-child structure and cardinality constraints defined by the message specification. This enables NIEM JSON to satisfy exchange requirements similar to traditional NIEM XML use cases.
+      *  Strict conformance establishes that the JSON instance follows all rules of the schema or IEPD. An instance that strictly conforms to an IEPD will contain all content that is required by the IEPD, will contain only content allowed by the IEPD, and will reflect the parent-child structure and cardinality constraints defined by the IEPD. This enables NIEM JSON to satisfy exchange requirements similar to traditional NIEM XML use cases.
 
-      *  Lax conformance enables the use of vocabularies that are defined by NIEM schemas or message specifications via linked data and linked open data methods. It establishes that exchanges with NIEM-conformant vocabularies use those vocabularies properly; this allows data to be more flexible, and to combine terms from NIEM-conformant vocabularies with terms from other vocabularies.
+      *  Lax conformance enables the use of vocabularies that are defined by NIEM schemas or IEPDs via linked data and linked open data methods. It establishes that exchanges with NIEM-conformant vocabularies use those vocabularies properly; this allows data to be more flexible, and to combine terms from NIEM-conformant vocabularies with terms from other vocabularies.
 
 1.1. Audience
 
-   This document was developed as a technical specification and is intended to be neither a user guide nor an introduction to the use of JSON for NIEM. Its intended audience is developers of tools that work with NIEM and NIEM JSON, or other individuals who require an understanding of the details of the alignment between NIEM JSON and other representations of NIEM data.
+   This document was developed as a technical specification, and is not intended to be a user guide or an introduction to the use of JSON for NIEM. Its intended audience is developers of tools that work with NIEM and NIEM JSON, or other individuals who require an understanding of the details of the alignment between NIEM JSON and other representations of NIEM data.
 
    Developers of NIEM message formats with a JSON representation may prefer to read the NIEM JSON documentation at https://niem.github.io/json/, specifically the NIEM JSON Tutorial, which proceeds step-by-step from data requirements to a conforming JSON representation. Developers of systems that read and write NIEM JSON messages should conform to the relevant message descriptions.
 
@@ -158,27 +158,27 @@ Table of contents
 
 3.3. NIEM Naming and Design Rules
 
-   The term conformant schema document set is a [conformance target] defined by the [NIEM NDR] Section 4.1.3, Schema document set, which states: 
+   The term conformant schema document set is a [conformance target] defined by the [NIEM NDR] Section 4.1.3, Schema document set, which states:
 
       A conformant schema document set is a collection of schema documents that together are capable of validating a conformant instance XML document.
 
-   Note that the principal component of a NIEM message specification is a conformant schema document set.
+   Note the principal component of a NIEM exchange definition (an information exchange package documentation, or IEPD) is a conformant schema document set.
 
-   The term conformant instance XML document is a [conformance target] defined by the [NIEM NDR] Section 4.1.4, Instance documents and elements, which states: 
+   The term conformant instance XML document is a [conformance target] defined by the [NIEM NDR] Section 4.1.4, Instance documents and elements, which states:
 
       A conformant instance XML document is an XML document that is [an] instance document valid to a conformant schema document set.
 
    Although the above definitions for the [conformance targets] [conformant schema document set] and [conformant instance XML document] reference each other, each conformance target is supported by a set of rules. Each artifact (i.e., document set or XML document) must conform to all rules for its conformance target in order to conform to the conformance target.
 
-   The term reference schema document is a [conformance target] defined by the [NIEM NDR] Section 4.1.1, Reference schema document, which states: 
+   The term reference schema document is a [conformance target] defined by the [NIEM NDR] Section 4.1.1, Reference schema document, which states:
 
       A reference schema document is a schema document that is intended to provide the authoritative definitions of broadly reusable schema components.
 
-   The term extension schema document is a [conformance target] defined by the [NIEM NDR] Section 4.1.2, Extension schema document, which states: 
+   The term extension schema document is a [conformance target] defined by the [NIEM NDR] Section 4.1.2, Extension schema document, which states:
 
       An extension schema document is a schema document that is intended to provide definitions of schema components that are intended for reuse within a more narrow scope than those defined by a reference schema document.
 
-   The term external schema document is defined by the [NIEM NDR] Section 10.2.3, External adapter types and external components, which states: 
+   The term external schema document is defined by the [NIEM NDR] Section 10.2.3, External adapter types and external components, which states:
 
       An external schema document is any schema document that is not one of
 
@@ -190,11 +190,9 @@ Table of contents
 
 3.4. Model Package Description Specification
 
-   The term IEP conformance target is defined by [IEPD] Section 5.6, Defining Information Exchange Packages. An IEP conformance target defines a set of conformance criteria for a class of [information exchange package (IEP)].
+   The term IEP conformance target is defined by [MPD] Section 5.6, Defining Information Exchange Packages. An IEP conformance target defines a set of conformance criteria for a class of [information exchange package (IEP)].
 
-   The term information exchange package is defined by [IEPD] Section 3.2.3, IEP Conformance Targets. An information exchange package (IEP) is an XML document that conforms to the criteria defined for an [IEP conformance target].
-
-   This document refers to an artifact that specifies NIEM-conformant information exchanges as a message specification. An information exchange package documentation (IEPD), as defined by [IEPD], is a form of message specification.
+   The term information exchange package is defined by [MPD] Section 3.2.3, IEP Conformance Targets. An information exchange package (IEP) is an XML document that conforms to the criteria defined for an [IEP conformance target].
 
 3.5. JSON
 
@@ -244,13 +242,13 @@ Table of contents
 
    [Definition: NIEM JSON document strictly conformant to a schema]
 
-      A NIEM JSON document strictly conformant to a schema is a [JSON-LD document] that may be assigned a one-to-one correspondence to a [conformant instance XML document] valid against a [conformant schema document set]. It is a [conformance target] of this specification. A NIEM JSON document strictly conformant to a schema MUST conform to all rules of this specification that apply to this conformance target. The [conformance target identifier] for this conformance target is http://reference.niem.gov/niem/specification/niem-json-spec/5.0/#Strict.
+      A NIEM JSON document strictly conformant to a schema is a [JSON-LD document] that may be assigned a one-to-one correspondence to a [conformant instance XML document] valid against a [conformant schema document set]. It is a [conformance target] of this specification. A NIEM JSON document strictly conformant to a schema MUST conform to all rules of this specification that apply to this conformance target. The [conformance target identifier] for this conformance target is http://reference.niem.gov/niem/specification/niem-json-spec/4.0/#Strict.
 
 4.2. NIEM JSON document laxly conformant to a schema
 
    [Definition: NIEM JSON document laxly conformant to a schema]
 
-      A NIEM JSON document laxly conformant to a schema is a [JSON-LD document] that may be interpreted using the RDF vocabulary defined by a [conformant schema document set]. It is a [conformance target] of this specification. A NIEM JSON document laxly conformant to a schema MUST conform to all rules of this specification that apply to this conformance target. The [conformance target identifier] for this conformance target is http://reference.niem.gov/niem/specification/niem-json-spec/5.0/#Lax.
+      A NIEM JSON document laxly conformant to a schema is a [JSON-LD document] that may be interpreted using the RDF vocabulary defined by a [conformant schema document set]. It is a [conformance target] of this specification. A NIEM JSON document laxly conformant to a schema MUST conform to all rules of this specification that apply to this conformance target. The [conformance target identifier] for this conformance target is http://reference.niem.gov/niem/specification/niem-json-spec/4.0/#Lax.
 
 5. Rules
 
@@ -264,11 +262,9 @@ Rule 5-2. Strictly conformant JSON corresponds to valid XML
 
    [Rule 5-2] (STRICT)
 
-      The [RDF graph] entailed by a [NIEM JSON document strictly conformant to a schema] MUST be [equivalent] to the [RDF graph] entailed by a corresponding [conformant instance XML document] instance of the schema, accounting for [NIEM JSON normalization] and the omission of external content.
+      The [RDF graph] entailed by a [NIEM JSON document strictly conformant to a schema] MUST be [equivalent] to the [RDF graph] entailed by a corresponding [conformant instance XML document] instance of the schema, accounting for [literal-to-object conversion] and the omission of external content.
 
-   Within this rule, the schema includes a [conformant schema document set], as well as all other constraints of an [IEP conformance target] defined by an IEPD.
-
-   The [RDF graph] entailed by a candidate JSON document is described by [JSON-LD-API]. The [RDF graph] entailed by an XML document is described by [NIEM NDR]. This rule does not provide or require a translation of JSON to XML, although such a translation may be helpful in validating this rule.
+   Within this rule, the schema includes a [conformant schema document set], and will include all other constraints of an [IEP conformance target] defined by an IEPD. The [RDF graph] entailed by a candidate JSON document is described by [JSON-LD-API]. The [RDF graph] entailed by an XML document is described by [NIEM NDR]. This rule does not provide or require a translation of JSON to XML, although such a translation may be helpful in validating this rule.
 
 Rule 5-3. JSON is satisfiable with schema
 
@@ -306,154 +302,58 @@ Rule 5-4. JSON interpreted based on schema
 
    Figure 5-1: XML representation of simple example
 
-      
-      <nc:PersonFullName xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/">
-          Sherlock Holmes
-      </nc:PersonFullName>
-      
 
-   [NIEM NDR] Section 5.6.3.2, Element instance specifies that each element that is defined by a NIEM-conformant schema carries an object value, not a literal value. The value of the above element nc:PersonName is an object with a single simple value of type string, which is reflected by the following RDF, in Turtle format (defined by [RDF-Turtle]):
+      <nc:PersonFullName xmlns:nc="http://release.niem.gov/niem/niem-core/4.0/"
+        >Sherlock Holmes</nc:PersonFullName>
+
+
+   [NIEM NDR] Section 5.6.3.2, Element instance specifies that each element that is defined by a NIEM-conformant schema carries an object value, not a literal value. The value of the above element nc:PersonName is an object with a single simple value, which is reflected by the following RDF, in Turtle format:
 
    Figure 5-2: RDF representation of simple example
 
-      
-      @prefix nc:  <http://release.niem.gov/niem/niem-core/5.0/> .
+
+      @prefix nc:  <http://release.niem.gov/niem/niem-core/4.0/> .
       @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
       _:b0    nc:PersonFullName  _:b1 .
       _:b1    rdf:value  "Sherlock Holmes" .
-      
+
 
    The JSON-LD versions of the example use the following JSON-LD context:
 
    Figure 5-3: JSON-LD context for simple example
 
-      
-      {
-          "nc" : "http://release.niem.gov/niem/niem-core/5.0/",
-          "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-          "xs" : "http://www.w3.org/2001/XMLSchema"
-      }
-      
 
-   The JSON-LD version of the above instance includes the object, with the literal name as an rdf:value property. The type for the literal is the nearest base type that appears within the list of RDF-compatible XSD types provided by [RDF-Types] Section 5.1, The XML Schema Built-in Datatypes.
+      {
+          "nc" : "http://release.niem.gov/niem/niem-core/4.0/",
+          "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      }
+
+
+   The JSON-LD version of the above instance includes the object, with the literal name as an rdf:value property:
 
    Figure 5-4: JSON-LD representation of simple example
 
-      
+
       {
         "nc:PersonFullName" : {
-          "rdf:value": {
-            "@value": "Sherlock Holmes",
-            "@type": "xs:string"
-          }
+          "rdf:value": "Sherlock Holmes"
         }
       }
-      
+
 
    Users of NIEM JSON have expressed a preference for a representation of data that is less verbose than the above. By converting from an object to a literal, the JSON-LD may be simplified:
 
    Figure 5-5: JSON-LD example using literals
 
-      
+
       {
         "nc:PersonFullName" : "Sherlock Holmes"
       }
-      
 
-   [Literal-to-object conversion] is the transformation from Figure 5-5, JSON-LD example using literals, above, to Figure 5-4, JSON-LD representation of simple example, above. Following the [literal-to-object conversion] process ensures that the resulting JSON can be mapped to the same RDF as for the XML version.
 
-   Users may express NIEM data using a brief format, with the knowledge that it represents the more verbose use of objects instead of bare literals through the [NIEM JSON Normalization] process.
+   [Literal-to-object conversion] is the transformation from Figure 5-5, JSON-LD example using literals, above, to Figure 5-4, JSON-LD representation of simple example, above. Users may express NIEM data using a brief format, with the knowledge that it represents the more verbose use of objects instead of bare literals.
 
-5.2. NIEM JSON Normalization
-
-   The literal-to-object conversion process forms the core of NIEM JSON Normalization, a process allowing for even briefer JSON expressions of NIEM data while maintaining a deterministic transformation to NIEM JSON-LD. The process consists of two steps:
-
-      1. Apply a context to map simple JSON names to fully qualified NIEM names
-
-      2. Iteratively convert each literal to an object
-
-   [Definition: NIEM JSON normalization]
-
-      Within this document, NIEM JSON normalization is a process by which a [JSON document] is transformed into a NIEM conformant document via the application of a context and an iterative application of [literal-to-object conversions], transforming simple JSON name/value pairs from simple names with values of false, null, true, number, or string, into NIEM conformant objects containing only the property rdf:value.
-
-      Evaluation of conformance of a [JSON document] is conducted on the results of NIEM JSON normalization of that document.
-
-5.2.1. Example of NIEM JSON Normalization
-
-   This section provides an example of [NIEM JSON normalization]. It shows the conversion of a simple JSON document to a corresponding Normalized JSON-LD object. The following is a simple plain NIEM JSON document:
-
-   Figure 5-6: Plain NIEM JSON
-
-      
-      {
-        "birth": {
-          "date": "1978-01-01"
-        }
-      }
-      
-
-   A JSON-LD context maps the simple JSON names to the corresponding NIEM names:
-
-   Figure 5-7: JSON-LD Context
-
-      
-      {
-        "nc": "http://release.niem.gov/niem/niem-core/5.0/",
-        "birth": "nc:PersonBirthDate",
-        "date": "nc:Date"
-      }
-      
-
-   Applying that JSON-LD context to the simple plain NIEM JSON document produces this plain NIEM JSON plus context document:
-
-   Figure 5-8: Plain NIEM JSON + Context
-
-      
-      {
-        "@context": {
-          "nc": "http://release.niem.gov/niem/niem-core/5.0/"
-        },
-        "nc:PersonBirthDate": {
-          "nc:Date": "1978-01-01"
-        }
-      }
-      
-
-   Using the techniques in Section 5.1, Literal-to-object conversion, above, to replace the literal string, we get the following normalized NIEM JSON-LD:
-
-   Figure 5-9: Normalized NIEM JSON-LD
-
-      
-      {
-        "@context": {
-          "nc": "http://release.niem.gov/niem/niem-core/5.0/",
-          "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-          "xs": "http://www.w3.org/2001/XMLSchema"
-        },
-        "nc:PersonBirthDate": {
-          "nc:Date": {
-            "rdf:value": {
-              "@value": "1978-01-01",
-              "@type": "xs:date"
-            }
-          }
-        }
-      }
-      
-
-   The RDF graph entailed by Figure 5-9, Normalized NIEM JSON-LD, above, is equivalent to the RDF graph entailed by the conformant instance XML document shown in Figure 5-10, NIEM XML, below. This demonstrates conformance of the JSON-LD in Figure 5-9, Normalized NIEM JSON-LD, above. The plain NIEM JSON in Figure 5-6, Plain NIEM JSON, above, is therefore also conforming.
-
-   The advantage of normalization is that it allows the runtime exchange of plain NIEM JSON like that shown in Figure 5-6, Plain NIEM JSON, above, while also allowing the evaluation of that data for conformance when necessary.
-
-   Figure 5-10: NIEM XML
-
-      
-      <nc:PersonBirthDate xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/">
-        <nc:Date>1978-01-01</nc:Date>
-      </nc:PersonBirthDate>
-      
-
-5.3. External content omission
+5.2. External content omission
 
    NIEM provides a mechanism for data that is not NIEM-conformant to be included within NIEM data. Such data is called external content (see [NIEM NDR] Section 10.2.3, External adapter types and external components). External content includes any content with a namespace defined by an [external schema document], or with any namespace not defined by a [reference schema document] or [extension schema document].
 
@@ -471,31 +371,27 @@ Appendix A. References
 
          [RFC 8174]: Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words", BCP 14, RFC 8174, May 2017. Available from https://www.ietf.org/rfc/rfc8174.txt.
 
-   [ConfReq]: Lynne Rosenthal, and Mark Skall, eds. "Conformance Requirements for Specifications v1.0." The Organization for the Advancement of Structured Information Standards (OASIS), March 15, 2002. Available from https://www.oasis-open.org/committees/download.php/305/conformance_requirements-v1.pdf.
+   [ConfReq]: Lynne Rosenthal, and Mark Skall, eds. "Conformance Requirements for Specifications v1.0." The Organization for the Advancement of Structured Information Standards (OASIS), March 15, 2002. https://www.oasis-open.org/committees/download.php/305/conformance_requirements-v1.pdf.
 
-   [CTAS]: Roberts, Webb. "NIEM Conformance Targets Attribute Specification, Version 3.0." NIEM Technical Architecture Committee. Available from https://reference.niem.gov/niem/specification/conformance-targets-attribute/3.0/.
+   [CTAS]: Roberts, Webb. "NIEM Conformance Targets Attribute Specification, Version 3.0." NIEM Technical Architecture Committee, July 31, 2014. http://reference.niem.gov/niem/specification/conformance-targets-attribute/3.0/NIEM-CTAS-3.0-2014-07-31.html.
 
-   [JSON-LD]: Manu Sporny, Dave Longley, Gregg Kellogg, Markus Lanthaler, and Niklas Lindstrom. "JSON-LD 1.0, A JSON-Based Serialization for Linked Data, W3C Recommendation." Edited by Manu Sporny, Gregg Kellogg, and Markus Lanthaler. W3C, January 16, 2014. Available from https://www.w3.org/TR/2014/REC-json-ld-20140116/.
+   [JSON-LD]: Manu Sporny, Dave Longley, Gregg Kellogg, Markus Lanthaler, and Niklas Lindstrom. "JSON-LD 1.0, A JSON-Based Serialization for Linked Data, W3C Recommendation." Edited by Manu Sporny, Gregg Kellogg, and Markus Lanthaler. W3C, January 16, 2014. https://www.w3.org/TR/2014/REC-json-ld-20140116/.
 
-   [JSON-LD-API]: Dave Longley, Gregg Kellogg, Markus Lanthaler, and Manu Sporny. "JSON-LD 1.0 Processing Algorithms and API." Edited by Markus Lanthaler, Gregg Kellogg, and Manu Sporny. W3C, January 16, 2014. Available from https://www.w3.org/TR/2014/REC-json-ld-api-20140116/.
+   [JSON-LD-API]: Dave Longley, Gregg Kellogg, Markus Lanthaler, and Manu Sporny. "JSON-LD 1.0 Processing Algorithms and API." Edited by Markus Lanthaler, Gregg Kellogg, and Manu Sporny. W3C, January 16, 2014. https://www.w3.org/TR/2014/REC-json-ld-api-20140116/.
 
-   [IEPD]: NIEM Technical Architecture Committee. "National Information Exchange Package Description (IEPD) Specification, Version 5.0". Available from https://reference.niem.gov/niem/specification/model-package-description/5.0/.
+   [MPD]: NIEM Technical Architecture Committee. "National Information Exchange Model Model Package Description Specification, Version 3.0.1", April 27, 2015. https://reference.niem.gov/niem/specification/model-package-description/3.0.1/model-package-description-3.0.1.html.
 
-   [NIEM NDR]: Roberts, Webb. "National Information Exchange Model Naming and Design Rules, Version 5.0." NIEM Technical Architecture Committee. Available from https://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/.
+   [NIEM NDR]: Roberts, Webb. "National Information Exchange Model Naming and Design Rules, Version 4.0." NIEM Technical Architecture Committee, November 7, 2017. http://reference.niem.gov/niem/specification/naming-and-design-rules/4.0/niem-ndr-4.0.html.
 
-   [RDF-Concepts]: Richard Cyganiak, David Wood, and Markus Lanthaler, eds. "RDF 1.1 Concepts and Abstract Syntax." W3C Recommendation. The World Wide Web Consortium (W3C), February 25, 2014. Available from https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/.
+   [RDF-Concepts]: Richard Cyganiak, David Wood, and Markus Lanthaler, eds. "RDF 1.1 Concepts and Abstract Syntax." W3C Recommendation. The World Wide Web Consortium (W3C), February 25, 2014. https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/.
 
-   [RDF-Schema]: Dan Brickley, and R.V. Guha, eds. "RDF Schema 1.1." The World Wide Web Consortium (W3C), February 25, 2014. Available from http://www.w3.org/TR/2014/REC-rdf-schema-20140225/.
+   [RDF-Schema]: Dan Brickley, and R.V. Guha, eds. "RDF Schema 1.1." The World Wide Web Consortium (W3C), February 25, 2014. http://www.w3.org/TR/2014/REC-rdf-schema-20140225/.
 
-   [RDF-Semantics]: Patrick J. Hayes, and Peter F. Patel-Schneider, eds. "RDF 1.1 Semantics." The World Wide Web Consortium (W3C), February 25, 2014. Available from https://www.w3.org/TR/2014/REC-rdf11-mt-20140225/.
+   [RDF-Semantics]: Patrick J. Hayes, and Peter F. Patel-Schneider, eds. "RDF 1.1 Semantics." The World Wide Web Consortium (W3C), February 25, 2014. http://www.w3.org/TR/2014/REC-rdf11-mt-20140225/.
 
-   [RDF-Turtle]: "RDF 1.1 Turtle, Terse RDF Triple Language," W3C Recommendation 25 February 2014. Available from https://www.w3.org/TR/2014/REC-turtle-20140225/.
+   [RFC4627]: D. Crockford. The application/json Media Type for JavaScript Object Notation (JSON) (RFC 4627). July 2006. RFC. http://www.ietf.org/rfc/rfc4627.txt
 
-   [RDF-Types]: "RDF 1.1 Concepts and Abstract Syntax," W3C Recommendation 25 February 2014. Available from https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/.
-
-   [RFC4627]: D. Crockford. "The application/json Media Type for JavaScript Object Notation (JSON) (RFC 4627)." July 2006. RFC. Available from http://www.ietf.org/rfc/rfc4627.txt
-
-   [RFC8259]: Bray, T., Ed., "The JavaScript Object Notation (JSON) Data Interchange Format," STD 90, RFC 8259, DOI 10.17487/RFC8259, December 2017, Available from https://www.ietf.org/rfc/rfc8259.txt.
+   [RFC8259]: Bray, T., Ed., "The JavaScript Object Notation (JSON) Data Interchange Format", STD 90, RFC 8259, DOI 10.17487/RFC8259, December 2017, https://www.ietf.org/rfc/rfc8259.txt.
 
 Appendix B. Index of definitions
 

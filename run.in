@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!@bash@
 
 set -o nounset -o errexit -o pipefail
 
@@ -8,16 +8,28 @@ set -o nounset -o errexit -o pipefail
 
 #HELP:COMMAND_NAME: Run some convenient stuff
 #HELP:Usage: COMMAND_NAME $global-options* $command ...
+
+default_command=( depend oh all validate )
+#HELP:The default command is: "depend oh all validate"
+
 #HELP:global-options:
 #HELP:  --help | -h: Print this help
 #HELP:  --verbose, -v: Print additional diagnostics
 
+#HELP:    -j ${number of jobs}: run this many jobs in parallel
+#HELP:        default = number of processing units available
+number_of_jobs=$(nproc)
+
 OPTIND=1
-while getopts :hv-: option
+while getopts :hj:v-: option
 do
     case "$option" in
         v ) opt_verbose;;
         h ) opt_help;;
+        j )
+            if ! printf -v number_of_jobs '%d' "$OPTARG"
+            then fail "Error: parameter to -j must be a number (got \"$OPTARG\")"
+            fi;;
         - )
             case "$OPTARG" in
                 help ) opt_help;;
@@ -36,33 +48,55 @@ shift $((OPTIND - 1))
 
 #HELP:Commands:
 
-(( $# >= 1 )) || fail "Need a command. Use \"help\" for more info."
+if (( $# == 0 ))
+then set -- "${default_command[@]}"
+fi
 
-case $1 in
-    #HELP:  help: print this help
-    help ) opt_help;;
-    #HELP:  build: Build stuff.
-    #HELP:  rebuild: Clean and then rebuild stuff starting from nothing.
-    #HELP:      Default is to build & install everything. Provide targets if you want to
-    #HELP:      build something specific.
-    build )
-        vrun make -j 8
-        vrun make spell
-        ;;
-    rebuild )
-        vrun make distclean
-        vrun @srcdir@/configure
-        vrun make depend depend=build
-        vrun make -j 8
-        vrun make spell
-        ;;
-    #HELP:  oh: "Open HTML": Quickly build the HTML file and open it.
-    oh )
-        vrun make -j 8 html
-        open build/niem-json-spec.html
-        ;;
-    * )
-        fail "Unknown command \"$1\"";;
-esac
-         
+while (( $# > 0 ))
+do
+    command=$1
+    shift
+    
+    case $command in
+        #HELP:  help: print this help
+        help )
+            opt_help
+            ;;
 
+        #HELP:  reconfigure: Re-run configure with the current known parameters
+        reconfigure )
+            @srcdir@/configure
+            ;;
+
+        #HELP:  depend | d: Build document dependencies
+        depend | d )
+            vrun make depend depend=build
+            ;;
+
+        #HELP:  oh: "Open HTML": Quickly build the HTML file and open it.
+        oh )
+            vrun make -j "${number_of_jobs}" html
+            open build/niem-json-spec.html
+            ;;
+
+        #HELP:  all: Build all published artifacts
+        all )
+            vrun make  -j "${number_of_jobs}"
+            ;;
+
+        #HELP:  validate: Run spell checks and valdiate whatever can be validated
+        validate )
+            vrun make spell
+            ;;
+
+        #HELP:  rebuild: Clean and then rebuild stuff starting from nothing.
+        #HELP:      Default is to build & install everything. Provide targets if you want to
+        #HELP:      build something specific.
+        rebuild )
+            make clean
+            set -- depend all validate "$@"
+            ;;
+        * )
+            fail "Unknown command \"$1\"";;
+    esac
+done
